@@ -1,0 +1,1 @@
+Fotos de las semillas aquí (ver content.js). Foto/gif del hero en /public/.

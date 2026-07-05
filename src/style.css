@@ -1,0 +1,709 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   SEMBRANDO FUTUROS · estilos
+   Mobile-first. Quien llega lo hace por QR, desde el celular, en la calle.
+   Los breakpoints amplían, no reorganizan.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta — tierra de la sabana de Bogotá, no terracota genérica. */
+  --crema:        #FBF4EC;  /* fondo, nunca blanco puro */
+  --crema-honda:  #F3E9DC;  /* secciones alternas */
+  --tinta:        #26301F;  /* verde-tierra muy oscuro, el texto */
+  --tinta-suave:  #5A5345;  /* texto secundario */
+  --arcilla:      #9C6B43;  /* siena, detalles cálidos */
+  --sabana:       #6E7A57;  /* verde salvia apagado (frailejón) */
+  --acento:       #FF5C2B;  /* naranja Halloween — SOLO para CTA */
+  --acento-honda: #E8481B;  /* hover del CTA */
+  --linea:        rgba(38, 48, 31, 0.14); /* bordes translúcidos */
+
+  /* Colores de "chrome" — tokenizados para que cada tema pueda redefinirlos.
+     Antes estaban hardcodeados en las reglas; ahora viven aquí. */
+  --nav-fondo:       rgba(251, 244, 236, 0.78); /* barra fija translúcida */
+  --sombra:          rgba(38, 48, 31, 0.22);    /* sombra de modales */
+  --backdrop:        rgba(38, 48, 31, 0.45);    /* fondo de modal de guía */
+  --backdrop-fuerte: rgba(38, 48, 31, 0.82);    /* fondo del lightbox */
+  --cierre-fondo:    var(--tinta);              /* panel de cierre (footer) */
+  --cierre-texto:    var(--crema);
+
+  /* Tipografía */
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
+
+  /* Ritmo */
+  --interlinea: 1.75;
+  --radio: 4px;
+  --transicion: 0.2s ease;
+  --ancho: 64rem;
+  --aire: clamp(3.5rem, 9vw, 7rem); /* espacio vertical entre secciones */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: var(--interlinea);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+::selection { background: var(--acento); color: var(--crema); }
+
+/* ── Tipos compartidos ─────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--arcilla);
+  margin: 0 0 1rem;
+}
+
+.seccion__titulo,
+.hero__titulo,
+.cierre__titulo,
+.filosofia__cita {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* ── Navegación fija con blur ───────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem clamp(1.25rem, 5vw, 3rem);
+  background: var(--nav-fondo);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linea);
+}
+
+.nav__logo {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  text-transform: lowercase;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__links a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color var(--transicion);
+}
+.nav__links a:hover { color: var(--acento); }
+
+/* Menú móvil — solo CSS (checkbox hack) */
+.nav__toggle { display: none; }
+
+.nav__burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav__burger span {
+  width: 24px;
+  height: 2px;
+  background: var(--tinta);
+  transition: transform var(--transicion), opacity var(--transicion);
+}
+
+.nav__links {
+  position: fixed;
+  inset: 0 0 0 30%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 2rem;
+  background: var(--crema);
+  border-left: 1px solid var(--linea);
+  transform: translateX(100%);
+  transition: transform 0.28s ease;
+  display: flex;
+}
+.nav__links a { font-size: 1.3rem; }
+
+.nav__toggle:checked ~ .nav__links { transform: translateX(0); }
+.nav__toggle:checked ~ .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__toggle:checked ~ .nav__burger span:nth-child(2) { opacity: 0; }
+.nav__toggle:checked ~ .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Botones ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.98rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio);
+  border: 1px solid transparent;
+  transition: background var(--transicion), color var(--transicion),
+    border-color var(--transicion), transform var(--transicion);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn--acento {
+  background: var(--acento);
+  color: var(--crema);
+  font-weight: 400;
+}
+.btn--acento:hover { background: var(--acento-honda); }
+
+.btn--fantasma {
+  border-color: var(--linea);
+  color: var(--tinta);
+}
+.btn--fantasma:hover { border-color: var(--tinta); }
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: clamp(7rem, 18vw, 11rem) clamp(1.25rem, 5vw, 3rem) var(--aire);
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+.hero__titulo {
+  font-size: clamp(2.8rem, 9vw, 5.2rem);
+  margin: 0 0 1.5rem;
+  max-width: 14ch;
+}
+.hero__parrafo {
+  max-width: 46ch;
+  font-size: 1.15rem;
+  color: var(--tinta-suave);
+  margin: 0 0 2.25rem;
+}
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+/* Columna de media (foto o gif del paquete con el QR) */
+.hero__media-marco {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--crema-honda);
+  border: 1px solid var(--linea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero__media-marco img { width: 100%; height: 100%; object-fit: cover; }
+.hero__media--ph .hero__media-marco { border-style: dashed; }
+.hero__media-ph {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--arcilla);
+  opacity: 0.7;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+/* ── Secciones ─────────────────────────────────────────────────────────── */
+.seccion {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: var(--aire) clamp(1.25rem, 5vw, 3rem);
+}
+.seccion--alt {
+  max-width: none;
+  background: var(--crema-honda);
+}
+/* Re-centra el contenido dentro de las secciones de ancho completo */
+.seccion--alt > * { max-width: var(--ancho); margin-left: auto; margin-right: auto; }
+
+.seccion__titulo { font-size: clamp(2rem, 6vw, 3.2rem); margin: 0 0 1rem; }
+.seccion__intro {
+  max-width: 48ch;
+  color: var(--tinta-suave);
+  margin: 0 0 3rem;
+}
+
+/* ── Fichas de semilla — el elemento firma (etiqueta de herbario) ──────── */
+.fichas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+.ficha {
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 1.6rem;
+  background: var(--crema);
+  transition: border-color var(--transicion), transform var(--transicion);
+}
+.ficha:hover { border-color: var(--sabana); transform: translateY(-2px); }
+
+.ficha__cabecera {
+  border-bottom: 1px solid var(--linea);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1rem;
+}
+.ficha__comun {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+.ficha__cientifico {
+  font-family: var(--serif);
+  color: var(--sabana);
+  margin: 0.1rem 0 0;
+  font-size: 1.1rem;
+}
+.ficha__desc { color: var(--tinta-suave); margin: 0 0 1.2rem; font-size: 1rem; }
+
+.ficha__datos { margin: 0; }
+.ficha__datos > div {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.35rem 0;
+  border-top: 1px dotted var(--linea);
+}
+.ficha__datos dt {
+  flex: 0 0 5.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--arcilla);
+  padding-top: 0.25rem;
+}
+.ficha__datos dd { margin: 0; font-size: 0.95rem; }
+
+/* ── Fotos dentro de la ficha (semilla → germinado) ────────────────────── */
+.ficha__fotos {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+.foto { flex: 1; margin: 0; }
+.foto__marco {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--crema-honda);
+  border: 1px solid var(--linea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.foto__marco img { width: 100%; height: 100%; object-fit: cover; }
+.foto--ph .foto__marco {
+  border-style: dashed;
+}
+.foto__pendiente {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--arcilla);
+  opacity: 0.7;
+}
+.foto__pie {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--arcilla);
+  text-align: center;
+}
+
+/* ── Foto clicable (abre el lightbox) ──────────────────────────────────── */
+.foto__btn {
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color var(--transicion);
+}
+.foto__btn:hover { border-color: var(--sabana); }
+
+/* ── Botón que abre la guía de cada semilla ────────────────────────────── */
+.ficha__cta {
+  margin-top: 1.3rem;
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 0.96rem;
+  color: var(--tinta);
+  background: none;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: border-color var(--transicion), background var(--transicion);
+}
+.ficha__cta:hover { border-color: var(--sabana); background: var(--crema-honda); }
+
+/* ── Guía (pasos y cuidados) — se usa dentro del modal ─────────────────── */
+.guia__bloque + .guia__bloque { margin-top: 1.4rem; }
+.guia__sub {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sabana);
+  margin: 0 0 0.7rem;
+}
+.guia__lista { margin: 0; padding: 0; list-style: none; }
+.guia__lista li {
+  font-size: 0.96rem;
+  color: var(--tinta-suave);
+  padding: 0.28rem 0 0.28rem 1.7rem;
+  position: relative;
+  line-height: 1.55;
+}
+.guia__lista--pasos { counter-reset: paso; }
+.guia__lista--pasos li { counter-increment: paso; }
+.guia__lista--pasos li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0.28rem;
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sabana);
+  line-height: 1.5;
+}
+.guia__lista--cuidados li::before {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  top: 0.85rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--arcilla);
+}
+
+/* ── Modal de guía ─────────────────────────────────────────────────────── */
+.modal {
+  border: none;
+  padding: 0;
+  border-radius: 8px;
+  background: var(--crema);
+  color: var(--tinta);
+  max-width: 32rem;
+  width: calc(100% - 2.5rem);
+  box-shadow: 0 24px 60px var(--sombra);
+}
+.modal::backdrop { background: var(--backdrop); }
+.modal__caja { padding: 2rem clamp(1.5rem, 5vw, 2.5rem) 2.25rem; position: relative; }
+.modal__cerrar {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--tinta-suave);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+.modal__cerrar:hover { color: var(--acento); }
+.modal__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--arcilla);
+  margin: 0 0 0.5rem;
+}
+.modal__titulo { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin: 0; }
+.modal__cientifico {
+  font-family: var(--serif);
+  color: var(--sabana);
+  font-size: 1.1rem;
+  margin: 0.1rem 0 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+/* ── Lightbox de imágenes ──────────────────────────────────────────────── */
+.lightbox {
+  border: none;
+  padding: 0;
+  background: none;
+  max-width: 92vw;
+  max-height: 92vh;
+}
+.lightbox::backdrop { background: var(--backdrop-fuerte); }
+.lightbox__img {
+  display: block;
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: var(--radio);
+}
+.lightbox__cerrar {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--crema);
+  cursor: pointer;
+}
+
+/* ── Filosofía ─────────────────────────────────────────────────────────── */
+.filosofia { text-align: center; }
+.filosofia__cita {
+  font-size: clamp(1.8rem, 5.5vw, 3rem);
+  font-style: italic;
+  font-weight: 500;
+  max-width: 22ch;
+  margin: 0 auto 2.5rem;
+  text-wrap: balance;
+}
+.filosofia__cuerpo {
+  max-width: 52ch;
+  margin: 0 auto;
+  text-align: left;
+}
+.filosofia__cuerpo p { margin: 0 0 1.25rem; color: var(--tinta-suave); }
+
+/* ── Aliados ───────────────────────────────────────────────────────────── */
+.aliados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.aliado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  flex: 1 1 14rem;
+  min-height: 5.5rem;
+  color: var(--tinta-suave);
+  font-size: 0.98rem;
+  transition: border-color var(--transicion), color var(--transicion);
+}
+.aliado:hover { border-color: var(--arcilla); color: var(--tinta); }
+
+/* ── Cierre ────────────────────────────────────────────────────────────── */
+.cierre {
+  background: var(--cierre-fondo);
+  color: var(--cierre-texto);
+  text-align: center;
+  padding: var(--aire) clamp(1.25rem, 5vw, 3rem);
+}
+.cierre__titulo { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 1rem; }
+.cierre__texto { max-width: 44ch; margin: 0 auto 2rem; opacity: 0.85; }
+.cierre__redes { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.red {
+  text-decoration: none;
+  border-bottom: 1px solid var(--acento);
+  padding-bottom: 2px;
+  transition: color var(--transicion);
+}
+.red:hover { color: var(--acento); }
+
+/* ── Accesibilidad ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ESCRITORIO
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 48rem) {
+  .nav__burger { display: none; }
+  .nav__links {
+    position: static;
+    inset: auto;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 0;
+    background: none;
+    border: none;
+    transform: none;
+    align-items: center;
+  }
+  .nav__links a { font-size: 0.95rem; }
+
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+
+  .fichas { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+@media (min-width: 64rem) {
+  .fichas { grid-template-columns: 1fr 1fr; }
+
+  /* El marco de la media se ensancha hacia el margen libre de la derecha
+     (el hero está centrado en 64rem; sobra espacio a los lados en pantallas
+     anchas). La columna de texto NO se toca: el grid sigue 1fr 1fr y solo
+     este elemento desborda su celda hacia la derecha.
+     · 50vw − 32rem = margen libre a la derecha del contenedor de 64rem.
+     · min(…, 14rem) = tope del ensanche. */
+  .hero__media {
+    width: calc(100% + min(50vw - 32rem, 14rem));
+    align-self: stretch; /* iguala la altura al bloque de texto */
+  }
+  /* En escritorio dejamos de forzar el cuadrado: el marco toma la altura del
+     texto (título → botones) para no sobrepasarlo por arriba ni por abajo. */
+  .hero__media-marco {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TEMAS ALTERNATIVOS  ·  exploración de dirección visual
+   ───────────────────────────────────────────────────────────────────────
+   Cada dirección es solo un set de variables bajo un selector de atributo
+   en <html>. El sitio hereda todo de :root (v1); estos bloques SOLO
+   redefinen tokens (color + tipografía) y algún detalle de firma.
+   El selector flotante que alterna data-tema vive en main.js, aislado y
+   fácil de quitar. Para publicar una dirección: copiar su bloque a :root
+   (o dejarlo como default) y borrar los otros dos + el selector.
+
+   Los motivos decorativos (ilustraciones de semilla/tierra, simbología
+   muisca en márgenes) son un paso posterior; vivirían aquí como
+   pseudo-elementos/backgrounds por tema, o como capa en render.js.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Dirección 1 · "Noche de velas" ────────────────────────────────────────
+   Fondo nocturno, luz cálida que emerge. La más dramática. */
+:root[data-tema="noche"] {
+  --crema:        #16130E;  /* fondo noche */
+  --crema-honda:  #1F1A12;  /* secciones alternas, apenas más claro */
+  --tinta:        #F2E8D5;  /* texto crema */
+  --tinta-suave:  #C7BBA2;  /* secundario, atenuado */
+  --arcilla:      #E9B04A;  /* dorado de vela — eyebrows y detalles */
+  /* musgo del brief es #5C6B47; se aclara para legibilidad de texto
+     (nombres científicos, subtítulos) sobre fondo oscuro. */
+  --sabana:       #9AAD79;
+  --acento:       #FF6B2C;  /* calabaza */
+  --acento-honda: #E85618;
+  --linea:        rgba(242, 232, 213, 0.16);
+
+  --nav-fondo:       rgba(22, 19, 14, 0.72);
+  --sombra:          rgba(0, 0, 0, 0.55);
+  --backdrop:        rgba(8, 6, 4, 0.6);
+  --backdrop-fuerte: rgba(8, 6, 4, 0.9);
+  --cierre-fondo:    #0F0D09;
+  --cierre-texto:    #F2E8D5;
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
+}
+/* Luz cálida que "emerge" del fondo — la semilla como punto de luz. */
+:root[data-tema="noche"] body {
+  background:
+    radial-gradient(120% 60% at 50% -8%, rgba(233, 176, 74, 0.10), transparent 60%),
+    var(--crema);
+}
+/* El CTA calabaza brilla un poco en la oscuridad. */
+:root[data-tema="noche"] .btn--acento {
+  box-shadow: 0 0 28px rgba(255, 107, 44, 0.35);
+}
+
+/* ── Dirección 2 · "Tejido de oro" ─────────────────────────────────────────
+   Barro y oro de la orfebrería ancestral, layout limpio y moderno. */
+:root[data-tema="oro"] {
+  --crema:        #E8DCC6;  /* barro */
+  --crema-honda:  #DED0B4;  /* alterno, barro más hondo */
+  --tinta:        #2A2117;
+  --tinta-suave:  #6B5D48;
+  --arcilla:      #C08A2E;  /* oro */
+  --sabana:       #6B7A4F;  /* verde sabana */
+  --acento:       #C0492F;  /* bermellón */
+  --acento-honda: #A63C25;
+  --linea:        rgba(42, 33, 23, 0.18);
+
+  --nav-fondo:       rgba(232, 220, 198, 0.8);
+  --sombra:          rgba(42, 33, 23, 0.2);
+  --backdrop:        rgba(42, 33, 23, 0.5);
+  --backdrop-fuerte: rgba(42, 33, 23, 0.85);
+  --cierre-fondo:    var(--tinta);
+  --cierre-texto:    #E8DCC6;
+
+  --serif: "Spectral", Georgia, serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
+}
+/* Detalle de firma: divisor de "tejido" bajo los eyebrows (geometría
+   ancestral dicha en clave moderna). Puro CSS, sin ilustración. */
+:root[data-tema="oro"] .eyebrow {
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid;
+  border-image: repeating-linear-gradient(
+    90deg, var(--arcilla) 0 4px, transparent 4px 8px) 1;
+}
+
+/* ── Dirección 3 · "Jardín vivo" ───────────────────────────────────────────
+   Botánica contemporánea; verde hondo + lima festivo. Títulos en sans. */
+:root[data-tema="jardin"] {
+  --crema:        #F6F4EC;  /* hueso */
+  --crema-honda:  #ECE9DB;
+  --tinta:        #243B22;  /* verde hondo, protagonista */
+  --tinta-suave:  #5A6152;  /* piedra, atenuado para contraste */
+  --arcilla:      #5F7A2A;  /* lima serio para labels pequeñas (legible) */
+  --sabana:       #4F7A24;  /* verde lima hondo para textos de apoyo */
+  --acento:       #F26A2E;  /* calabaza — CTA cálido, coherente entre temas */
+  --acento-honda: #D9541C;
+  --linea:        rgba(36, 59, 34, 0.16);
+  --lima:         #93C13D;  /* lima "fosforescente" — solo para pops no-texto */
+
+  --nav-fondo:       rgba(246, 244, 236, 0.82);
+  --sombra:          rgba(36, 59, 34, 0.18);
+  --backdrop:        rgba(36, 59, 34, 0.5);
+  --backdrop-fuerte: rgba(20, 33, 19, 0.85);
+  --cierre-fondo:    var(--tinta);
+  --cierre-texto:    #F6F4EC;
+
+  --serif: "Space Grotesk", system-ui, sans-serif; /* display en sans */
+  --sans:  "DM Sans", system-ui, sans-serif;
+}
+/* El lima aparece como pop de vida en detalles interactivos (no en texto,
+   por contraste): bordes al hover y marcadores de pasos. */
+:root[data-tema="jardin"] .ficha:hover,
+:root[data-tema="jardin"] .foto__btn:hover,
+:root[data-tema="jardin"] .ficha__cta:hover { border-color: var(--lima); }
+:root[data-tema="jardin"] .guia__lista--pasos li::before { color: var(--lima); }
+/* Títulos grotesque: un poco más de peso y menos contraste tipográfico. */
+:root[data-tema="jardin"] .seccion__titulo,
+:root[data-tema="jardin"] .hero__titulo,
+:root[data-tema="jardin"] .cierre__titulo {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
