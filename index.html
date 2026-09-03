@@ -3,8 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
+    <!-- SEO. El texto debe coincidir con `sitio` en src/content.js. Va estático
+         en el HTML (no por JS) para que los crawlers y los previews de
+         WhatsApp/Instagram —el canal por el que se comparte tras el QR— lo lean. -->
+    <meta
+      name="description"
+      content="Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas. Una iniciativa hermana de Kindo."
+    />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph / Twitter — preview al compartir el enlace. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="sembrando futuros" />
+    <meta property="og:locale" content="es_CO" />
+    <meta
+      property="og:title"
+      content="sembrando futuros — un puñado de futuro en tus manos"
+    />
+    <meta
+      property="og:description"
+      content="Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas."
+    />
+    <!-- Al tener dominio, añade:  <meta property="og:url" content="https://…" />
+         Para que el preview muestre imagen, agrega un JPG/PNG de 1200×630 en
+         /public y descomenta:
+    <meta property="og:image" content="/og-image.jpg" /> -->
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="sembrando futuros — un puñado de futuro en tus manos"
+    />
+    <meta
+      name="twitter:description"
+      content="Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas."
+    />
     <!-- Tipografías.
          v1 (default): Cormorant Garamond (display) + DM Sans (cuerpo).
          Temas de exploración: Fraunces (Noche), Spectral (Oro), Space Grotesk

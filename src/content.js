@@ -15,16 +15,21 @@ export const sitio = {
   tituloPagina: "sembrando futuros — un puñado de futuro en tus manos",
   descripcion:
     "Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas. Una iniciativa hermana de Kindo.",
+  // Enlaces de la navegación (texto + ancla). Editar aquí, no en render.js.
+  nav: [
+    { texto: "Semillas", ancla: "#semillas" },
+    { texto: "Por qué", ancla: "#filosofia" },
+    { texto: "Aliados", ancla: "#aliados" },
+  ],
 };
 
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: "una iniciativa hermana de Kindo",
-  titulo: "Tienes un puñado de futuro en las manos",
+  titulo: "Tienes un paquete con futuros en tus manos",
   parrafo:
-    "Eso que recibiste son semillas nativas de la sabana de Bogotá. " +
-    "Plantas que crecieron aquí mucho antes que nosotros y que este suelo " +
-    "todavía reconoce. Sembrarlas es devolverle algo a la tierra que pisas.",
+    "Si estás leyendo esto, tienes en tus manos un paquetico con varias semillas, nativas de la sabana de Bogotá. " +
+    "Plantas muy antiguas y que este suelo " +
+    "reconoce. Sembrarlas es devolverle algo a la tierra que te sostiene :)",
   ctaPrincipal: { texto: "Cómo sembrarlas", ancla: "#semillas" },
   ctaSecundario: { texto: "Conoce las semillas", ancla: "#semillas" },
   // Espacio reservado a la derecha del hero para una foto o gif del paquete
@@ -48,6 +53,27 @@ export const hero = {
 //
 // ⚠️ Los datos botánicos (pasos, cuidados, tiempos) son PLACEHOLDERS
 // razonables. Valídalos con el banco de semillas antes de publicar.
+
+// Textos de la sección (encabezado) + etiquetas que se repiten en CADA ficha.
+// Al vivir aquí, otra ciudad puede traducir/adaptar toda la copia sin tocar
+// el marcado.
+export const semillasSeccion = {
+  eyebrow: "en tu sobre",
+  titulo: "Lo que llevas contigo",
+  intro:
+    "Una mezcla especial, curada por bancos de semillas de la sabana. " +
+    "Cada una cuenta una historia. Y estas son las que podrías tener en tus manos:",
+  etiquetas: {
+    fotoSemilla: "la semilla",
+    fotoGerminado: "al germinar",
+    fotoPendiente: "foto pendiente",
+    guiaCta: "Cómo sembrarla y cuidarla",
+    guiaEyebrow: "cómo sembrarla",
+    pasos: "Paso a paso",
+    cuidados: "Cuidados",
+  },
+};
+
 export const semillas = [
   {
     id: "chicala",
@@ -172,6 +198,11 @@ export const filosofia = {
 };
 
 // ── ALIADOS ─────────────────────────────────────────────────────────────
+export const aliadosSeccion = {
+  eyebrow: "no lo hacemos solos",
+  titulo: "Quienes siembran con nosotros",
+};
+
 export const aliados = [
   { nombre: "Plant-for-the-Planet Colombia", logo: null, url: "#" },
   { nombre: "Bancos de semillas locales", logo: null, url: "#" },

@@ -1,5 +1,14 @@
 import "./style.css";
-import { sitio, hero, semillas, filosofia, aliados, cierre } from "./content.js";
+import {
+  sitio,
+  hero,
+  semillas,
+  semillasSeccion,
+  filosofia,
+  aliados,
+  aliadosSeccion,
+  cierre,
+} from "./content.js";
 import {
   renderNav,
   renderHero,
@@ -18,9 +27,9 @@ document.querySelector("#app").innerHTML = [
   renderNav(sitio),
   `<main>`,
   renderHero(hero),
-  renderSemillas(semillas),
+  renderSemillas(semillas, semillasSeccion),
   renderFilosofia(filosofia),
-  renderAliados(aliados),
+  renderAliados(aliados, aliadosSeccion),
   `</main>`,
   renderCierre(cierre),
   renderLightbox(),
@@ -30,7 +39,26 @@ document.querySelector("#app").innerHTML = [
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = lightbox.querySelector(".lightbox__img");
 
+// Menú móvil: refleja abierto/cerrado en el botón (aria) y permite cerrarlo.
+const navToggle = document.getElementById("nav-toggle");
+const navBurger = document.querySelector(".nav__burger");
+const reflejarMenu = () => {
+  const abierto = !!navToggle?.checked;
+  navBurger?.setAttribute("aria-expanded", String(abierto));
+  navBurger?.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+};
+// Abrir por el label dispara "change"; cerrar por JS no, así que se refleja allí.
+navToggle?.addEventListener("change", reflejarMenu);
+const cerrarMenu = () => {
+  if (navToggle) {
+    navToggle.checked = false;
+    reflejarMenu();
+  }
+};
+
 document.addEventListener("click", (e) => {
+  // Al tocar un enlace del menú, ciérralo (si no, queda abierto tras navegar).
+  if (e.target.closest(".nav__links a")) cerrarMenu();
   // Abrir modal de guía de una semilla
   const abrir = e.target.closest("[data-modal]");
   if (abrir) {
@@ -55,6 +83,11 @@ document.addEventListener("click", (e) => {
   if (e.target.tagName === "DIALOG") {
     e.target.close();
   }
+});
+
+// Escape cierra el menú móvil si está abierto.
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") cerrarMenu();
 });
 
 // ═════════════════════════════════════════════════════════════════════════

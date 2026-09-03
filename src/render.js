@@ -6,25 +6,30 @@
 //  Astro, cada función de abajo se vuelve un componente .astro.
 // ─────────────────────────────────────────────────────────────────────────
 
+// Escapa para texto Y para atributos: incluye comillas, porque muchos valores
+// se interpolan dentro de atributos (href, data-*, id). Correcto por defecto,
+// también cuando el contenido venga de un CMS.
 const esc = (s) =>
   String(s)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 export function renderNav(sitio) {
+  const enlaces = sitio.nav
+    .map((l) => `<li><a href="${esc(l.ancla)}">${esc(l.texto)}</a></li>`)
+    .join("");
   return `
     <nav class="nav" aria-label="Navegación principal">
       <a class="nav__logo" href="#inicio">${esc(sitio.nombre)}</a>
       <input type="checkbox" id="nav-toggle" class="nav__toggle" />
-      <label for="nav-toggle" class="nav__burger" aria-label="Abrir menú">
+      <label for="nav-toggle" class="nav__burger" aria-label="Abrir menú"
+             aria-controls="nav-menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </label>
-      <ul class="nav__links">
-        <li><a href="#semillas">Semillas</a></li>
-        <li><a href="#filosofia">Por qué</a></li>
-        <li><a href="#aliados">Aliados</a></li>
-      </ul>
+      <ul class="nav__links" id="nav-menu">${enlaces}</ul>
     </nav>`;
 }
 
@@ -44,7 +49,7 @@ export function renderHero(hero) {
   return `
     <header class="hero" id="inicio">
       <div class="hero__texto">
-        <p class="eyebrow">${esc(hero.eyebrow)}</p>
+        ${hero.eyebrow ? `<p class="eyebrow">${esc(hero.eyebrow)}</p>` : ""}
         <h1 class="hero__titulo">${esc(hero.titulo)}</h1>
         <p class="hero__parrafo">${esc(hero.parrafo)}</p>
         <div class="hero__ctas">
@@ -61,7 +66,7 @@ export function renderHero(hero) {
 }
 
 // Una foto de la ficha. Si hay "src", es un botón que abre el lightbox.
-function renderFoto(foto, etiqueta) {
+function renderFoto(foto, etiqueta, pendiente) {
   if (foto.src) {
     return `
       <figure class="foto">
@@ -74,7 +79,7 @@ function renderFoto(foto, etiqueta) {
   }
   return `
     <figure class="foto foto--ph">
-      <div class="foto__marco"><span class="foto__pendiente">foto pendiente</span></div>
+      <div class="foto__marco"><span class="foto__pendiente">${esc(pendiente)}</span></div>
       <figcaption class="foto__pie">${esc(etiqueta)}</figcaption>
     </figure>`;
 }
@@ -90,26 +95,26 @@ function renderListaGuia(titulo, items, ordenada) {
 }
 
 // El modal con los pasos y cuidados de una semilla.
-function renderModalGuia(s) {
+function renderModalGuia(s, etiquetas) {
   return `
     <dialog class="modal" id="guia-${esc(s.id)}" aria-labelledby="guia-${esc(s.id)}-tit">
       <div class="modal__caja">
         <button class="modal__cerrar" data-close aria-label="Cerrar">&times;</button>
-        <p class="modal__eyebrow">cómo sembrarla</p>
+        <p class="modal__eyebrow">${esc(etiquetas.guiaEyebrow)}</p>
         <h3 class="modal__titulo" id="guia-${esc(s.id)}-tit">${esc(s.comun)}</h3>
         <p class="modal__cientifico"><em>${esc(s.cientifico)}</em></p>
-        ${renderListaGuia("Paso a paso", s.pasos, true)}
-        ${renderListaGuia("Cuidados", s.cuidados, false)}
+        ${renderListaGuia(etiquetas.pasos, s.pasos, true)}
+        ${renderListaGuia(etiquetas.cuidados, s.cuidados, false)}
       </div>
     </dialog>`;
 }
 
-function renderFichaSemilla(s) {
+function renderFichaSemilla(s, etiquetas) {
   return `
     <article class="ficha">
       <div class="ficha__fotos">
-        ${renderFoto(s.fotos.semilla, "la semilla")}
-        ${renderFoto(s.fotos.germinado, "al germinar")}
+        ${renderFoto(s.fotos.semilla, etiquetas.fotoSemilla, etiquetas.fotoPendiente)}
+        ${renderFoto(s.fotos.germinado, etiquetas.fotoGerminado, etiquetas.fotoPendiente)}
       </div>
       <div class="ficha__cabecera">
         <h3 class="ficha__comun">${esc(s.comun)}</h3>
@@ -122,24 +127,22 @@ function renderFichaSemilla(s) {
         <div><dt>Porte</dt><dd>${esc(s.porte)}</dd></div>
       </dl>
       <button class="ficha__cta" data-modal="guia-${esc(s.id)}">
-        Cómo sembrarla y cuidarla
+        ${esc(etiquetas.guiaCta)}
       </button>
-      ${renderModalGuia(s)}
+      ${renderModalGuia(s, etiquetas)}
     </article>`;
 }
 
-export function renderSemillas(semillas) {
+export function renderSemillas(semillas, seccion) {
+  const fichas = semillas
+    .map((s) => renderFichaSemilla(s, seccion.etiquetas))
+    .join("");
   return `
     <section class="seccion" id="semillas">
-      <p class="eyebrow">en tu sobre</p>
-      <h2 class="seccion__titulo">Lo que llevas contigo</h2>
-      <p class="seccion__intro">
-        Una pequeña mezcla curada por bancos de semillas de la sabana.
-        Estas son las que podrías tener entre manos.
-      </p>
-      <div class="fichas">
-        ${semillas.map(renderFichaSemilla).join("")}
-      </div>
+      <p class="eyebrow">${esc(seccion.eyebrow)}</p>
+      <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
+      <p class="seccion__intro">${esc(seccion.intro)}</p>
+      <div class="fichas">${fichas}</div>
     </section>`;
 }
 
@@ -153,7 +156,7 @@ export function renderFilosofia(f) {
     </section>`;
 }
 
-export function renderAliados(aliados) {
+export function renderAliados(aliados, seccion) {
   const items = aliados
     .map((a) => {
       const dentro = a.logo
@@ -164,8 +167,8 @@ export function renderAliados(aliados) {
     .join("");
   return `
     <section class="seccion seccion--alt" id="aliados">
-      <p class="eyebrow">no lo hacemos solos</p>
-      <h2 class="seccion__titulo">Quienes siembran con nosotros</h2>
+      <p class="eyebrow">${esc(seccion.eyebrow)}</p>
+      <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
       <div class="aliados">${items}</div>
     </section>`;
 }

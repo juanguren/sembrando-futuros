@@ -126,6 +126,10 @@ a { color: inherit; }
   gap: 5px;
   cursor: pointer;
   padding: 4px;
+  /* Por encima del panel de links: si no, el propio panel tapa la
+     hamburguesa al abrirse y no se puede tocar para cerrar. */
+  position: relative;
+  z-index: 60;
 }
 .nav__burger span {
   width: 24px;
@@ -136,7 +140,15 @@ a { color: inherit; }
 
 .nav__links {
   position: fixed;
-  inset: 0 0 0 30%;
+  /* Posicionado con unidades de viewport, NO con inset/%: la .nav tiene
+     backdrop-filter, lo que la convierte en el bloque contenedor de sus
+     hijos fixed. Con inset:0 el drawer heredaba la altura de la nav (~68px)
+     en vez de la pantalla completa. 100dvh lo evita. */
+  top: 0;
+  right: 0;
+  width: min(72vw, 320px);
+  height: 100vh;      /* fallback */
+  height: 100dvh;
   flex-direction: column;
   justify-content: center;
   gap: 1.75rem;
@@ -144,12 +156,20 @@ a { color: inherit; }
   background: var(--crema);
   border-left: 1px solid var(--linea);
   transform: translateX(100%);
-  transition: transform 0.28s ease;
+  /* visibility: hidden saca los links del orden de tabulación cuando el menú
+     está cerrado (si no, con Tab se cae en enlaces invisibles fuera de
+     pantalla). Como propiedad discreta, se mantiene visible durante el
+     deslizamiento de salida y se oculta al terminar. */
+  visibility: hidden;
+  transition: transform 0.28s ease, visibility 0.28s ease;
   display: flex;
 }
 .nav__links a { font-size: 1.3rem; }
 
-.nav__toggle:checked ~ .nav__links { transform: translateX(0); }
+.nav__toggle:checked ~ .nav__links {
+  transform: translateX(0);
+  visibility: visible;
+}
 .nav__toggle:checked ~ .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav__toggle:checked ~ .nav__burger span:nth-child(2) { opacity: 0; }
 .nav__toggle:checked ~ .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -547,6 +567,9 @@ a { color: inherit; }
   .nav__links {
     position: static;
     inset: auto;
+    width: auto;         /* deshace el drawer móvil */
+    height: auto;
+    visibility: visible; /* siempre visible en escritorio */
     flex-direction: row;
     gap: 2rem;
     padding: 0;
