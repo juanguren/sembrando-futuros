@@ -14,7 +14,7 @@ export const sitio = {
   nombre: "sembrando futuros",
   tituloPagina: "sembrando futuros — un puñado de futuro en tus manos",
   descripcion:
-    "Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas. Una iniciativa hermana de Kindo.",
+    "Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas.",
   // Enlaces de la navegación (texto + ancla). Editar aquí, no en render.js.
   nav: [
     { texto: "Semillas", ancla: "#semillas" },
@@ -217,6 +217,5 @@ export const cierre = {
     "un vecino el próximo octubre.",
   redes: [
     { nombre: "Instagram", url: "#" },
-    { nombre: "WhatsApp (comunidad Kindo)", url: "#" },
   ],
 };
