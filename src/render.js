@@ -233,7 +233,7 @@ function renderModalManifiesto(f) {
 export function renderColectivo(c) {
   return `
     <section class="seccion colectivo" id="colectivo">
-      <p class="eyebrow">${esc(c.eyebrow)}</p>
+      ${c.eyebrow ? `<p class="eyebrow">${esc(c.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(c.titulo)}</h2>
       <p class="colectivo__texto">${esc(c.texto)}</p>
       <p class="colectivo__teaser">${esc(c.teaser)}</p>

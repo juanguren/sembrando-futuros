@@ -250,12 +250,16 @@ a { color: inherit; }
   margin: 0 auto;
   padding: var(--aire) clamp(1.25rem, 5vw, 3rem);
 }
+/* Fondo a sangre completa SIN sacar el contenido del flujo centrado: la
+   sección conserva el mismo ancho y centrado que las normales (por eso todo
+   alinea entre secciones), y el color se extiende a los lados con box-shadow
+   recortado en vertical. Reemplaza el viejo truco `> *` que peleaba con los
+   márgenes de los títulos. */
 .seccion--alt {
-  max-width: none;
   background: var(--crema-honda);
+  box-shadow: 0 0 0 100vmax var(--crema-honda);
+  clip-path: inset(0 -100vmax);
 }
-/* Re-centra el contenido dentro de las secciones de ancho completo */
-.seccion--alt > * { max-width: var(--ancho); margin-left: auto; margin-right: auto; }
 
 .seccion__titulo { font-size: clamp(2rem, 6vw, 3.2rem); margin: 0 0 1rem; }
 .seccion__intro {
@@ -786,15 +790,13 @@ a { color: inherit; }
   mask: var(--greca-mask) repeat-x left center / auto 100%;
 }
 /* El manifiesto "que explota": rompe la calma con color a sangre completa */
+/* Sangre completa con la misma técnica que .seccion--alt, para que el
+   manifiesto alinee su contenido con el resto de secciones. */
 :root[data-tema] .filosofia {
-  max-width: none;
   background: var(--explota-bg, transparent);
   color: var(--explota-fg, inherit);
-}
-:root[data-tema] .filosofia > * {
-  max-width: var(--ancho);
-  margin-left: auto;
-  margin-right: auto;
+  box-shadow: 0 0 0 100vmax var(--explota-bg, transparent);
+  clip-path: inset(0 -100vmax);
 }
 :root[data-tema] .filosofia .eyebrow { color: var(--explota-eyebrow, var(--arcilla)); }
 :root[data-tema] .filosofia__cita { color: var(--explota-fg, var(--tinta)); }

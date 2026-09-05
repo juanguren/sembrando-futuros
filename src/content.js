@@ -282,7 +282,6 @@ export const filosofia = {
 // Enmarca que esto es más grande que una web: la puerta a una movida
 // colectiva, con el teaser del mapa (v2).
 export const colectivo = {
-  eyebrow: "no estás solo",
   titulo: "Somos parte de algo más grande",
   texto:
     "Es un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá " +
