@@ -87,20 +87,20 @@ export const queHago = {
     {
       titulo: "Ábrelo",
       texto:
-        "Adentro hay una mezcla de semillas nativas. Guárdalas secas y a la " +
-        "sombra hasta que decidas sembrar.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " +
+        "eiusmod tempor incididunt ut labore.",
     },
     {
       titulo: "Siémbralas",
       texto:
-        "En una matera, el antejardín o un rincón del barrio. Cada semilla " +
-        "trae su guía — la encuentras más abajo.",
+        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+        "nisi ut aliquip ex ea commodo.",
     },
     {
       titulo: "Comparte",
       texto:
-        "Cuéntalo, etiquétanos con #SembrandoFuturos, o regálale semillas a un " +
-        "vecino. Así la sabana vuelve más rápido.",
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse " +
+        "cillum dolore eu fugiat nulla pariatur.",
     },
   ],
 };
