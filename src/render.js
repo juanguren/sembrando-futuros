@@ -86,7 +86,7 @@ export function renderEvento(evento) {
     .join("");
   return `
     <section class="seccion seccion--alt" id="evento">
-      <p class="eyebrow">${esc(evento.eyebrow)}</p>
+      ${evento.eyebrow ? `<p class="eyebrow">${esc(evento.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(evento.titulo)}</h2>
       <p class="seccion__intro">${esc(evento.intro)}</p>
       <div class="grid-tarjetas">${tarjetas}</div>
@@ -106,7 +106,7 @@ export function renderQueHago(queHago) {
     .join("");
   return `
     <section class="seccion" id="pasos">
-      <p class="eyebrow">${esc(queHago.eyebrow)}</p>
+      ${queHago.eyebrow ? `<p class="eyebrow">${esc(queHago.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(queHago.titulo)}</h2>
       <div class="pasos">${pasos}</div>
     </section>`;
@@ -186,7 +186,7 @@ export function renderSemillas(semillas, seccion) {
     .join("");
   return `
     <section class="seccion" id="semillas">
-      <p class="eyebrow">${esc(seccion.eyebrow)}</p>
+      ${seccion.eyebrow ? `<p class="eyebrow">${esc(seccion.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
       <p class="seccion__intro">${esc(seccion.intro)}</p>
       <div class="fichas">${fichas}</div>

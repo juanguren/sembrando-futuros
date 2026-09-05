@@ -49,7 +49,6 @@ export const hero = {
 // Qué es esto, dónde ocurre y cuál es la invitación. Va justo tras el hero:
 // primero se entiende la movida, luego el "qué hago".
 export const evento = {
-  eyebrow: "qué es esto",
   titulo: "¿Qué es Sembrando Futuros?",
   intro:
     "Una movida ambiental y comunitaria de Bogotá. Cada octubre repartimos " +
@@ -84,7 +83,6 @@ export const evento = {
 // ── ¿Y AHORA QUÉ? (los 3 pasos) ──────────────────────────────────────────
 // La respuesta rápida a "¿qué hago con esto?", antes del detalle botánico.
 export const queHago = {
-  eyebrow: "el trato, en tres pasos",
   titulo: "¿Y ahora qué hago?",
   pasos: [
     {
@@ -124,7 +122,6 @@ export const queHago = {
 // Al vivir aquí, otra ciudad puede traducir/adaptar toda la copia sin tocar
 // el marcado.
 export const semillasSeccion = {
-  eyebrow: "en tu sobre",
   titulo: "Lo que llevas contigo",
   intro:
     "Una mezcla especial, curada por bancos de semillas de la sabana. " +
