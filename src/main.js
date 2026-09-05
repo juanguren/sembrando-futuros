@@ -93,8 +93,8 @@ document.addEventListener("keydown", (e) => {
 // ═════════════════════════════════════════════════════════════════════════
 //  SELECTOR DE TEMAS · herramienta de exploración (TEMPORAL)
 //
-//  Alterna el atributo data-tema en <html> para comparar en vivo las tres
-//  direcciones visuales contra el contenido real. NO es parte final del
+//  Alterna el atributo data-tema en <html> para comparar en vivo las cuatro
+//  direcciones "con alma" contra el contenido real. NO es parte final del
 //  sitio: es un aislado deliberado. Para quitarlo, borra este bloque entero
 //  (y, si quieres, los bloques :root[data-tema=...] de style.css).
 //
@@ -102,11 +102,12 @@ document.addEventListener("keydown", (e) => {
 // ═════════════════════════════════════════════════════════════════════════
 (() => {
   const TEMAS = [
-    { id: "", nombre: "v1 · herbario" },
-    { id: "noche", nombre: "Noche de velas" },
-    { id: "oro", nombre: "Tejido de oro" },
-    { id: "jardin", nombre: "Jardín vivo" },
+    { id: "jardin-llamas", nombre: "Jardín en llamas" },
+    { id: "fogata", nombre: "Fogata" },
+    { id: "greca", nombre: "Greca de oro" },
+    { id: "riso", nombre: "Riso resistencia" },
   ];
+  const DEFECTO = "jardin-llamas"; // coincide con data-tema en index.html
   const CLAVE = "sf-tema-explorador";
 
   const aplicar = (id) => {
@@ -172,5 +173,5 @@ document.addEventListener("keydown", (e) => {
 
   let inicial = "";
   try { inicial = localStorage.getItem(CLAVE) || ""; } catch {}
-  aplicar(TEMAS.some((t) => t.id === inicial) ? inicial : "");
+  aplicar(TEMAS.some((t) => t.id === inicial) ? inicial : DEFECTO);
 })();
