@@ -205,7 +205,7 @@ export function renderFilosofia(f) {
     .join("");
   return `
     <section class="seccion filosofia" id="filosofia">
-      <p class="eyebrow">${esc(f.eyebrow)}</p>
+      ${f.eyebrow ? `<p class="eyebrow">${esc(f.eyebrow)}</p>` : ""}
       <blockquote class="filosofia__cita">${esc(f.cita)}</blockquote>
       <div class="filosofia__beats">${beats}</div>
       <button class="btn btn--acento" data-modal="manifiesto-completo">
