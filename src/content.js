@@ -246,38 +246,35 @@ export const semillas = [
 // ── FILOSOFÍA / MANIFIESTO ───────────────────────────────────────────────
 // Corto y punzante en la página (cita + 3 beats); el manifiesto completo se
 // abre en un modal para quien quiera ahondar.
+// ⚠️ Manifiesto en LOREM IPSUM — placeholder a la espera del copy final.
 export const filosofia = {
   eyebrow: "por qué sembramos",
-  cita: "Para construir un mejor futuro, tenemos que poder sentirlo primero.",
+  cita: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do.",
   beats: [
     {
-      titulo: "Sabana que vuelve",
-      texto: "No es un gesto simbólico: es territorio que regresa.",
+      titulo: "Lorem ipsum",
+      texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     },
     {
-      titulo: "Sombra y comida",
-      texto: "Cada árbol nativo es refugio y alimento para las aves.",
+      titulo: "Dolor sit amet",
+      texto: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
     },
     {
-      titulo: "Un barrio más vivo",
-      texto: "Sembrar con las manos es imaginar el futuro con terquedad.",
+      titulo: "Consectetur elit",
+      texto: "Ut labore et dolore magna aliqua, ut enim ad minim veniam.",
     },
   ],
   ctaCompleto: "Leer el manifiesto completo",
-  manifiestoTitulo: "Para poder sentirlo primero",
+  manifiestoTitulo: "Lorem ipsum dolor",
   completo: [
-    "Las redes nos enseñaron a creer que el futuro es un lugar oscuro e " +
-      "inamovible. Pero la realidad también está llena de gente, barrios y " +
-      "colectivos construyendo futuros más amables, más cerca de la naturaleza.",
-    "Creemos en un futuro sutil y vivo que ya viene en camino. No el de las " +
-      "grandes promesas, sino el de lo pequeño y terco: una semilla nativa que " +
-      "alguien decide sembrar en su ventana.",
-    "Lo ancestral no es nostalgia. La sabana que cuidaron los muiscas es una " +
-      "tecnología viva: sabe volver si le abrimos espacio. Sembrar es tejer " +
-      "eso ancestral con lo que somos hoy.",
-    "Te llegó en Halloween casi como un truco. El trato es este: cuídala, y " +
-      "pásale la voz a alguien más. Porque para construir un mejor futuro, " +
-      "primero tenemos que poder sentirlo.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod " +
+      "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim " +
+      "veniam, quis nostrud exercitation ullamco laboris.",
+    "Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
+      "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla " +
+      "pariatur.",
+    "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+      "officia deserunt mollit anim id est laborum.",
   ],
 };
 // proyecto de pedagogía y acción colectiva alrededor de las semillas nativas de la sabana de Bogotá
