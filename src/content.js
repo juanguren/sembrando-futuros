@@ -248,8 +248,7 @@ export const semillas = [
 // abre en un modal para quien quiera ahondar.
 // ⚠️ Manifiesto en LOREM IPSUM — placeholder a la espera del copy final.
 export const filosofia = {
-  eyebrow: "por qué sembramos",
-  cita: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do.",
+  cita: "¿Por que lo hacemos?",
   beats: [
     {
       titulo: "Lorem ipsum",
