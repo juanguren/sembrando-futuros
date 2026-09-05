@@ -283,7 +283,7 @@ export const filosofia = {
 // colectiva, con el teaser del mapa (v2).
 export const colectivo = {
   eyebrow: "no estás solo",
-  titulo: "Esto es parte de algo más grande",
+  titulo: "Somos parte de algo más grande",
   texto:
     "Es un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá " +
     "sembrando el mismo futuro, cada quien en su barrio. Cuando siembras, te sumas.",
