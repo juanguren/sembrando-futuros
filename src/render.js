@@ -51,6 +51,13 @@ export function renderHero(hero) {
       <div class="hero__texto">
         ${hero.eyebrow ? `<p class="eyebrow">${esc(hero.eyebrow)}</p>` : ""}
         <h1 class="hero__titulo">${esc(hero.titulo)}</h1>
+        ${
+          hero.hashtags?.length
+            ? `<p class="hero__hashtags">${hero.hashtags
+                .map((h) => `<span>${esc(h)}</span>`)
+                .join("")}</p>`
+            : ""
+        }
         <p class="hero__parrafo">${esc(hero.parrafo)}</p>
         <div class="hero__ctas">
           <a class="btn btn--acento" href="${esc(hero.ctaPrincipal.ancla)}">
@@ -63,6 +70,46 @@ export function renderHero(hero) {
       </div>
       ${renderHeroMedia(hero.media)}
     </header>`;
+}
+
+// Banda "el evento": qué es, dónde ocurre, la invitación + tarjetas de meta.
+export function renderEvento(evento) {
+  const tarjetas = evento.tarjetas
+    .map(
+      (t) => `
+      <div class="tarjeta">
+        <p class="tarjeta__k">${esc(t.k)}</p>
+        <h3 class="tarjeta__titulo">${esc(t.titulo)}</h3>
+        <p class="tarjeta__texto">${esc(t.texto)}</p>
+      </div>`
+    )
+    .join("");
+  return `
+    <section class="seccion seccion--alt" id="evento">
+      <p class="eyebrow">${esc(evento.eyebrow)}</p>
+      <h2 class="seccion__titulo">${esc(evento.titulo)}</h2>
+      <p class="seccion__intro">${esc(evento.intro)}</p>
+      <div class="grid-tarjetas">${tarjetas}</div>
+    </section>`;
+}
+
+// Banda "¿y ahora qué?": los 3 pasos, la respuesta rápida a la acción.
+export function renderQueHago(queHago) {
+  const pasos = queHago.pasos
+    .map(
+      (p) => `
+      <div class="paso">
+        <h3 class="paso__titulo">${esc(p.titulo)}</h3>
+        <p class="paso__texto">${esc(p.texto)}</p>
+      </div>`
+    )
+    .join("");
+  return `
+    <section class="seccion" id="pasos">
+      <p class="eyebrow">${esc(queHago.eyebrow)}</p>
+      <h2 class="seccion__titulo">${esc(queHago.titulo)}</h2>
+      <div class="pasos">${pasos}</div>
+    </section>`;
 }
 
 // Una foto de la ficha. Si hay "src", es un botón que abre el lightbox.
@@ -147,12 +194,49 @@ export function renderSemillas(semillas, seccion) {
 }
 
 export function renderFilosofia(f) {
-  const parrafos = f.parrafos.map((p) => `<p>${esc(p)}</p>`).join("");
+  const beats = f.beats
+    .map(
+      (b) => `
+      <div class="beat">
+        <b class="beat__titulo">${esc(b.titulo)}</b>
+        <span class="beat__texto">${esc(b.texto)}</span>
+      </div>`
+    )
+    .join("");
   return `
     <section class="seccion filosofia" id="filosofia">
       <p class="eyebrow">${esc(f.eyebrow)}</p>
       <blockquote class="filosofia__cita">${esc(f.cita)}</blockquote>
-      <div class="filosofia__cuerpo">${parrafos}</div>
+      <div class="filosofia__beats">${beats}</div>
+      <button class="btn btn--acento" data-modal="manifiesto-completo">
+        ${esc(f.ctaCompleto)}
+      </button>
+      ${renderModalManifiesto(f)}
+    </section>`;
+}
+
+// El manifiesto completo, para quien quiera ahondar (modal <dialog>).
+function renderModalManifiesto(f) {
+  const parrafos = f.completo.map((p) => `<p>${esc(p)}</p>`).join("");
+  return `
+    <dialog class="modal" id="manifiesto-completo" aria-labelledby="manifiesto-tit">
+      <div class="modal__caja modal__caja--texto">
+        <button class="modal__cerrar" data-close aria-label="Cerrar">&times;</button>
+        <p class="modal__eyebrow">manifiesto</p>
+        <h3 class="modal__titulo" id="manifiesto-tit">${esc(f.manifiestoTitulo)}</h3>
+        <div class="manifiesto-largo">${parrafos}</div>
+      </div>
+    </dialog>`;
+}
+
+// Banda "colectividad": esto es más grande que una web + teaser del mapa.
+export function renderColectivo(c) {
+  return `
+    <section class="seccion colectivo" id="colectivo">
+      <p class="eyebrow">${esc(c.eyebrow)}</p>
+      <h2 class="seccion__titulo">${esc(c.titulo)}</h2>
+      <p class="colectivo__texto">${esc(c.texto)}</p>
+      <p class="colectivo__teaser">${esc(c.teaser)}</p>
     </section>`;
 }
 

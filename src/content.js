@@ -26,6 +26,9 @@ export const sitio = {
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
   titulo: "Tienes un paquete con futuros en tus manos",
+  // Hashtags bajo el título (cada uno en su línea). Deja el arreglo vacío
+  // para ocultarlos.
+  hashtags: ["#SembrandoFuturos", "#SembramosFuturos"],
   parrafo:
     "Si estás leyendo esto, tienes en tus manos un paquetico con varias semillas, nativas de la sabana de Bogotá. " +
     "Plantas muy antiguas y que este suelo " +
@@ -40,6 +43,69 @@ export const hero = {
     alt: "El sobre de semillas abriéndose para revelar lo que hay dentro",
     nota: "foto o gif del paquete + QR",
   },
+};
+
+// ── EL EVENTO / LA MOVIDA ────────────────────────────────────────────────
+// Qué es esto, dónde ocurre y cuál es la invitación. Va justo tras el hero:
+// primero se entiende la movida, luego el "qué hago".
+export const evento = {
+  eyebrow: "qué es esto",
+  titulo: "¿Qué es Sembrando Futuros?",
+  intro:
+    "Una movida ambiental y comunitaria de Bogotá. Cada octubre repartimos " +
+    "sobres de semillas nativas por los barrios — un “dulce” de Halloween que " +
+    "en realidad es un caballo de Troya: adentro no hay azúcar, hay sabana. " +
+    "La invitación es simple: siembra una, y pasa la voz.",
+  tarjetas: [
+    {
+      k: "Dónde",
+      titulo: "Barrios de Bogotá",
+      texto:
+        "De puerta en puerta, con vecinos y en nuestros barrios. La sabana vuelve " +
+        "balcón por balcón, parque por parque.",
+    },
+    {
+      k: "Cuándo",
+      titulo: "Octubre",
+      texto:
+        "Época de Halloween: " + "Si compartimos dulces... " +
+        "¿por qué no también semillas?",
+    },
+    {
+      k: "Con quién",
+      titulo: "¡Tus Comunidades!",
+      texto:
+        "Bancos de semillas, organizaciones de barrio y cualquiera que quiera " +
+        "sembrar. Una vez siembras, ya eres parte :)",
+    },
+  ],
+};
+
+// ── ¿Y AHORA QUÉ? (los 3 pasos) ──────────────────────────────────────────
+// La respuesta rápida a "¿qué hago con esto?", antes del detalle botánico.
+export const queHago = {
+  eyebrow: "el trato, en tres pasos",
+  titulo: "¿Y ahora qué hago?",
+  pasos: [
+    {
+      titulo: "Ábrelo",
+      texto:
+        "Adentro hay una mezcla de semillas nativas. Guárdalas secas y a la " +
+        "sombra hasta que decidas sembrar.",
+    },
+    {
+      titulo: "Siémbralas",
+      texto:
+        "En una matera, el antejardín o un rincón del barrio. Cada semilla " +
+        "trae su guía — la encuentras más abajo.",
+    },
+    {
+      titulo: "Comparte",
+      texto:
+        "Cuéntalo, etiquétanos con #SembrandoFuturos, o regálale semillas a un " +
+        "vecino. Así la sabana vuelve más rápido.",
+    },
+  ],
 };
 
 // ── SEMILLAS ─────────────────────────────────────────────────────────────
@@ -181,20 +247,55 @@ export const semillas = [
   },
 ];
 
-// ── FILOSOFÍA ───────────────────────────────────────────────────────────
+// ── FILOSOFÍA / MANIFIESTO ───────────────────────────────────────────────
+// Corto y punzante en la página (cita + 3 beats); el manifiesto completo se
+// abre en un modal para quien quiera ahondar.
 export const filosofia = {
-  eyebrow: "por qué semillas",
+  eyebrow: "por qué sembramos",
   cita: "Para construir un mejor futuro, tenemos que poder sentirlo primero.",
-  parrafos: [
+  beats: [
+    {
+      titulo: "Sabana que vuelve",
+      texto: "No es un gesto simbólico: es territorio que regresa.",
+    },
+    {
+      titulo: "Sombra y comida",
+      texto: "Cada árbol nativo es refugio y alimento para las aves.",
+    },
+    {
+      titulo: "Un barrio más vivo",
+      texto: "Sembrar con las manos es imaginar el futuro con terquedad.",
+    },
+  ],
+  ctaCompleto: "Leer el manifiesto completo",
+  manifiestoTitulo: "Para poder sentirlo primero",
+  completo: [
     "Las redes nos enseñaron a creer que el futuro es un lugar oscuro e " +
       "inamovible. Pero la realidad también está llena de gente, barrios y " +
       "colectivos construyendo futuros más amables, más cerca de la naturaleza.",
-    "Sembrar una planta nativa es una forma pequeña y terca de imaginar ese " +
-      "futuro con las manos. No es un gesto simbólico: es sabana que vuelve, " +
-      "es sombra, es comida para las aves, es un barrio un poco más vivo.",
+    "Creemos en un futuro sutil y vivo que ya viene en camino. No el de las " +
+      "grandes promesas, sino el de lo pequeño y terco: una semilla nativa que " +
+      "alguien decide sembrar en su ventana.",
+    "Lo ancestral no es nostalgia. La sabana que cuidaron los muiscas es una " +
+      "tecnología viva: sabe volver si le abrimos espacio. Sembrar es tejer " +
+      "eso ancestral con lo que somos hoy.",
     "Te llegó en Halloween casi como un truco. El trato es este: cuídala, y " +
-      "pásale la voz a alguien más.",
+      "pásale la voz a alguien más. Porque para construir un mejor futuro, " +
+      "primero tenemos que poder sentirlo.",
   ],
+};
+
+// ── COLECTIVIDAD ─────────────────────────────────────────────────────────
+// Enmarca que esto es más grande que una web: la puerta a una movida
+// colectiva, con el teaser del mapa (v2).
+export const colectivo = {
+  eyebrow: "no estás solo",
+  titulo: "Esto es parte de algo más grande",
+  texto:
+    "Es una movida colectiva: vecinos, colectivos y bancos de semillas " +
+    "sembrando el mismo futuro, cada quien en su barrio. Cuando siembras, te sumas.",
+  teaser:
+    "Pronto: un mapa para marcar dónde sembraste y ver la sabana volver por todo Bogotá.",
 };
 
 // ── ALIADOS ─────────────────────────────────────────────────────────────

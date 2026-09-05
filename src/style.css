@@ -506,6 +506,108 @@ a { color: inherit; }
 }
 .filosofia__cuerpo p { margin: 0 0 1.25rem; color: var(--tinta-suave); }
 
+/* Beats del manifiesto (viven dentro de la sección que "explota") */
+.filosofia__beats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 46rem;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+.beat {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+.beat__titulo {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
+  color: var(--explota-eyebrow, var(--arcilla));
+}
+.beat__texto { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.85; font-size: 0.94rem; }
+/* El CTA del manifiesto sobre la explosión: usa el color-pop del tema, para
+   que no se confunda con el fondo (p. ej. bermellón sobre bermellón en Riso). */
+.filosofia .btn--acento {
+  background: var(--explota-eyebrow, var(--acento));
+  color: #17140e;
+  box-shadow: none;
+}
+.filosofia .btn--acento:hover { background: var(--explota-eyebrow, var(--acento)); filter: brightness(1.06); }
+
+/* ── Hashtags del hero ─────────────────────────────────────────────────── */
+.hero__hashtags { margin: -0.4rem 0 1.6rem; }
+.hero__hashtags span {
+  display: block;
+  font-family: var(--sans);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--arcilla);
+}
+
+/* ── Los 3 pasos (¿y ahora qué?) ───────────────────────────────────────── */
+.pasos { display: grid; grid-template-columns: 1fr; gap: 1.1rem; counter-reset: paso; }
+.paso {
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: var(--crema-honda);
+  counter-increment: paso;
+}
+.paso::before {
+  content: counter(paso);
+  font-family: var(--serif); font-weight: 600; font-size: 1.05rem;
+  color: var(--crema); background: var(--acento);
+  width: 2rem; height: 2rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.paso__titulo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 0.4rem; }
+.paso__texto { margin: 0; color: var(--tinta-suave); font-size: 0.98rem; line-height: 1.6; }
+
+/* ── Grid de tarjetas (banda del evento) ───────────────────────────────── */
+.grid-tarjetas { display: grid; grid-template-columns: 1fr; gap: 1.1rem; margin-top: 0.5rem; }
+.tarjeta {
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: var(--crema);
+}
+.tarjeta__k {
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--arcilla); margin: 0 0 0.5rem;
+}
+.tarjeta__titulo { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem; }
+.tarjeta__texto { margin: 0; color: var(--tinta-suave); font-size: 0.96rem; line-height: 1.6; }
+
+/* ── Colectividad ──────────────────────────────────────────────────────── */
+.colectivo { text-align: center; }
+.colectivo__texto { max-width: 48ch; margin: 0 auto; color: var(--tinta-suave); }
+.colectivo__teaser {
+  display: inline-block;
+  margin: 1.6rem auto 0;
+  font-size: 0.9rem;
+  color: var(--arcilla);
+  border: 1px solid var(--linea);
+  border-radius: 100px;
+  padding: 0.55rem 1.1rem;
+}
+
+/* Texto largo dentro del modal (manifiesto completo) */
+.modal__caja--texto .manifiesto-largo p { margin: 0 0 1rem; color: var(--tinta-suave); }
+.modal__caja--texto .manifiesto-largo p:first-child { color: var(--tinta); }
+
+@media (min-width: 40rem) {
+  .pasos { grid-template-columns: repeat(3, 1fr); }
+  .grid-tarjetas { grid-template-columns: repeat(3, 1fr); }
+  .filosofia__beats { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* ── Aliados ───────────────────────────────────────────────────────────── */
 .aliados {
   display: flex;
