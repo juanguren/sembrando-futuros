@@ -51,10 +51,9 @@ export const hero = {
 export const evento = {
   titulo: "¿Qué es Sembrando Futuros?",
   intro:
-    "Una movida ambiental y comunitaria de Bogotá. Cada octubre repartimos " +
-    "sobres de semillas nativas por los barrios — un “dulce” de Halloween que " +
-    "en realidad es un caballo de Troya: adentro no hay azúcar, hay sabana. " +
-    "La invitación es simple: siembra una, y pasa la voz.",
+    "Somos un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá. " +
+    "Sembramos esperanza y futuros posibles, una semilla y un encuentro a la vez. " +
+    "La invitación es simple: Siembra, Divirtiete, Comparte ",
   tarjetas: [
     {
       k: "Dónde",
@@ -67,7 +66,7 @@ export const evento = {
       k: "Cuándo",
       titulo: "Octubre",
       texto:
-        "Época de Halloween: " + "Si compartimos dulces... " +
+        "Época de fiestas y disfraces: " + "Si compartimos dulces... " +
         "¿por qué no también semillas?",
     },
     {
@@ -281,6 +280,7 @@ export const filosofia = {
       "primero tenemos que poder sentirlo.",
   ],
 };
+// proyecto de pedagogía y acción colectiva alrededor de las semillas nativas de la sabana de Bogotá
 
 // ── COLECTIVIDAD ─────────────────────────────────────────────────────────
 // Enmarca que esto es más grande que una web: la puerta a una movida
@@ -289,7 +289,7 @@ export const colectivo = {
   eyebrow: "no estás solo",
   titulo: "Esto es parte de algo más grande",
   texto:
-    "Es una movida colectiva: vecinos, colectivos y bancos de semillas " +
+    "Es un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá " +
     "sembrando el mismo futuro, cada quien en su barrio. Cuando siembras, te sumas.",
   teaser:
     "Pronto: un mapa para marcar dónde sembraste y ver la sabana volver por todo Bogotá.",
