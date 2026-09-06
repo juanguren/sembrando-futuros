@@ -111,10 +111,10 @@ document.addEventListener("keydown", (e) => {
 // ═════════════════════════════════════════════════════════════════════════
 (() => {
   const TEMAS = [
-    { id: "jardin-llamas", nombre: "Jardín en llamas" },
-    { id: "fogata", nombre: "Fogata" },
-    { id: "greca", nombre: "Greca de oro" },
-    { id: "riso", nombre: "Riso resistencia" },
+    { id: "jardin-llamas", nombre: "Solarpunk" },
+    { id: "fogata", nombre: "Animista-futurista" },
+    { id: "greca", nombre: "Ancestral-moderno" },
+    { id: "riso", nombre: "Maximalista latino" },
   ];
   const DEFECTO = "jardin-llamas"; // coincide con data-tema en index.html
   const CLAVE = "sf-tema-explorador";
