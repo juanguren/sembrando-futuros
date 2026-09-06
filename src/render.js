@@ -50,7 +50,7 @@ export function renderHero(hero) {
     <header class="hero" id="inicio">
       <div class="hero__texto">
         ${hero.eyebrow ? `<p class="eyebrow">${esc(hero.eyebrow)}</p>` : ""}
-        <h1 class="hero__titulo">${esc(hero.titulo)}</h1>
+        <h1 class="hero__titulo">${esc(hero.tituloAntes)} <span class="hero__rota" data-rota>${esc(hero.tituloRota[0])}</span> ${esc(hero.tituloDespues)}</h1>
         ${
           hero.hashtags?.length
             ? `<p class="hero__hashtags">${hero.hashtags

@@ -99,6 +99,25 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") cerrarMenu();
 });
 
+// ── Carrusel de la palabra del hero (futuros → semillas → esperanza) ─────
+// Rota con un crossfade suave. Si el usuario pide menos movimiento, queda fijo.
+(() => {
+  const el = document.querySelector("[data-rota]");
+  const palabras = hero.tituloRota || [];
+  const sinMovimiento = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (!el || palabras.length < 2 || sinMovimiento) return;
+
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % palabras.length;
+    el.style.opacity = "0";
+    setTimeout(() => {
+      el.textContent = palabras[i];
+      el.style.opacity = "1";
+    }, 280);
+  }, 2600);
+})();
+
 // ═════════════════════════════════════════════════════════════════════════
 //  SELECTOR DE TEMAS · herramienta de exploración (TEMPORAL)
 //

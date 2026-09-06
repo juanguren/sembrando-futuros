@@ -25,7 +25,13 @@ export const sitio = {
 
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
-  titulo: "Tienes un paquete con futuros en tus manos",
+  // Título con una palabra que rota en carrusel:
+  // "{tituloAntes} {tituloRota[i]} {tituloDespues}".
+  // Si tituloRota tiene una sola palabra (o el usuario no quiere animación),
+  // el título queda fijo.
+  tituloAntes: "Tienes un paquete con",
+  tituloRota: ["futuros", "semillas", "esperanza"],
+  tituloDespues: "en tus manos",
   // Hashtags bajo el título (cada uno en su línea). Deja el arreglo vacío
   // para ocultarlos.
   hashtags: ["#SembrandoFuturos", "#SembramosFuturos"],
