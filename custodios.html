@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- data-tema fija la dirección por defecto y evita el parpadeo inicial;
+     tema-explorador.js la sobreescribe con la elección guardada. -->
+<html lang="es" data-tema="jardin-llamas">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SEO estático (los crawlers no ejecutan JS). Debe coincidir con
+         `custodiosPagina` en src/content.js. -->
+    <meta
+      name="description"
+      content="Las semillas de tu sobre tienen un origen y una historia. Conoce a quienes las custodian."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="sembrando futuros" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content="custodios de semillas — sembrando futuros" />
+    <meta
+      property="og:description"
+      content="Las semillas de tu sobre tienen un origen y una historia. Conoce a quienes las custodian."
+    />
+
+    <!-- Tipografías: mismas familias que index.html (ver nota allí). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Spectral:ital,wght@0,500;0,600;1,500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>custodios de semillas — sembrando futuros</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/custodios.js"></script>
+  </body>
+</html>

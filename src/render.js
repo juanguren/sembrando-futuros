@@ -17,6 +17,10 @@ const esc = (s) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+// Convierte [[palabra]] en <mark>palabra</mark> (resaltado de marcador),
+// escapando todo lo demás. Se usa en títulos/textos del contenido.
+const marcar = (s) => esc(s).replace(/\[\[(.+?)\]\]/g, "<mark>$1</mark>");
+
 export function renderNav(sitio) {
   const enlaces = sitio.nav
     .map((l) => `<li><a href="${esc(l.ancla)}">${esc(l.texto)}</a></li>`)
@@ -180,7 +184,7 @@ function renderFichaSemilla(s, etiquetas) {
     </article>`;
 }
 
-export function renderSemillas(semillas, seccion) {
+export function renderSemillas(semillas, seccion, puente) {
   const fichas = semillas
     .map((s) => renderFichaSemilla(s, seccion.etiquetas))
     .join("");
@@ -190,7 +194,22 @@ export function renderSemillas(semillas, seccion) {
       <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
       <p class="seccion__intro">${esc(seccion.intro)}</p>
       <div class="fichas">${fichas}</div>
+      ${puente ? renderPuenteCustodios(puente) : ""}
     </section>`;
+}
+
+// Puente al final de la sección de semillas → página de custodios.
+// Un recorte "pegado con cinta": toda la tarjeta es un enlace.
+function renderPuenteCustodios(p) {
+  const foto = p.foto?.src
+    ? `<img class="puente__foto" src="${esc(p.foto.src)}" alt="${esc(p.foto.alt)}" />`
+    : `<span class="puente__foto puente__foto--ph" aria-hidden="true">foto<br />custodio</span>`;
+  return `
+    <a class="puente cinta" href="${esc(p.url)}">
+      ${foto}
+      <span class="puente__texto">${marcar(p.texto)}</span>
+      <span class="puente__cta">${esc(p.cta)}</span>
+    </a>`;
 }
 
 export function renderFilosofia(f) {
@@ -229,14 +248,54 @@ function renderModalManifiesto(f) {
     </dialog>`;
 }
 
-// Banda "colectividad": esto es más grande que una web + teaser del mapa.
-export function renderColectivo(c) {
+// Banda final "colectividad + súmate": una sola sección que enmarca la movida
+// (más grande que una web, teaser del mapa) y remata con el form de registro.
+// El envío del form lo engancha main.js; incluye honeypot y consentimiento.
+export function renderColectivoSumate(c, r) {
+  const aviso = r.avisoPrivacidad
+    ? ` <a href="${esc(r.avisoPrivacidad.url)}">${esc(r.avisoPrivacidad.texto)}</a>.`
+    : "";
   return `
-    <section class="seccion colectivo" id="colectivo">
+    <section class="seccion seccion--alt colectivo" id="sumate">
       ${c.eyebrow ? `<p class="eyebrow">${esc(c.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(c.titulo)}</h2>
       <p class="colectivo__texto">${esc(c.texto)}</p>
       <p class="colectivo__teaser">${esc(c.teaser)}</p>
+      <div class="colectivo__registro">
+        <h3 class="colectivo__sub">${esc(r.titulo)}</h3>
+        <p class="colectivo__intro">${esc(r.intro)}</p>
+        <form class="registro__form" novalidate>
+          <!-- honeypot: invisible para humanos; si un bot lo llena, se descarta -->
+          <div class="registro__trampa" aria-hidden="true">
+            <label>No llenes esto
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="registro__campos">
+            <label class="campo">
+              <span class="campo__label">${esc(r.campos.nombre)}</span>
+              <input class="campo__input" type="text" name="nombre" required
+                     autocomplete="name" />
+            </label>
+            <label class="campo">
+              <span class="campo__label">${esc(r.campos.email)}</span>
+              <input class="campo__input" type="email" name="email" required
+                     autocomplete="email" />
+            </label>
+            <label class="campo">
+              <span class="campo__label">${esc(r.campos.barrio)}</span>
+              <input class="campo__input" type="text" name="barrio"
+                     autocomplete="address-level3" />
+            </label>
+          </div>
+          <label class="registro__consent">
+            <input type="checkbox" name="consentimiento" required />
+            <span>${esc(r.consentimiento)}${aviso}</span>
+          </label>
+          <button class="btn btn--acento" type="submit">${esc(r.boton)}</button>
+          <p class="registro__estado" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </section>`;
 }
 
@@ -276,4 +335,125 @@ export function renderLightbox() {
       <button class="lightbox__cerrar" data-close aria-label="Cerrar">&times;</button>
       <img class="lightbox__img" src="" alt="" />
     </dialog>`;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PÁGINA /custodios — formato featuring, arco ALTAR → VERBENA.
+   Lenguaje suelto: recortes con cinta, marcador, polaroids, blobs.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+// 1 · El video del custodio (altar) con su cita montada encima.
+export function renderCustodioFeaturing(f) {
+  const video = f.video.src
+    ? `<video class="cvideo__video" controls preload="none" playsinline
+         ${f.video.poster ? `poster="${esc(f.video.poster)}"` : ""}
+         src="${esc(f.video.src)}"></video>`
+    : `<div class="cvideo__ph">
+         <span class="cvideo__play" aria-hidden="true">
+           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+         </span>
+         <span class="cvideo__nota">${esc(f.video.nota)} · video pendiente</span>
+       </div>`;
+  return `
+    <section class="seccion cvideo" id="custodio">
+      <div class="blob blob--a" aria-hidden="true"></div>
+      <div class="cvideo__marco">
+        <span class="cvideo__marca">${esc(f.marca)}</span>
+        ${video}
+      </div>
+      <div class="cita-recorte cinta">
+        <blockquote class="cita-recorte__cita">${esc(f.cita)}</blockquote>
+        <p class="cita-recorte__firma"><b>${esc(f.nombre)}</b> · ${esc(f.rol)}</p>
+      </div>
+    </section>`;
+}
+
+// 2 · Qué es custodiar — notas sueltas, desalineadas a propósito.
+export function renderQueEsCustodiar(q) {
+  const notas = q.notas
+    .map(
+      (n, i) => `
+      <div class="nota nota--${i + 1}">
+        <b class="nota__titulo">${esc(n.titulo)}</b>
+        <span class="nota__texto">${esc(n.texto)}</span>
+      </div>`
+    )
+    .join("");
+  return `
+    <section class="seccion quees">
+      <div class="blob blob--b" aria-hidden="true"></div>
+      <h2 class="seccion__titulo quees__titulo">${marcar(q.titulo)}</h2>
+      <div class="notas">${notas}</div>
+    </section>`;
+}
+
+// 3 · Mesa de fotos: polaroids sueltas; cada una amplía en el lightbox.
+export function renderMesaFotos(fotos) {
+  const items = fotos.items
+    .map((f, i) => {
+      const cuerpo = f.src
+        ? `<button class="polaroid__btn" data-full="${esc(f.src)}" data-alt="${esc(f.alt)}"
+             aria-label="Ampliar: ${esc(f.alt)}">
+             <img src="${esc(f.src)}" alt="${esc(f.alt)}" loading="lazy" /></button>`
+        : `<div class="polaroid__ph">foto ${i + 1}</div>`;
+      return `
+      <figure class="polaroid polaroid--${i + 1}${i % 2 === 0 ? " cinta" : ""}">
+        ${cuerpo}
+        <figcaption class="polaroid__pie">${esc(f.pie)}</figcaption>
+      </figure>`;
+    })
+    .join("");
+  return `
+    <section class="seccion mesa-seccion">
+      <h2 class="seccion__titulo mesa__titulo">${marcar(fotos.titulo)}</h2>
+      <div class="mesa">${items}</div>
+      <p class="mesa__hint">← desliza →</p>
+    </section>`;
+}
+
+// 4 · Bancos de semillas: de la mano del custodio a tu sobre.
+export function renderBancosSemillas(b) {
+  const parrafos = b.parrafos.map((p) => `<p>${esc(p)}</p>`).join("");
+  return `
+    <section class="seccion bancos">
+      <div class="blob blob--c1" aria-hidden="true"></div>
+      <div class="blob blob--c2" aria-hidden="true"></div>
+      <h2 class="seccion__titulo bancos__titulo">${marcar(b.titulo)}</h2>
+      <div class="bancos__cuerpo">${parrafos}</div>
+    </section>`;
+}
+
+// 5 · Slots para los próximos custodios (2–3 máx).
+export function renderProximosCustodios(proximos) {
+  if (!proximos?.length) return "";
+  const slots = proximos
+    .map(
+      (t, i) => `
+      <div class="proximo proximo--${i % 2 ? "b" : "a"}">
+        <span class="proximo__foto" aria-hidden="true"></span>
+        <p>${esc(t)}</p>
+      </div>`
+    )
+    .join("");
+  return `
+    <section class="seccion proximos-seccion">
+      <div class="proximos">${slots}</div>
+    </section>`;
+}
+
+// 6 · Cierre en VERBENA: al sembrar, tú también custodias.
+export function renderCierreVerbena(c) {
+  return `
+    <footer class="verbena">
+      <div class="verbena__blob1" aria-hidden="true"></div>
+      <div class="verbena__blob2" aria-hidden="true"></div>
+      <div class="verbena__contenido">
+        <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
+        <p class="verbena__texto">${esc(c.texto)}</p>
+        <div class="verbena__ctas">
+          <a class="btn verbena__btn-principal" href="${esc(c.ctaPrincipal.url)}">${esc(c.ctaPrincipal.texto)}</a>
+          <a class="btn verbena__btn-borde" href="${esc(c.ctaSecundario.url)}">${esc(c.ctaSecundario.texto)}</a>
+        </div>
+      </div>
+    </footer>`;
 }

@@ -608,14 +608,79 @@ a { color: inherit; }
   padding: 0.55rem 1.1rem;
 }
 
+/* El registro dentro de la banda de colectividad: bloque centrado pero con
+   el formulario alineado a la izquierda (legibilidad de los campos). */
+.colectivo__registro {
+  max-width: 38rem;
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--linea);
+  text-align: left;
+}
+.colectivo__sub {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+}
+.colectivo__intro {
+  color: var(--tinta-suave);
+  margin: 0 0 1.8rem;
+}
+
 /* Texto largo dentro del modal (manifiesto completo) */
 .modal__caja--texto .manifiesto-largo p { margin: 0 0 1rem; color: var(--tinta-suave); }
 .modal__caja--texto .manifiesto-largo p:first-child { color: var(--tinta); }
+
+/* ── Súmate / registro (formulario) ────────────────────────────────────── */
+.registro__form { max-width: 38rem; }
+/* Honeypot: fuera de pantalla, invisible para humanos */
+.registro__trampa {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.registro__campos { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+.campo { display: flex; flex-direction: column; gap: 0.35rem; }
+.campo__label {
+  font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--arcilla);
+}
+.campo__input {
+  font-family: var(--sans); font-size: 1rem; color: var(--tinta);
+  background: var(--crema);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 0.7rem 0.85rem;
+  transition: border-color var(--transicion);
+}
+.campo__input:hover { border-color: var(--sabana); }
+.campo__input:focus-visible { border-color: var(--acento); }
+
+.registro__consent {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  font-size: 0.92rem; color: var(--tinta-suave); line-height: 1.5;
+  margin-bottom: 1.3rem; cursor: pointer;
+}
+.registro__consent input { margin-top: 0.25rem; flex: 0 0 auto; accent-color: var(--acento); }
+.registro__consent a { color: var(--arcilla); }
+
+.registro__estado {
+  min-height: 1.4em; margin: 1rem 0 0; font-size: 0.95rem; color: var(--tinta-suave);
+}
+.registro__estado.is-ok { color: var(--sabana); }
+.registro__estado.is-error { color: var(--acento); }
 
 @media (min-width: 40rem) {
   .pasos { grid-template-columns: repeat(3, 1fr); }
   .grid-tarjetas { grid-template-columns: repeat(3, 1fr); }
   .filosofia__beats { grid-template-columns: repeat(3, 1fr); }
+  /* nombre + correo lado a lado; barrio ocupa toda la fila */
+  .registro__campos { grid-template-columns: 1fr 1fr; }
+  .registro__campos .campo:nth-child(3) { grid-column: 1 / -1; }
 }
 
 /* ── Aliados ───────────────────────────────────────────────────────────── */
@@ -961,3 +1026,369 @@ a { color: inherit; }
 :root[data-tema="riso"] .seccion__titulo,
 :root[data-tema="riso"] .hero__titulo,
 :root[data-tema="riso"] .cierre__titulo { font-weight: 800; letter-spacing: -0.02em; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LENGUAJE SUELTO — recortes con cinta, marcador, blobs, polaroids.
+   Nace en /custodios (arco altar → verbena) y el puente de la landing;
+   pensado para extenderse luego al resto del sitio. Todo con tokens:
+   funciona en las 4 direcciones. Cero assets: solo CSS.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Resaltado de marcador (a mano, ligeramente irregular) */
+mark {
+  background: linear-gradient(
+    100deg,
+    transparent 2%,
+    color-mix(in srgb, var(--sabana) 45%, transparent) 8%,
+    color-mix(in srgb, var(--sabana) 42%, transparent) 92%,
+    transparent 98%
+  );
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Cinta adhesiva sobre un recorte */
+.cinta { position: relative; }
+.cinta::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: color-mix(in srgb, var(--arcilla) 45%, transparent);
+  border-radius: 2px;
+}
+
+/* Blobs orgánicos que sangran por los bordes — progresión A → B → C:
+   lima viva → oro → dúo lima+calabaza (sube la temperatura hacia la verbena) */
+.blob { position: absolute; z-index: -1; pointer-events: none; }
+.blob--a {
+  width: 46vw; max-width: 430px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--lima, var(--sabana)) 42%, transparent);
+  border-radius: 58% 42% 63% 37% / 45% 55% 45% 55%;
+}
+.blob--b {
+  width: 44vw; max-width: 410px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--arcilla) 50%, transparent);
+  border-radius: 39% 61% 45% 55% / 60% 38% 62% 40%;
+}
+.blob--c1 {
+  width: 42vw; max-width: 400px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--lima, var(--sabana)) 38%, transparent);
+  border-radius: 58% 42% 63% 37% / 45% 55% 45% 55%;
+}
+.blob--c2 {
+  width: 30vw; max-width: 280px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--acento) 30%, transparent);
+  border-radius: 39% 61% 45% 55% / 60% 38% 62% 40%;
+}
+
+/* ── Puente en la landing (final de "Lo que llevas contigo") ──────────── */
+.puente {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  align-items: center;
+  padding: 1.5rem 1.6rem;
+  transform: rotate(-1.2deg);
+  background: var(--crema-honda);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  box-shadow: 0 10px 26px var(--sombra);
+  text-decoration: none;
+  color: var(--tinta);
+  transition: transform var(--transicion);
+}
+.puente:hover { transform: rotate(-0.4deg) scale(1.01); }
+.puente__foto {
+  flex: 0 0 76px;
+  height: 76px;
+  border-radius: 50%;
+  transform: rotate(3deg);
+  object-fit: cover;
+}
+.puente__foto--ph {
+  background: var(--crema);
+  border: 1px dashed var(--linea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  letter-spacing: 0.05em;
+  color: var(--tinta-suave);
+  text-align: center;
+}
+.puente__texto {
+  flex: 1 1 16rem;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  line-height: 1.35;
+}
+.puente__cta {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--acento);
+  border-bottom: 1px solid var(--acento);
+  white-space: nowrap;
+}
+
+/* ── /custodios · secciones (modo altar) ──────────────────────────────── */
+main.custodios { overflow-x: clip; }
+main.custodios .seccion { position: relative; }
+
+/* 1 · Video del custodio con la cita montada encima */
+.cvideo .blob--a { top: -18%; left: -18%; }
+.cvideo__marco {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(90% 90% at 50% 40%, #3a5233, #1c2b1a);
+  border: 1px solid var(--linea);
+}
+.cvideo__video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cvideo__marca {
+  position: absolute;
+  top: 1rem;
+  left: 1.1rem;
+  z-index: 2;
+  color: rgba(246, 244, 236, 0.65);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.cvideo__ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+.cvideo__play {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: var(--acento);
+  color: #f6f4ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 34px color-mix(in srgb, var(--acento) 45%, transparent);
+}
+.cvideo__play svg { width: 26px; height: 26px; margin-left: 4px; }
+.cvideo__nota { color: rgba(246, 244, 236, 0.85); font-size: 0.8rem; letter-spacing: 0.05em; }
+
+.cita-recorte {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+  margin: -3.2rem auto 0;
+  transform: rotate(-1.6deg);
+  background: var(--crema);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 1.6rem 1.8rem 1.4rem;
+  box-shadow: 0 14px 30px var(--sombra);
+}
+.cita-recorte__cita {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 3.6vw, 1.7rem);
+  line-height: 1.3;
+  margin: 0 0 0.8rem;
+  text-wrap: balance;
+}
+.cita-recorte__cita::before { content: "“"; color: var(--sabana); }
+.cita-recorte__cita::after { content: "”"; color: var(--sabana); }
+.cita-recorte__firma { margin: 0; font-size: 0.9rem; color: var(--tinta-suave); }
+.cita-recorte__firma b { font-weight: 500; color: var(--tinta); }
+
+/* 2 · Qué es custodiar — notas sueltas */
+.quees .blob--b { top: 6%; right: -16%; }
+.quees__titulo { max-width: 18ch; margin-bottom: 2.2rem; }
+.notas { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+.nota {
+  background: var(--crema);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  box-shadow: 0 8px 22px var(--sombra);
+}
+.nota__titulo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+.nota__texto { color: var(--tinta-suave); font-size: 0.94rem; }
+.nota--1 { transform: rotate(-1.4deg); }
+.nota--2 { transform: rotate(1.8deg); }
+.nota--3 { transform: rotate(-0.8deg); }
+
+/* 3 · Mesa de fotos: polaroids sueltas, deslizables */
+.mesa__titulo { margin-bottom: 0; }
+.mesa {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 1.4rem 0.4rem 1.6rem;
+  -webkit-overflow-scrolling: touch;
+}
+.mesa::-webkit-scrollbar { height: 6px; }
+.mesa::-webkit-scrollbar-thumb { background: var(--linea); border-radius: 3px; }
+.polaroid {
+  position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: 3px;
+  padding: 0.55rem 0.55rem 2.1rem;
+  box-shadow: 0 12px 26px var(--sombra);
+}
+.polaroid__btn { padding: 0; border: none; background: none; cursor: pointer; display: block; }
+.polaroid__btn img, .polaroid__ph { display: block; object-fit: cover; }
+.polaroid__ph {
+  background: var(--crema-honda);
+  border: 1px dashed var(--linea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tinta-suave);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+.polaroid__pie {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.7rem;
+  font-size: 0.68rem;
+  color: var(--tinta-suave);
+  font-style: italic;
+}
+.polaroid--1 { transform: rotate(-3deg); }
+.polaroid--1 .polaroid__ph, .polaroid--1 img { width: 230px; aspect-ratio: 4/3; }
+.polaroid--2 { transform: rotate(2deg) translateY(10px); margin-left: -14px; }
+.polaroid--2 .polaroid__ph, .polaroid--2 img { width: 190px; aspect-ratio: 3/4; }
+.polaroid--3 { transform: rotate(-1.5deg); margin-left: -10px; }
+.polaroid--3 .polaroid__ph, .polaroid--3 img { width: 260px; aspect-ratio: 4/3; }
+.polaroid--4 { transform: rotate(3.2deg) translateY(6px); margin-left: -12px; }
+.polaroid--4 .polaroid__ph, .polaroid--4 img { width: 200px; aspect-ratio: 1; }
+.mesa__hint { font-size: 0.78rem; color: var(--tinta-suave); margin: 0; }
+
+/* 4 · Bancos de semillas */
+.bancos .blob--c1 { bottom: -30%; right: -14%; }
+.bancos .blob--c2 { bottom: -12%; right: 8%; }
+.bancos__titulo { max-width: 20ch; }
+.bancos__cuerpo p { max-width: 54ch; color: var(--tinta-suave); margin: 0 0 1rem; }
+
+/* 5 · Slots para próximos custodios */
+.proximos-seccion { padding-top: 0; }
+.proximos { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+.proximo {
+  flex: 1 1 16rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.3rem 1.5rem;
+  border: 1px dashed var(--linea);
+  border-radius: 4px;
+  color: var(--tinta-suave);
+}
+.proximo--a { transform: rotate(-1deg); }
+.proximo--b { transform: rotate(1.4deg); }
+.proximo__foto {
+  flex: 0 0 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--crema-honda);
+  border: 1px dashed var(--linea);
+}
+.proximo p { margin: 0; font-size: 0.9rem; }
+
+/* ── /custodios · cierre en VERBENA ───────────────────────────────────── */
+.verbena {
+  position: relative;
+  overflow: hidden;
+  background: var(--acento);
+  color: var(--tinta);
+  padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 5vw, 3rem);
+}
+.verbena__blob1 {
+  position: absolute; top: -18%; right: -8%;
+  width: 44vw; max-width: 420px; aspect-ratio: 1;
+  background: var(--arcilla);
+  border-radius: 58% 42% 63% 37% / 45% 55% 45% 55%;
+  opacity: 0.85;
+}
+.verbena__blob2 {
+  position: absolute; bottom: -22%; left: -6%;
+  width: 36vw; max-width: 340px; aspect-ratio: 1;
+  background: var(--tinta);
+  border-radius: 39% 61% 45% 55% / 60% 38% 62% 40%;
+  opacity: 0.5;
+}
+.verbena__contenido { position: relative; z-index: 2; max-width: var(--ancho); margin: 0 auto; }
+.verbena__titulo {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.2rem;
+  max-width: 14ch;
+  transform: rotate(-1.6deg);
+}
+.verbena__titulo mark {
+  background: linear-gradient(
+    100deg,
+    transparent 2%,
+    color-mix(in srgb, var(--arcilla) 85%, transparent) 8%,
+    color-mix(in srgb, var(--arcilla) 80%, transparent) 92%,
+    transparent 98%
+  );
+}
+.verbena__texto {
+  max-width: 40ch;
+  margin: 0 0 2rem;
+  color: color-mix(in srgb, var(--tinta) 88%, transparent);
+  font-size: 1.08rem;
+}
+.verbena__ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.verbena .btn { font-family: var(--serif); font-weight: 700; padding: 0.85rem 1.6rem; }
+.verbena__btn-principal {
+  background: var(--tinta);
+  color: var(--crema);
+  transform: rotate(-1.2deg);
+  box-shadow: 0 10px 24px var(--sombra);
+}
+.verbena__btn-principal:hover { transform: rotate(-1.2deg) scale(1.04); }
+.verbena__btn-borde {
+  border: 2px solid var(--tinta);
+  color: var(--tinta);
+  transform: rotate(0.8deg);
+}
+
+@media (min-width: 46rem) {
+  .notas { grid-template-columns: 1.1fr 0.9fr 1fr; align-items: start; }
+  .nota--2 { transform: rotate(1.8deg) translateY(14px); }
+  .nota--3 { transform: rotate(-0.8deg) translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puente, .puente:hover, .cita-recorte, .nota, .polaroid, .proximo,
+  .verbena__titulo, .verbena .btn { transform: none !important; }
+}
