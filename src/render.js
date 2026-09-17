@@ -27,7 +27,7 @@ export function renderNav(sitio) {
     .join("");
   return `
     <nav class="nav" aria-label="Navegación principal">
-      <a class="nav__logo" href="#inicio">${esc(sitio.nombre)}</a>
+      <a class="nav__logo" href="/#inicio">${esc(sitio.nombre)}</a>
       <input type="checkbox" id="nav-toggle" class="nav__toggle" />
       <label for="nav-toggle" class="nav__burger" aria-label="Abrir menú"
              aria-controls="nav-menu" aria-expanded="false">
