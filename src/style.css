@@ -214,11 +214,23 @@ a { color: inherit; }
   margin: 0 0 1.5rem;
   max-width: 14ch;
 }
-/* Palabra rotativa del título (carrusel con crossfade) */
+/* Palabra rotativa del título. UNA sola cápsula: se desvanece, cambia de
+   texto mientras es invisible y vuelve a entrar — nunca coexisten dos
+   palabras (un crossfade de dos textos distintos se lee como duplicado).
+   El contenedor interpola su ANCHO para que "en tus manos" no dé brincos. */
 .hero__rota {
   display: inline-block;
-  color: var(--acento);
-  transition: opacity 0.28s ease;
+  position: relative;
+  vertical-align: bottom;
+  white-space: nowrap;
+  transition: width 0.62s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero__rota-cap {
+  display: inline-block;
+  padding: 0 0.18em;
+  border-radius: 3px;
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 .hero__parrafo {
   max-width: 46ch;
@@ -1035,7 +1047,8 @@ a { color: inherit; }
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* Resaltado de marcador (a mano, ligeramente irregular) */
-mark {
+mark,
+.hero__rota-cap {
   background: linear-gradient(
     100deg,
     transparent 2%,
@@ -1391,4 +1404,65 @@ main.custodios .seccion { position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .puente, .puente:hover, .cita-recorte, .nota, .polaroid, .proximo,
   .verbena__titulo, .verbena .btn { transform: none !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CONFETI DE SEMILLAS · hero
+   Las piezas son máscaras SVG coloreadas con las variables del tema, así
+   cambian de color con cada dirección visual sin regenerarse. El reparto lo
+   calcula src/hero-vivo.js detectando el espacio negativo real.
+   ═══════════════════════════════════════════════════════════════════════ */
+/* position: relative para anclar el confeti. SIN overflow:clip — el marco de
+   la media desborda a propósito hacia la derecha en escritorio. */
+.hero { position: relative; }
+.confeti {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center;  mask-position: center;
+  -webkit-mask-size: contain;     mask-size: contain;
+}
+/* El texto y la media van por encima del confeti de fondo */
+.hero__texto, .hero__media { position: relative; z-index: 2; }
+
+.confeti--semilla {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='12'%20rx='5.5'%20ry='9.5'%20fill='%23fff'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='12'%20rx='5.5'%20ry='9.5'%20fill='%23fff'/%3E%3C/svg%3E");
+}
+.confeti--hoja {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2021C7%2017%206%2012%208%207c5%201%208%205%207%2011-1%202-2%203-3%203Z'%20fill='%23fff'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2021C7%2017%206%2012%208%207c5%201%208%205%207%2011-1%202-2%203-3%203Z'%20fill='%23fff'/%3E%3C/svg%3E");
+}
+.confeti--punto {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3C/svg%3E");
+}
+.confeti--brote {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2022V9M12%209C12%205%209%203%205%203c0%204%203%207%207%206ZM12%2011c0-4%203-6%207-6%200%204-3%207-7%206Z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2022V9M12%209C12%205%209%203%205%203c0%204%203%207%207%206ZM12%2011c0-4%203-6%207-6%200%204-3%207-7%206Z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'/%3E%3C/svg%3E");
+}
+
+/* Tonos: variables del tema, así el confeti acompaña cada dirección */
+.confeti--lima    { color: var(--lima, var(--sabana)); }
+.confeti--acento  { color: var(--acento); }
+.confeti--arcilla { color: var(--arcilla); }
+.confeti--sabana  { color: var(--sabana); }
+
+/* En un carnaval el confeti vuela: las piezas altas se desplazan en diagonal,
+   las encajadas entre líneas apenas flotan. Delays negativos → cada pieza
+   arranca a mitad de su ciclo, nunca hay un latido colectivo. */
+@media (prefers-reduced-motion: no-preference) {
+  .confeti {
+    animation: confeti-flota var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate;
+  }
+  @keyframes confeti-flota {
+    from { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+    to   { transform: translate(var(--dx, 0), var(--dy, -9px))
+                      rotate(calc(var(--rot, 0deg) + var(--dr, 5deg))); }
+  }
 }

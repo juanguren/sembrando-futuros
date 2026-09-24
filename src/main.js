@@ -26,6 +26,7 @@ import {
 } from "./render.js";
 import { initInteracciones } from "./interacciones.js";
 import { initTemaExplorador } from "./tema-explorador.js";
+import { initHeroVivo } from "./hero-vivo.js";
 
 document.title = sitio.tituloPagina;
 const metaDesc = document.querySelector('meta[name="description"]');
@@ -48,24 +49,8 @@ document.querySelector("#app").innerHTML = [
 // Menú móvil, modales, lightbox y Escape (compartido entre páginas).
 initInteracciones();
 
-// ── Carrusel de la palabra del hero (futuros → semillas → esperanza) ─────
-// Rota con un crossfade suave. Si el usuario pide menos movimiento, queda fijo.
-(() => {
-  const el = document.querySelector("[data-rota]");
-  const palabras = hero.tituloRota || [];
-  const sinMovimiento = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  if (!el || palabras.length < 2 || sinMovimiento) return;
-
-  let i = 0;
-  setInterval(() => {
-    i = (i + 1) % palabras.length;
-    el.style.opacity = "0";
-    setTimeout(() => {
-      el.textContent = palabras[i];
-      el.style.opacity = "1";
-    }, 280);
-  }, 2600);
-})();
+// Hero vivo: confeti de semillas + palabra rotativa (futuros/semillas/esperanza).
+initHeroVivo(hero.tituloRota);
 
 // ── Envío del formulario de registro ─────────────────────────────────────
 // POST al `registro.endpoint` (Formspree/Web3Forms/Google Form → CSV). Sin
