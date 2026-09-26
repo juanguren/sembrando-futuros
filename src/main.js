@@ -27,6 +27,7 @@ import {
 import { initInteracciones } from "./interacciones.js";
 import { initTemaExplorador } from "./tema-explorador.js";
 import { initHeroVivo } from "./hero-vivo.js";
+import { initTejidoVivo } from "./tejido-vivo.js";
 
 document.title = sitio.tituloPagina;
 const metaDesc = document.querySelector('meta[name="description"]');
@@ -51,6 +52,9 @@ initInteracciones();
 
 // Hero vivo: confeti de semillas + palabra rotativa (futuros/semillas/esperanza).
 initHeroVivo(hero.tituloRota);
+
+// Tejido vivo: revelado gradual al hacer scroll y la fogata (brasa + chispas).
+initTejidoVivo();
 
 // ── Envío del formulario de registro ─────────────────────────────────────
 // POST al `registro.endpoint` (Formspree/Web3Forms/Google Form → CSV). Sin

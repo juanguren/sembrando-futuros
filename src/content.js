@@ -267,17 +267,19 @@ export const semillas = [
 // ⚠️ Manifiesto en LOREM IPSUM — placeholder a la espera del copy final.
 export const filosofia = {
   cita: "¿Por que lo hacemos?",
+  // El manifiesto en tres tiempos — las tres piedras de la tulpa alrededor
+  // del fuego: pasado, presente y futuro. Los textos siguen en lorem.
   beats: [
     {
-      titulo: "Lorem ipsum",
+      titulo: "Recordar",
       texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     },
     {
-      titulo: "Dolor sit amet",
+      titulo: "Recuperar",
       texto: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
     },
     {
-      titulo: "Consectetur elit",
+      titulo: "Encarnar",
       texto: "Ut labore et dolore magna aliqua, ut enim ad minim veniam.",
     },
   ],
@@ -300,7 +302,8 @@ export const filosofia = {
 // Enmarca que esto es más grande que una web: la puerta a una movida
 // colectiva, con el teaser del mapa (v2).
 export const colectivo = {
-  titulo: "Somos parte de algo más grande",
+  // [[palabra]] marca el resaltado de marcador (ver marcar() en render.js).
+  titulo: "Somos parte de [[algo más grande]]",
   texto:
     "Es un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá " +
     "sembrando el mismo futuro, cada quien en su barrio. Cuando siembras, te sumas.",
@@ -345,6 +348,8 @@ export const registro = {
 export const aliadosSeccion = {
   eyebrow: "no lo hacemos solos",
   titulo: "Quienes siembran con nosotros",
+  // El sello vacío al final de la ronda: un lugar abierto para quien se sume.
+  invitacion: { texto: "¿Y tú?", url: "#sumate" },
 };
 
 export const aliados = [

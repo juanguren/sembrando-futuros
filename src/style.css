@@ -14,6 +14,7 @@
   --sabana:       #6E7A57;  /* verde salvia apagado (frailejón) */
   --acento:       #FF5C2B;  /* naranja Halloween — SOLO para CTA */
   --acento-honda: #E8481B;  /* hover del CTA */
+  --fuego:        var(--acento); /* la brasa de la fogata; cada tema puede cambiarla */
   --linea:        rgba(38, 48, 31, 0.14); /* bordes translúcidos */
 
   /* Colores de "chrome" — tokenizados para que cada tema pueda redefinirlos.
@@ -35,6 +36,7 @@
   --transicion: 0.2s ease;
   --ancho: 64rem;
   --aire: clamp(3.5rem, 9vw, 7rem); /* espacio vertical entre secciones */
+  --lado: clamp(1.25rem, 5vw, 3rem); /* aire lateral de cada sección */
 }
 
 *,
@@ -266,7 +268,7 @@ a { color: inherit; }
 .seccion {
   max-width: var(--ancho);
   margin: 0 auto;
-  padding: var(--aire) clamp(1.25rem, 5vw, 3rem);
+  padding: var(--aire) var(--lado);
 }
 /* Fondo a sangre completa SIN sacar el contenido del flujo centrado: la
    sección conserva el mismo ancho y centrado que las normales (por eso todo
@@ -528,28 +530,6 @@ a { color: inherit; }
 }
 .filosofia__cuerpo p { margin: 0 0 1.25rem; color: var(--tinta-suave); }
 
-/* Beats del manifiesto (viven dentro de la sección que "explota") */
-.filosofia__beats {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  max-width: 46rem;
-  margin: 0 auto 2rem;
-  text-align: left;
-}
-.beat {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  padding: 1.2rem;
-}
-.beat__titulo {
-  display: block;
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  margin-bottom: 0.3rem;
-  color: var(--explota-eyebrow, var(--arcilla));
-}
-.beat__texto { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.85; font-size: 0.94rem; }
 /* El CTA del manifiesto sobre la explosión: usa el color-pop del tema, para
    que no se confunda con el fondo (p. ej. bermellón sobre bermellón en Riso). */
 .filosofia .btn--acento {
@@ -591,55 +571,6 @@ a { color: inherit; }
 }
 .paso__titulo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 0.4rem; }
 .paso__texto { margin: 0; color: var(--tinta-suave); font-size: 0.98rem; line-height: 1.6; }
-
-/* ── Grid de tarjetas (banda del evento) ───────────────────────────────── */
-.grid-tarjetas { display: grid; grid-template-columns: 1fr; gap: 1.1rem; margin-top: 0.5rem; }
-.tarjeta {
-  border: 1px solid var(--linea);
-  border-radius: 12px;
-  padding: 1.5rem;
-  background: var(--crema);
-}
-.tarjeta__k {
-  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--arcilla); margin: 0 0 0.5rem;
-}
-.tarjeta__titulo { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem; }
-.tarjeta__texto { margin: 0; color: var(--tinta-suave); font-size: 0.96rem; line-height: 1.6; }
-
-/* ── Colectividad ──────────────────────────────────────────────────────── */
-.colectivo { text-align: center; }
-.colectivo__texto { max-width: 48ch; margin: 0 auto; color: var(--tinta-suave); }
-.colectivo__teaser {
-  display: inline-block;
-  margin: 1.6rem auto 0;
-  font-size: 0.9rem;
-  color: var(--arcilla);
-  border: 1px solid var(--linea);
-  border-radius: 100px;
-  padding: 0.55rem 1.1rem;
-}
-
-/* El registro dentro de la banda de colectividad: bloque centrado pero con
-   el formulario alineado a la izquierda (legibilidad de los campos). */
-.colectivo__registro {
-  max-width: 38rem;
-  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
-  padding-top: clamp(2rem, 5vw, 3rem);
-  border-top: 1px solid var(--linea);
-  text-align: left;
-}
-.colectivo__sub {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 4vw, 1.9rem);
-  font-weight: 600;
-  line-height: 1.15;
-  margin: 0 0 0.7rem;
-}
-.colectivo__intro {
-  color: var(--tinta-suave);
-  margin: 0 0 1.8rem;
-}
 
 /* Texto largo dentro del modal (manifiesto completo) */
 .modal__caja--texto .manifiesto-largo p { margin: 0 0 1rem; color: var(--tinta-suave); }
@@ -688,36 +619,10 @@ a { color: inherit; }
 
 @media (min-width: 40rem) {
   .pasos { grid-template-columns: repeat(3, 1fr); }
-  .grid-tarjetas { grid-template-columns: repeat(3, 1fr); }
-  .filosofia__beats { grid-template-columns: repeat(3, 1fr); }
   /* nombre + correo lado a lado; barrio ocupa toda la fila */
   .registro__campos { grid-template-columns: 1fr 1fr; }
   .registro__campos .campo:nth-child(3) { grid-column: 1 / -1; }
 }
-
-/* ── Aliados ───────────────────────────────────────────────────────────── */
-.aliados {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 3rem;
-}
-.aliado {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  padding: 1.4rem 1.6rem;
-  border: 1px solid var(--linea);
-  border-radius: var(--radio);
-  flex: 1 1 14rem;
-  min-height: 5.5rem;
-  color: var(--tinta-suave);
-  font-size: 0.98rem;
-  transition: border-color var(--transicion), color var(--transicion);
-}
-.aliado:hover { border-color: var(--arcilla); color: var(--tinta); }
 
 /* ── Cierre ────────────────────────────────────────────────────────────── */
 .cierre {
@@ -872,18 +777,8 @@ a { color: inherit; }
   -webkit-mask: var(--greca-mask) repeat-x left center / auto 100%;
   mask: var(--greca-mask) repeat-x left center / auto 100%;
 }
-/* El manifiesto "que explota": rompe la calma con color a sangre completa */
-/* Sangre completa con la misma técnica que .seccion--alt, para que el
-   manifiesto alinee su contenido con el resto de secciones. */
-:root[data-tema] .filosofia {
-  background: var(--explota-bg, transparent);
-  color: var(--explota-fg, inherit);
-  box-shadow: 0 0 0 100vmax var(--explota-bg, transparent);
-  clip-path: inset(0 -100vmax);
-}
-:root[data-tema] .filosofia .eyebrow { color: var(--explota-eyebrow, var(--arcilla)); }
-:root[data-tema] .filosofia__cita { color: var(--explota-fg, var(--tinta)); }
-:root[data-tema] .filosofia__cuerpo p { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.85; }
+/* El manifiesto es ahora la FOGATA: anochece con un degradado y se enciende
+   una brasa. Sus reglas viven al final del archivo (PARTITURA). */
 
 /* ── Dirección 1 · "Jardín en llamas" ──────────────────────────────────────
    Solarpunk vida: verde hondo protagonista, lima fosforescente, calabaza. */
@@ -957,12 +852,14 @@ a { color: inherit; }
   --motivo: rgba(233, 176, 74, 0.12);
   --explota-fg: #F2E8D5;
   --explota-eyebrow: #E9B04A;
-}
-/* El manifiesto arde: brasa cálida que emerge del negro */
-:root[data-tema="fogata"] .filosofia {
-  background:
-    radial-gradient(100% 130% at 50% 0%, rgba(233, 176, 74, 0.16), transparent 60%),
-    #0F0D09;
+  /* La fogata al revés: la página ya es noche, así que el fuego ALUMBRA la
+     sección (madera encendida) en vez de oscurecerla. */
+  --explota-bg: #36220F;
+  --fuego: #FFB347;
+  --pared-sombra: rgba(0, 0, 0, 0.42);
+  /* La verbena usa la naranja de día: la de noche (#FF6B2C, el acento de los
+     botones) deslumbra sobre el fondo oscuro. */
+  --verbena-fondo: #F26A2E;
 }
 :root[data-tema="fogata"] .btn--acento { box-shadow: 0 0 28px rgba(255, 107, 44, 0.35); }
 
@@ -1241,7 +1138,7 @@ main.custodios .seccion { position: relative; }
   font-family: var(--serif);
   font-weight: 600;
   font-size: 1.15rem;
-  margin-bottom: 0.4rem;
+  margin: 0 0 0.4rem;
 }
 .nota__texto { color: var(--tinta-suave); font-size: 0.94rem; }
 .nota--1 { transform: rotate(-1.4deg); }
@@ -1334,8 +1231,10 @@ main.custodios .seccion { position: relative; }
 /* ── /custodios · cierre en VERBENA ───────────────────────────────────── */
 .verbena {
   position: relative;
-  overflow: hidden;
-  background: var(--acento);
+  overflow: clip; /* clip, no hidden: hidden crearía un scroll container y
+                     rompería el revelado ligado al scroll de sus hijos */
+  /* Fondo con token propio: se puede suavizar sin tocar el acento de los botones */
+  background: var(--verbena-fondo, var(--acento));
   color: var(--tinta);
   padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 5vw, 3rem);
 }
@@ -1427,24 +1326,33 @@ main.custodios .seccion { position: relative; }
   -webkit-mask-position: center;  mask-position: center;
   -webkit-mask-size: contain;     mask-size: contain;
 }
+/* Las cuatro formas, como tokens: las comparten el confeti, los numerales de
+   los pasos y las sombras de la fogata. */
+:root {
+  --forma-semilla: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='12'%20rx='5.5'%20ry='9.5'%20fill='%23fff'/%3E%3C/svg%3E");
+  --forma-hoja: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2021C7%2017%206%2012%208%207c5%201%208%205%207%2011-1%202-2%203-3%203Z'%20fill='%23fff'/%3E%3C/svg%3E");
+  --forma-punto: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3C/svg%3E");
+  --forma-brote: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2022V9M12%209C12%205%209%203%205%203c0%204%203%207%207%206ZM12%2011c0-4%203-6%207-6%200%204-3%207-7%206Z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'/%3E%3C/svg%3E");
+}
+
 /* El texto y la media van por encima del confeti de fondo */
 .hero__texto, .hero__media { position: relative; z-index: 2; }
 
 .confeti--semilla {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='12'%20rx='5.5'%20ry='9.5'%20fill='%23fff'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='12'%20rx='5.5'%20ry='9.5'%20fill='%23fff'/%3E%3C/svg%3E");
+  -webkit-mask-image: var(--forma-semilla);
+          mask-image: var(--forma-semilla);
 }
 .confeti--hoja {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2021C7%2017%206%2012%208%207c5%201%208%205%207%2011-1%202-2%203-3%203Z'%20fill='%23fff'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2021C7%2017%206%2012%208%207c5%201%208%205%207%2011-1%202-2%203-3%203Z'%20fill='%23fff'/%3E%3C/svg%3E");
+  -webkit-mask-image: var(--forma-hoja);
+          mask-image: var(--forma-hoja);
 }
 .confeti--punto {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3C/svg%3E");
+  -webkit-mask-image: var(--forma-punto);
+          mask-image: var(--forma-punto);
 }
 .confeti--brote {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2022V9M12%209C12%205%209%203%205%203c0%204%203%207%207%206ZM12%2011c0-4%203-6%207-6%200%204-3%207-7%206Z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2022V9M12%209C12%205%209%203%205%203c0%204%203%207%207%206ZM12%2011c0-4%203-6%207-6%200%204-3%207-7%206Z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'/%3E%3C/svg%3E");
+  -webkit-mask-image: var(--forma-brote);
+          mask-image: var(--forma-brote);
 }
 
 /* Tonos: variables del tema, así el confeti acompaña cada dirección */
@@ -1465,4 +1373,387 @@ main.custodios .seccion { position: relative; }
     to   { transform: translate(var(--dx, 0), var(--dy, -9px))
                       rotate(calc(var(--rot, 0deg) + var(--dr, 5deg))); }
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PARTITURA · tonos de la landing
+   Cada sección bajo el hero tiene un tono, de 1 (calma) a 5 (verbena):
+     cartelera 2 · brote 3 · mesa 3 · fogata 4 · ronda 2 · vuelta 4
+   Los hilos que las tejen: las cuatro formas del confeti, el papel girado
+   (±0.8–1.8°, nunca en fotos ni fichas), los blobs A→B→C y el marcador.
+   Todo con tokens: funciona en las cuatro direcciones. Lo que se mueve al
+   hacer scroll lo acompaña src/tejido-vivo.js.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Los blobs sangran por los costados; que no abran scroll horizontal.
+   (clip, no hidden: hidden crearía un scroll container y rompería el
+   revelado ligado al scroll.) */
+main { overflow-x: clip; }
+
+/* ── Revelado gradual al hacer scroll ──────────────────────────────────── */
+/* Ligado al scroll donde existe animation-timeline; si no, tejido-vivo.js
+   pone .js-entra en <html> y marca cada bloque al entrar (por tiempo).
+   Se anima `translate`, no `transform`, para no pisar los giros de papel. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-entra] {
+      animation: entra linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 70%;
+    }
+  }
+  .js-entra [data-entra] {
+    opacity: 0;
+    translate: 0 22px;
+    transition: opacity 0.9s ease-out, translate 0.9s ease-out;
+  }
+  .js-entra [data-entra].is-visible { opacity: 1; translate: 0 0; }
+}
+@keyframes entra {
+  from { opacity: 0; translate: 0 22px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+/* ── 2 · Cartelera de barrio (evento): notas pegadas al tablón ─────────── */
+.cartelera { position: relative; }
+.cartelera .blob--a { top: 6%; left: -14%; opacity: 0.55; }
+.nota__k {
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--arcilla); margin: 0 0 0.5rem;
+}
+
+/* ── 3 · Brote (los tres pasos): crecen de izquierda a derecha ─────────── */
+.paso {
+  border-radius: 4px;
+  box-shadow: 0 8px 22px var(--sombra);
+}
+/* El número deja de ser un círculo: semilla → brote → hoja */
+.paso::before {
+  content: "";
+  width: var(--paso-forma, 2rem);
+  height: var(--paso-forma, 2rem);
+  border-radius: 0;
+  background: var(--acento);
+  -webkit-mask: var(--forma) no-repeat center / contain;
+          mask: var(--forma) no-repeat center / contain;
+}
+.paso--1 { --forma: var(--forma-semilla); transform: rotate(-1deg); }
+.paso--2 { --forma: var(--forma-brote); --paso-forma: 2.4rem; transform: rotate(0.9deg); }
+.paso--3 {
+  --forma: var(--forma-hoja); --paso-forma: 2.8rem;
+  transform: rotate(-0.6deg) scale(1.03);
+  background: color-mix(in srgb, var(--lima, var(--sabana)) 16%, var(--crema-honda));
+  border-color: color-mix(in srgb, var(--lima, var(--sabana)) 55%, var(--linea));
+}
+.paso--3 .paso__titulo { font-size: 1.5rem; }
+
+/* ── 4 · Mesa de herbario (semillas): las fichas quietas, calor alrededor ─ */
+/* (La clase es .herbario: .mesa ya es la mesa de polaroids de /custodios.) */
+.herbario { position: relative; isolation: isolate; }
+.herbario .blob--b { top: 14%; right: -16%; opacity: 0.6; }
+
+/* ── 5 · Fogata (manifiesto): anochece y se enciende una brasa ─────────── */
+/* A sangre completa de verdad (sin el truco del box-shadow), para que el
+   atardecer y el amanecer sean degradados: se entra y se sale del fuego
+   poco a poco, al ritmo del scroll. El contenido conserva el ancho y la
+   alineación de las demás secciones vía .fogata__contenido. */
+:root[data-tema] .fogata {
+  --atardecer: clamp(7rem, 16vw, 11rem);   /* alto del degradado de entrada */
+  --amanecer:  clamp(5rem, 12vw, 8rem);    /* … y del de salida, hacia la ronda */
+  position: relative;
+  max-width: none;
+  padding-inline: 0;
+  overflow: clip;
+  color: var(--explota-fg);
+  background:
+    linear-gradient(to bottom, var(--crema) 0, transparent var(--atardecer)),
+    linear-gradient(to top, var(--crema-honda) 0, transparent var(--amanecer)),
+    var(--explota-bg);
+}
+:root[data-tema] .fogata::before {
+  width: calc(min(100%, var(--ancho)) - 2 * var(--lado));
+}
+:root[data-tema] .fogata .eyebrow { color: var(--explota-eyebrow, var(--arcilla)); }
+:root[data-tema] .fogata .filosofia__cita {
+  color: var(--explota-fg);
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.35);
+}
+.fogata__contenido {
+  position: relative;
+  z-index: 2;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding-inline: var(--lado);
+}
+
+/* La pared: sombras de las plantas nativas, temblando con la luz del fuego */
+.fogata__pared { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sombra {
+  position: absolute;
+  background-color: var(--pared-sombra, rgba(0, 0, 0, 0.3));
+  -webkit-mask: var(--forma) no-repeat center / contain;
+          mask: var(--forma) no-repeat center / contain;
+  opacity: var(--sombra-op, 0.85);
+}
+.sombra--1 {
+  --forma: var(--sprig);
+  left: -4%; bottom: 3%;
+  width: min(46vw, 22rem); height: min(56vw, 27rem);
+  transform: scaleX(-1) rotate(5deg);
+}
+.sombra--2 {
+  --forma: var(--forma-hoja);
+  right: -5%; top: 9%;
+  width: min(42vw, 20rem); height: min(42vw, 20rem);
+  transform: rotate(-28deg);
+}
+.sombra--3 {
+  --forma: var(--forma-brote);
+  right: 10%; bottom: -4%;
+  width: min(34vw, 15rem); height: min(40vw, 18rem);
+  transform: rotate(8deg);
+}
+
+/* El hogar: la pregunta es el fuego; detrás, la brasa; encima, las chispas */
+.fogata__hogar {
+  position: relative;
+  padding: clamp(2.5rem, 8vw, 5rem) 0 clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+}
+.fogata__hogar .filosofia__cita { position: relative; z-index: 2; margin-bottom: 0; }
+.fogata__brasa {
+  position: absolute;
+  left: 50%; top: 58%;
+  z-index: 0;
+  width: min(88vw, 36rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+.fogata__luz {
+  display: block;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 55%,
+    color-mix(in srgb, var(--fuego) 62%, transparent) 0%,
+    color-mix(in srgb, var(--fuego) 26%, transparent) 26%,
+    color-mix(in srgb, var(--fuego) 8%, transparent) 46%,
+    transparent 66%);
+}
+.fogata__chispas {
+  position: absolute;
+  left: 50%; top: 62%;
+  z-index: 1;
+  width: 0; height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease 0.4s;
+}
+.fogata.is-encendida .fogata__chispas { opacity: 1; }
+.chispa {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--fuego) 70%, #fff);
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--fuego) 70%, transparent);
+  opacity: 0;
+}
+
+/* Encendido: chispa → brasa. Ligado al scroll si se puede; si no, al llegar
+   (tejido-vivo.js marca .is-encendida) con una transición larga. Y una vez
+   encendida, la brasa respira. */
+@media (prefers-reduced-motion: no-preference) {
+  .fogata__brasa {
+    opacity: 0;
+    scale: 0.3;
+    transition: opacity 1.8s ease-out, scale 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .fogata.is-encendida .fogata__brasa { opacity: 1; scale: 1; }
+  @supports (animation-timeline: view()) {
+    .fogata__brasa {
+      transition: none;
+      animation: brasa-enciende linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 95%;
+    }
+  }
+  .fogata__luz { animation: brasa-respira 6.5s ease-in-out infinite alternate; }
+  .sombra { animation: vela var(--vela-dur, 4.6s) ease-in-out var(--vela-delay, 0s) infinite alternate; }
+  .sombra--2 { --vela-dur: 3.7s; --vela-delay: -1.3s; }
+  .sombra--3 { --vela-dur: 5.4s; --vela-delay: -2.2s; }
+  .chispa { animation: chispa-sube var(--dur, 5s) linear var(--delay, 0s) infinite; }
+}
+@keyframes brasa-enciende {
+  from { opacity: 0; scale: 0.3; }
+  to   { opacity: 1; scale: 1; }
+}
+@keyframes brasa-respira {
+  from { opacity: 0.78; scale: 0.96; }
+  to   { opacity: 1; scale: 1.05; }
+}
+@keyframes vela {
+  from { opacity: var(--sombra-op, 0.85); }
+  to   { opacity: calc(var(--sombra-op, 0.85) * 0.5); }
+}
+@keyframes chispa-sube {
+  0%   { translate: 0 0; opacity: 0; scale: 1; }
+  10%  { opacity: 0.95; }
+  70%  { opacity: 0.6; }
+  100% { translate: var(--deriva, 0px) calc(-1 * var(--alto, 140px)); opacity: 0; scale: 0.35; }
+}
+
+/* La tulpa: las tres piedras alrededor del fuego (recordar / recuperar /
+   encarnar). Piedras, no tarjetas: esquinas desiguales. */
+.tulpa {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 52rem;
+  margin: 0 auto 2.4rem;
+  text-align: left;
+}
+.piedra {
+  padding: 1.5rem 1.6rem 1.35rem;
+  border-radius: 1.6rem 2.6rem 1.4rem 2.9rem / 2.3rem 1.5rem 2.7rem 1.7rem;
+  background: color-mix(in srgb, var(--explota-fg) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--explota-fg) 16%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--explota-fg) 10%, transparent);
+}
+.piedra--2 { border-radius: 2.8rem 1.5rem 2.4rem 1.6rem / 1.6rem 2.6rem 1.5rem 2.5rem; }
+.piedra--3 { border-radius: 1.5rem 2.4rem 2.9rem 1.6rem / 2.6rem 1.7rem 1.5rem 2.4rem; }
+.piedra__verbo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--explota-eyebrow, var(--arcilla));
+  margin-bottom: 0.3rem;
+}
+.piedra__texto { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.85; font-size: 0.94rem; }
+
+/* ── 6 · La ronda (aliados): sellos estampados a mano ──────────────────── */
+.sellos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem 1.4rem;
+  margin-top: 2.4rem;
+}
+.sello {
+  width: 9.6rem; height: 9.6rem;
+  padding: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--arcilla);
+  outline: 1px solid var(--arcilla); outline-offset: -7px; /* doble anillo: sello de caucho */
+  background: var(--crema);
+  color: var(--tinta-suave);
+  font-size: 0.88rem; line-height: 1.3;
+  text-decoration: none;
+  box-shadow: 0 8px 20px var(--sombra);
+  transition: border-color var(--transicion), color var(--transicion);
+}
+.sello img { max-width: 70%; }
+.sello:hover { color: var(--tinta); border-color: var(--acento); }
+.sello--1 { transform: rotate(-5deg); }
+.sello--2 { transform: rotate(3deg) translateY(10px); }
+.sello--3 { transform: rotate(-2deg) translateY(-4px); }
+.sello--tu {
+  border-style: dashed;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--arcilla);
+  transform: rotate(6deg) translateY(8px);
+}
+
+/* ── 7 · Vuelta a la verbena (colectividad + súmate) ───────────────────── */
+/* Reutiliza el cierre en verbena de /custodios; aquí el formulario es un
+   recorte de papel pegado con cinta y vuelven unas piezas del confeti. */
+.seccion.verbena { max-width: none; }
+.seccion.verbena::before { display: none; } /* la greca no va sobre el naranja */
+.vuelta .verbena__contenido { max-width: calc(var(--ancho) - 2 * var(--lado)); }
+.vuelta__grid { display: grid; gap: 2.4rem; }
+.vuelta .verbena__titulo { margin-bottom: 1rem; }
+.vuelta__teaser {
+  display: inline-block;
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: var(--tinta);
+  border: 1px solid color-mix(in srgb, var(--tinta) 45%, transparent);
+  border-radius: 100px;
+  padding: 0.55rem 1.1rem;
+}
+.vuelta__registro {
+  position: relative;
+  background: var(--crema);
+  color: var(--tinta);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 1.8rem 1.6rem 1.5rem;
+  box-shadow: 0 18px 40px var(--sombra);
+  transform: rotate(-1.1deg);
+}
+.vuelta__sub {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+}
+.vuelta__intro { color: var(--tinta-suave); margin: 0 0 1.6rem; font-size: 0.98rem; }
+
+/* Unas piezas del confeti del hero vuelven aquí: el ciclo se cierra */
+.vuelta__confeti { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.vuelta__confeti .confeti { opacity: 0.85; }
+.confeti--tinta { color: var(--tinta); }
+.confeti--crema { color: var(--crema); }
+.vuelta__confeti .confeti:nth-child(1) { left: 5%;  top: 10%; width: 16px; height: 16px; --rot: -22deg; --dx: 6px;  --dy: -20px; --dr: 16deg; --dur: 7.4s; --delay: -2.1s; }
+.vuelta__confeti .confeti:nth-child(2) { left: 14%; top: 78%; width: 12px; height: 12px; --rot: 14deg;  --dx: -5px; --dy: -14px; --dr: 10deg; --dur: 6.1s; --delay: -0.7s; }
+.vuelta__confeti .confeti:nth-child(3) { left: 46%; top: 6%;  width: 14px; height: 14px; --rot: 30deg;  --dx: 7px;  --dy: -22px; --dr: 20deg; --dur: 8.2s; --delay: -4.4s; }
+.vuelta__confeti .confeti:nth-child(4) { left: 60%; top: 88%; width: 18px; height: 18px; --rot: -8deg;  --dx: -7px; --dy: -16px; --dr: 12deg; --dur: 5.6s; --delay: -3.2s; }
+.vuelta__confeti .confeti:nth-child(5) { left: 88%; top: 14%; width: 13px; height: 13px; --rot: 18deg;  --dx: 4px;  --dy: -24px; --dr: 22deg; --dur: 9.1s; --delay: -5.5s; }
+.vuelta__confeti .confeti:nth-child(6) { left: 93%; top: 62%; width: 17px; height: 17px; --rot: -30deg; --dx: -6px; --dy: -18px; --dr: 14deg; --dur: 6.8s; --delay: -1.6s; }
+.vuelta__confeti .confeti:nth-child(7) { left: 30%; top: 92%; width: 11px; height: 11px; --rot: 6deg;   --dx: 5px;  --dy: -12px; --dr: 8deg;  --dur: 7.9s; --delay: -6.3s; }
+.vuelta__confeti .confeti:nth-child(8) { left: 74%; top: 4%;  width: 15px; height: 15px; --rot: -16deg; --dx: -4px; --dy: -20px; --dr: 18deg; --dur: 8.6s; --delay: -2.9s; }
+
+@media (min-width: 46rem) {
+  .tulpa { grid-template-columns: repeat(3, 1fr); align-items: start; gap: 1.4rem; }
+  .piedra--1 { transform: rotate(-2deg); }
+  .piedra--2 { transform: rotate(0.6deg); margin-top: 2.6rem; } /* la cuna bajo el fuego */
+  .piedra--3 { transform: rotate(2deg); }
+}
+@media (min-width: 52rem) {
+  .vuelta__grid { grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 3rem; }
+}
+
+/* ── Noche (animista-futurista): el confeti son luciérnagas ────────────── */
+/* Mismo reparto, otra criatura: puntos de luz que laten, sin máscara. */
+:root[data-tema="fogata"] .confeti {
+  -webkit-mask-image: none;
+          mask-image: none;
+  border-radius: 50%;
+  scale: 0.42;
+  box-shadow:
+    0 0 5px 1px currentColor,
+    0 0 16px 5px color-mix(in srgb, currentColor 40%, transparent);
+}
+:root[data-tema="fogata"] .confeti--lima,
+:root[data-tema="fogata"] .confeti--sabana { color: #E6EA86; }
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-tema="fogata"] .confeti {
+    animation:
+      confeti-flota var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate,
+      luciernaga-late calc(var(--dur, 7s) / 2.6) ease-in-out var(--delay, 0s) infinite alternate;
+  }
+}
+@keyframes luciernaga-late {
+  from { opacity: 0.12; }
+  to   { opacity: 0.95; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paso, .sello, .vuelta__registro, .piedra { transform: none !important; }
 }

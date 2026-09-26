@@ -76,40 +76,43 @@ export function renderHero(hero) {
     </header>`;
 }
 
-// Banda "el evento": qué es, dónde ocurre, la invitación + tarjetas de meta.
+// Banda del evento en tono "cartelera de barrio": las tres tarjetas son notas
+// pegadas al tablón (giradas, escalonadas) y un blob lima asoma por un lado.
 export function renderEvento(evento) {
-  const tarjetas = evento.tarjetas
+  const notas = evento.tarjetas
     .map(
-      (t) => `
-      <div class="tarjeta">
-        <p class="tarjeta__k">${esc(t.k)}</p>
-        <h3 class="tarjeta__titulo">${esc(t.titulo)}</h3>
-        <p class="tarjeta__texto">${esc(t.texto)}</p>
+      (t, i) => `
+      <div class="nota nota--${i + 1}" data-entra>
+        <p class="nota__k">${esc(t.k)}</p>
+        <h3 class="nota__titulo">${esc(t.titulo)}</h3>
+        <p class="nota__texto">${esc(t.texto)}</p>
       </div>`
     )
     .join("");
   return `
-    <section class="seccion seccion--alt" id="evento">
+    <section class="seccion seccion--alt cartelera" id="evento">
+      <div class="blob blob--a" aria-hidden="true"></div>
       ${evento.eyebrow ? `<p class="eyebrow">${esc(evento.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(evento.titulo)}</h2>
       <p class="seccion__intro">${esc(evento.intro)}</p>
-      <div class="grid-tarjetas">${tarjetas}</div>
+      <div class="notas">${notas}</div>
     </section>`;
 }
 
-// Banda "¿y ahora qué?": los 3 pasos, la respuesta rápida a la acción.
+// Banda "¿y ahora qué?" en tono "brote": los tres pasos crecen de izquierda
+// a derecha y el número deja de ser un círculo: semilla → brote → hoja.
 export function renderQueHago(queHago) {
   const pasos = queHago.pasos
     .map(
-      (p) => `
-      <div class="paso">
+      (p, i) => `
+      <div class="paso paso--${i + 1}" data-entra>
         <h3 class="paso__titulo">${esc(p.titulo)}</h3>
         <p class="paso__texto">${esc(p.texto)}</p>
       </div>`
     )
     .join("");
   return `
-    <section class="seccion" id="pasos">
+    <section class="seccion brote" id="pasos">
       ${queHago.eyebrow ? `<p class="eyebrow">${esc(queHago.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(queHago.titulo)}</h2>
       <div class="pasos">${pasos}</div>
@@ -184,12 +187,15 @@ function renderFichaSemilla(s, etiquetas) {
     </article>`;
 }
 
+// Sección de semillas en tono "mesa de herbario": las fichas quietas y
+// precisas (son el contenido); alrededor, un blob oro y el puente a custodios.
 export function renderSemillas(semillas, seccion, puente) {
   const fichas = semillas
     .map((s) => renderFichaSemilla(s, seccion.etiquetas))
     .join("");
   return `
-    <section class="seccion" id="semillas">
+    <section class="seccion herbario" id="semillas">
+      <div class="blob blob--b" aria-hidden="true"></div>
       ${seccion.eyebrow ? `<p class="eyebrow">${esc(seccion.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
       <p class="seccion__intro">${esc(seccion.intro)}</p>
@@ -205,31 +211,46 @@ function renderPuenteCustodios(p) {
     ? `<img class="puente__foto" src="${esc(p.foto.src)}" alt="${esc(p.foto.alt)}" />`
     : `<span class="puente__foto puente__foto--ph" aria-hidden="true">foto<br />custodio</span>`;
   return `
-    <a class="puente cinta" href="${esc(p.url)}">
+    <a class="puente cinta" href="${esc(p.url)}" data-entra>
       ${foto}
       <span class="puente__texto">${marcar(p.texto)}</span>
       <span class="puente__cta">${esc(p.cta)}</span>
     </a>`;
 }
 
+// El manifiesto en tono "fogata": anochece, se enciende una brasa y los tres
+// beats son las tres piedras de la tulpa alrededor del fuego. En la pared,
+// las sombras de las plantas tiemblan con la luz. tejido-vivo.js enciende la
+// brasa al llegar y hace subir las chispas.
 export function renderFilosofia(f) {
-  const beats = f.beats
+  const piedras = f.beats
     .map(
-      (b) => `
-      <div class="beat">
-        <b class="beat__titulo">${esc(b.titulo)}</b>
-        <span class="beat__texto">${esc(b.texto)}</span>
+      (b, i) => `
+      <div class="piedra piedra--${i + 1}" data-entra>
+        <b class="piedra__verbo">${esc(b.titulo)}</b>
+        <span class="piedra__texto">${esc(b.texto)}</span>
       </div>`
     )
     .join("");
   return `
-    <section class="seccion filosofia" id="filosofia">
-      ${f.eyebrow ? `<p class="eyebrow">${esc(f.eyebrow)}</p>` : ""}
-      <blockquote class="filosofia__cita">${esc(f.cita)}</blockquote>
-      <div class="filosofia__beats">${beats}</div>
-      <button class="btn btn--acento" data-modal="manifiesto-completo">
-        ${esc(f.ctaCompleto)}
-      </button>
+    <section class="seccion filosofia fogata" id="filosofia">
+      <div class="fogata__pared" aria-hidden="true">
+        <span class="sombra sombra--1"></span>
+        <span class="sombra sombra--2"></span>
+        <span class="sombra sombra--3"></span>
+      </div>
+      <div class="fogata__contenido">
+        ${f.eyebrow ? `<p class="eyebrow">${esc(f.eyebrow)}</p>` : ""}
+        <div class="fogata__hogar">
+          <span class="fogata__brasa" aria-hidden="true"><span class="fogata__luz"></span></span>
+          <span class="fogata__chispas" aria-hidden="true"></span>
+          <blockquote class="filosofia__cita">${esc(f.cita)}</blockquote>
+        </div>
+        <div class="tulpa">${piedras}</div>
+        <button class="btn btn--acento" data-modal="manifiesto-completo">
+          ${esc(f.ctaCompleto)}
+        </button>
+      </div>
       ${renderModalManifiesto(f)}
     </section>`;
 }
@@ -248,71 +269,95 @@ function renderModalManifiesto(f) {
     </dialog>`;
 }
 
-// Banda final "colectividad + súmate": una sola sección que enmarca la movida
-// (más grande que una web, teaser del mapa) y remata con el form de registro.
-// El envío del form lo engancha main.js; incluye honeypot y consentimiento.
+// Piezas del confeti del hero que vuelven en la banda final (forma, tono).
+// Sus posiciones y vuelo viven en style.css (.vuelta__confeti).
+const CONFETI_VUELTA = [
+  ["semilla", "tinta"], ["hoja", "crema"], ["punto", "tinta"], ["brote", "crema"],
+  ["semilla", "crema"], ["punto", "arcilla"], ["hoja", "tinta"], ["brote", "tinta"],
+];
+
+// Banda final en tono "vuelta a la verbena": el mismo cierre en fiesta que
+// /custodios (fondo acento, blobs, título girado), el formulario como un
+// recorte de papel pegado con cinta y unas piezas del confeti del hero: el
+// ciclo se cierra donde empezó. El envío del form lo engancha main.js;
+// incluye honeypot y consentimiento.
 export function renderColectivoSumate(c, r) {
   const aviso = r.avisoPrivacidad
     ? ` <a href="${esc(r.avisoPrivacidad.url)}">${esc(r.avisoPrivacidad.texto)}</a>.`
     : "";
+  const confeti = CONFETI_VUELTA
+    .map(([forma, tono]) => `<span class="confeti confeti--${forma} confeti--${tono}"></span>`)
+    .join("");
   return `
-    <section class="seccion seccion--alt colectivo" id="sumate">
-      ${c.eyebrow ? `<p class="eyebrow">${esc(c.eyebrow)}</p>` : ""}
-      <h2 class="seccion__titulo">${esc(c.titulo)}</h2>
-      <p class="colectivo__texto">${esc(c.texto)}</p>
-      <p class="colectivo__teaser">${esc(c.teaser)}</p>
-      <div class="colectivo__registro">
-        <h3 class="colectivo__sub">${esc(r.titulo)}</h3>
-        <p class="colectivo__intro">${esc(r.intro)}</p>
-        <form class="registro__form" novalidate>
-          <!-- honeypot: invisible para humanos; si un bot lo llena, se descarta -->
-          <div class="registro__trampa" aria-hidden="true">
-            <label>No llenes esto
-              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    <section class="seccion verbena vuelta" id="sumate">
+      <div class="verbena__blob1" aria-hidden="true"></div>
+      <div class="verbena__blob2" aria-hidden="true"></div>
+      <div class="vuelta__confeti" aria-hidden="true">${confeti}</div>
+      <div class="verbena__contenido vuelta__grid">
+        <div class="vuelta__voz">
+          ${c.eyebrow ? `<p class="eyebrow">${esc(c.eyebrow)}</p>` : ""}
+          <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
+          <p class="verbena__texto">${esc(c.texto)}</p>
+          <p class="vuelta__teaser">${esc(c.teaser)}</p>
+        </div>
+        <div class="vuelta__registro cinta" data-entra>
+          <h3 class="vuelta__sub">${esc(r.titulo)}</h3>
+          <p class="vuelta__intro">${esc(r.intro)}</p>
+          <form class="registro__form" novalidate>
+            <!-- honeypot: invisible para humanos; si un bot lo llena, se descarta -->
+            <div class="registro__trampa" aria-hidden="true">
+              <label>No llenes esto
+                <input type="text" name="website" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+            <div class="registro__campos">
+              <label class="campo">
+                <span class="campo__label">${esc(r.campos.nombre)}</span>
+                <input class="campo__input" type="text" name="nombre" required
+                       autocomplete="name" />
+              </label>
+              <label class="campo">
+                <span class="campo__label">${esc(r.campos.email)}</span>
+                <input class="campo__input" type="email" name="email" required
+                       autocomplete="email" />
+              </label>
+              <label class="campo">
+                <span class="campo__label">${esc(r.campos.barrio)}</span>
+                <input class="campo__input" type="text" name="barrio"
+                       autocomplete="address-level3" />
+              </label>
+            </div>
+            <label class="registro__consent">
+              <input type="checkbox" name="consentimiento" required />
+              <span>${esc(r.consentimiento)}${aviso}</span>
             </label>
-          </div>
-          <div class="registro__campos">
-            <label class="campo">
-              <span class="campo__label">${esc(r.campos.nombre)}</span>
-              <input class="campo__input" type="text" name="nombre" required
-                     autocomplete="name" />
-            </label>
-            <label class="campo">
-              <span class="campo__label">${esc(r.campos.email)}</span>
-              <input class="campo__input" type="email" name="email" required
-                     autocomplete="email" />
-            </label>
-            <label class="campo">
-              <span class="campo__label">${esc(r.campos.barrio)}</span>
-              <input class="campo__input" type="text" name="barrio"
-                     autocomplete="address-level3" />
-            </label>
-          </div>
-          <label class="registro__consent">
-            <input type="checkbox" name="consentimiento" required />
-            <span>${esc(r.consentimiento)}${aviso}</span>
-          </label>
-          <button class="btn btn--acento" type="submit">${esc(r.boton)}</button>
-          <p class="registro__estado" role="status" aria-live="polite"></p>
-        </form>
+            <button class="btn btn--acento" type="submit">${esc(r.boton)}</button>
+            <p class="registro__estado" role="status" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>`;
 }
 
+// Aliados en tono "la ronda": sellos redondos, como estampados a mano, y un
+// sello vacío al final para quien quiera sumarse.
 export function renderAliados(aliados, seccion) {
-  const items = aliados
-    .map((a) => {
+  const sellos = aliados
+    .map((a, i) => {
       const dentro = a.logo
         ? `<img src="${esc(a.logo)}" alt="${esc(a.nombre)}" />`
         : `<span>${esc(a.nombre)}</span>`;
-      return `<a class="aliado" href="${esc(a.url)}">${dentro}</a>`;
+      return `<a class="sello sello--${i + 1}" href="${esc(a.url)}" data-entra>${dentro}</a>`;
     })
     .join("");
+  const invitacion = seccion.invitacion
+    ? `<a class="sello sello--tu" href="${esc(seccion.invitacion.url)}" data-entra>${esc(seccion.invitacion.texto)}</a>`
+    : "";
   return `
-    <section class="seccion seccion--alt" id="aliados">
+    <section class="seccion seccion--alt ronda" id="aliados">
       <p class="eyebrow">${esc(seccion.eyebrow)}</p>
       <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
-      <div class="aliados">${items}</div>
+      <div class="sellos">${sellos}${invitacion}</div>
     </section>`;
 }
 

@@ -11,7 +11,7 @@
 //  así funciona en las cuatro direcciones visuales sin regenerarse.
 //
 //  Cómo está organizado (núcleo puro + cáscara que toca el DOM):
-//   1 · Azar y geometría      funciones puras, sin DOM
+//   1 · Geometría             funciones puras, sin DOM
 //   2 · Leer el hero          leerEscena(): el hero convertido en datos
 //   3 · Núcleo del confeti    detectarHuecos → repartirCupos → colocarPiezas
 //   4 · Pintar                pintarConfeti(): los datos convertidos en <span>
@@ -25,25 +25,10 @@ import {
   BRISA, VUELO, PALABRA, ESPERA_TRAS_RESIZE, FORMAS, TONOS,
   CLASES, SELECTORES, TEXTOS, TIPOS_DE_HUECO, GEOMETRIA,
 } from "./hero-vivo.ajustes.js";
+import { crearAzar, alAzarEntre, alAzarDe } from "./azar.js";
 
-// ═══ 1 · Azar y geometría ═════════════════════════════════════════════════
-
-// Generador con semilla fija (algoritmo mulberry32): el reparto es SIEMPRE
-// el mismo. Un confeti aleatorio sería imposible de aprobar: cada carga,
-// otra composición.
-function crearAzar(semilla) {
-  let estado = semilla;
-  return () => {
-    estado |= 0;
-    estado = (estado + 0x6d2b79f5) | 0;
-    let t = Math.imul(estado ^ (estado >>> 15), 1 | estado);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-const alAzarEntre = (azar, [min, max]) => min + azar() * (max - min);
-const alAzarDe = (azar, lista) => lista[Math.floor(azar() * lista.length)];
+// ═══ 1 · Geometría ════════════════════════════════════════════════════════
+// (El azar con semilla vive en azar.js: lo comparte con la fogata.)
 
 const seSolapan = (a, b) => a.x1 < b.x2 && a.x2 > b.x1 && a.y1 < b.y2 && a.y2 > b.y1;
 const distancia = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
