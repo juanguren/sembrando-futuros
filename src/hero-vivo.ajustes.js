@@ -57,7 +57,7 @@ export const PALABRA = Object.freeze({
 export const ESPERA_TRAS_RESIZE = 200;
 
 // Clases CSS del confeti. Las formas son máscaras SVG y los tonos son
-// variables del tema, así el confeti acompaña las cuatro direcciones.
+// variables del tema, así el confeti acompaña los dos temas.
 export const FORMAS = Object.freeze(["semilla", "brote", "hoja", "punto"]);
 export const TONOS  = Object.freeze(["lima", "acento", "arcilla", "sabana"]);
 

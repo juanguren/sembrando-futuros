@@ -706,8 +706,9 @@ a { color: inherit; }
 /* ═══════════════════════════════════════════════════════════════════════
    DIRECCIONES "CON ALMA"  ·  exploración de dirección visual
    ───────────────────────────────────────────────────────────────────────
-   Cuatro direcciones alternables: jardin-llamas (solarpunk vida), fogata
-   (animista luz), greca (ancestral-moderno), riso (maximalismo punk).
+   Dos direcciones alternables: jardin-llamas (solarpunk) y fogata (animista-
+   futurista). Las otras dos que se exploraron —greca (ancestral-moderno) y
+   riso (maximalismo punk)— se retiraron para concentrar el diseño.
    Cada una redefine tokens (color + tipografía) y activa cuatro capas de
    vida compartidas: grano, greca muisca, motivo botánico y la sección que
    explota (ver "Andamiaje compartido"). El selector flotante que alterna
@@ -863,84 +864,11 @@ a { color: inherit; }
 }
 :root[data-tema="fogata"] .btn--acento { box-shadow: 0 0 28px rgba(255, 107, 44, 0.35); }
 
-/* ── Dirección 3 · "Greca de oro" ───────────────────────────────────────────
-   Ancestral-moderno: barro y oro de la orfebrería muisca. La greca es
-   protagonista, layout limpio. */
-:root[data-tema="greca"] {
-  --crema:        #E8DCC6;
-  --crema-honda:  #DED0B4;
-  --tinta:        #2A2117;
-  --tinta-suave:  #6B5D48;
-  --arcilla:      #C08A2E;
-  --sabana:       #6B7A4F;
-  --acento:       #C0492F;
-  --acento-honda: #A63C25;
-  --linea:        rgba(42, 33, 23, 0.18);
-
-  --nav-fondo:    rgba(232, 220, 198, 0.8);
-  --sombra:       rgba(42, 33, 23, 0.2);
-  --backdrop:     rgba(42, 33, 23, 0.5);
-  --backdrop-fuerte: rgba(42, 33, 23, 0.85);
-  --cierre-fondo: #2A2117;
-  --cierre-texto: #E8DCC6;
-
-  --serif: "Spectral", Georgia, serif;
-  --sans:  "DM Sans", system-ui, sans-serif;
-
-  --grano: 0.38;
-  --greca-h: 18px;                 /* greca protagonista → más presencia */
-  --greca: rgba(192, 138, 46, 0.8);
-  --motivo: rgba(192, 138, 46, 0.16);
-  --explota-bg: #2A2117;
-  --explota-fg: #E8DCC6;
-  --explota-eyebrow: #C08A2E;
-}
-
-/* ── Dirección 4 · "Riso resistencia" ───────────────────────────────────────
-   Maximalismo alegre latino en clave punk repartible: papel, dos tintas,
-   grano risográfico fuerte, botánica a mano. La más loca. */
-:root[data-tema="riso"] {
-  --crema:        #F3EAD6;
-  --crema-honda:  #ECE0C6;
-  --tinta:        #2A2117;
-  --tinta-suave:  #6E6047;
-  --arcilla:      #C67A1E;         /* oro legible para labels pequeñas */
-  --sabana:       #4E8A3A;
-  --acento:       #E8433B;         /* bermellón riso */
-  --acento-honda: #C9382F;
-  --linea:        rgba(42, 33, 23, 0.2);
-  --lima:         #9BCB3C;         /* pop lima riso, no en texto */
-
-  --nav-fondo:    rgba(243, 234, 214, 0.82);
-  --sombra:       rgba(42, 33, 23, 0.2);
-  --backdrop:     rgba(42, 33, 23, 0.55);
-  --backdrop-fuerte: rgba(42, 33, 23, 0.85);
-  --cierre-fondo: #2A2117;
-  --cierre-texto: #F3EAD6;
-
-  --serif: "Bricolage Grotesque", system-ui, sans-serif;
-  --sans:  "DM Sans", system-ui, sans-serif;
-
-  --grano: 0.60;                   /* textura de impresión marcada */
-  --greca: rgba(232, 67, 59, 0.5);
-  --motivo: rgba(232, 67, 59, 0.16);
-  --explota-bg: #E8433B;
-  --explota-fg: #F3EAD6;
-  --explota-eyebrow: #F2B705;
-}
-:root[data-tema="riso"] .ficha:hover,
-:root[data-tema="riso"] .foto__btn:hover,
-:root[data-tema="riso"] .ficha__cta:hover { border-color: var(--lima); }
-:root[data-tema="riso"] .guia__lista--pasos li::before { color: var(--lima); }
-:root[data-tema="riso"] .seccion__titulo,
-:root[data-tema="riso"] .hero__titulo,
-:root[data-tema="riso"] .cierre__titulo { font-weight: 800; letter-spacing: -0.02em; }
-
 /* ═══════════════════════════════════════════════════════════════════════
    LENGUAJE SUELTO — recortes con cinta, marcador, blobs, polaroids.
    Nace en /custodios (arco altar → verbena) y el puente de la landing;
    pensado para extenderse luego al resto del sitio. Todo con tokens:
-   funciona en las 4 direcciones. Cero assets: solo CSS.
+   funciona en los dos temas. Cero assets: solo CSS.
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* Resaltado de marcador (a mano, ligeramente irregular) */
@@ -1381,7 +1309,7 @@ main.custodios .seccion { position: relative; }
      cartelera 2 · brote 3 · mesa 3 · fogata 4 · ronda 2 · vuelta 4
    Los hilos que las tejen: las cuatro formas del confeti, el papel girado
    (±0.8–1.8°, nunca en fotos ni fichas), los blobs A→B→C y el marcador.
-   Todo con tokens: funciona en las cuatro direcciones. Lo que se mueve al
+   Todo con tokens: funciona en los dos temas. Lo que se mueve al
    hacer scroll lo acompaña src/tejido-vivo.js.
    ═══════════════════════════════════════════════════════════════════════ */
 

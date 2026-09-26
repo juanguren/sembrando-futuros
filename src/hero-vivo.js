@@ -8,7 +8,7 @@
 //  Así cada pieza vuela ininterrumpida: un loop continuo, sin reinicios.
 //
 //  El confeti se colorea con las variables del tema (no con colores fijos),
-//  así funciona en las cuatro direcciones visuales sin regenerarse.
+//  así funciona en los dos temas visuales sin regenerarse.
 //
 //  Cómo está organizado (núcleo puro + cáscara que toca el DOM):
 //   1 · Geometría             funciones puras, sin DOM

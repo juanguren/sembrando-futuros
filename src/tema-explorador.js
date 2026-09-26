@@ -1,8 +1,8 @@
 // ═════════════════════════════════════════════════════════════════════════
 //  SELECTOR DE TEMAS · herramienta de exploración (TEMPORAL)
 //
-//  Alterna el atributo data-tema en <html> para comparar en vivo las cuatro
-//  direcciones "con alma" contra el contenido real, en cualquier página.
+//  Alterna el atributo data-tema en <html> para comparar en vivo los dos
+//  temas (solarpunk y animista-futurista) contra el contenido real.
 //  NO es parte final del sitio: es un aislado deliberado. Para quitarlo,
 //  borra este archivo y sus imports en main.js / custodios.js (y, si quieres,
 //  los bloques :root[data-tema=...] de style.css).
@@ -14,8 +14,6 @@ export function initTemaExplorador() {
   const TEMAS = [
     { id: "jardin-llamas", nombre: "Solarpunk" },
     { id: "fogata", nombre: "Animista-futurista" },
-    { id: "greca", nombre: "Ancestral-moderno" },
-    { id: "riso", nombre: "Maximalista latino" },
   ];
   const DEFECTO = "jardin-llamas"; // coincide con data-tema en los .html
   const CLAVE = "sf-tema-explorador";
