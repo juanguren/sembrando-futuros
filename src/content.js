@@ -12,16 +12,19 @@
 
 export const sitio = {
   nombre: "sembrando futuros",
-  tituloPagina: "sembrando futuros — un puñado de futuro en tus manos",
+  tituloPagina: "sembrando-futuros - cultivando esperanza y diversión por el mañana",
   descripcion:
-    "Recibiste semillas nativas de la sabana de Bogotá. Aquí te contamos qué son y cómo sembrarlas.",
+    "Festival colombiano de esperanza, educación y diversión alrededor de las semillas nativas de " +
+    "nuestros territorios y nuestras comunidades. ¡Únete a sembrar!",
   // Enlaces de la navegación (texto + ancla). Editar aquí, no en render.js.
   // Van con "/" al inicio para que funcionen también desde /custodios.html.
   nav: [
+    { texto: "Inicio", ancla: "/#inicio" },
+    { texto: "Festival", ancla: "/#evento" },
     { texto: "Semillas", ancla: "/#semillas" },
-    { texto: "Por qué", ancla: "/#filosofia" },
-    { texto: "Aliados", ancla: "/#aliados" },
-    { texto: "Custodios", ancla: "/custodios.html" },
+    { texto: "Por Qué", ancla: "/#filosofia" },
+    { texto: "Quiénes Somos", ancla: "/#aliados" },
+    { texto: "¡Únete!", ancla: "/#sumate" },
   ],
 };
 
@@ -38,10 +41,9 @@ export const hero = {
   // para ocultarlos.
   hashtags: ["#SembrandoFuturos", "#SembramosFuturos"],
   parrafo:
-    "Si estás leyendo esto, tienes en tus manos un paquetico con varias semillas, nativas de la sabana de Bogotá. " +
-    "Plantas muy antiguas y que este suelo " +
-    "reconoce. Sembrarlas es devolverle algo a la tierra que te sostiene :)",
-  ctaPrincipal: { texto: "Cómo sembrarlas", ancla: "#semillas" },
+    "Si estás leyendo esto, tienes en tus manos un paquetico que contiene varias semillas, nativas de la sabana de Bogotá. " +
+    "Plantas muy antiguas y que este suelo reconoce. Sembrarlas es devolverle algo a la tierra que te sostiene 🌄",
+  ctaPrincipal: { texto: "Festival", ancla: "#evento" },
   ctaSecundario: { texto: "Conoce las semillas", ancla: "#semillas" },
   // Espacio reservado a la derecha del hero para una foto o gif del paquete
   // con el QR abriéndose. Pon la ruta en "src" (p. ej. "/hero-paquete.gif").
@@ -49,7 +51,7 @@ export const hero = {
   media: {
     src: null,
     alt: "El sobre de semillas abriéndose para revelar lo que hay dentro",
-    nota: "foto o gif del paquete + QR",
+    nota: "foto / gif del paquetico",
   },
 };
 
@@ -58,17 +60,16 @@ export const hero = {
 // primero se entiende la movida, luego el "qué hago".
 export const evento = {
   titulo: "¿Qué es Sembrando Futuros?",
+  // Los saltos de línea ("\n") se respetan en la página.
   intro:
-    "Somos un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá. " +
-    "Sembramos esperanza y futuros posibles, una semilla y un encuentro a la vez. " +
-    "La invitación es simple: Siembra, Divirtiete, Comparte ",
+    "Somos un evento Colombiano de educación, diversión y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá. " +
+    "Sembramos esperanza y futuros posibles, una semilla y un encuentro a la vez.\n" +
+    "¡Siembra, Diviértete y Comparte!",
   tarjetas: [
     {
       k: "Dónde",
-      titulo: "Barrios de Bogotá",
-      texto:
-        "De puerta en puerta, con vecinos y en nuestros barrios. La sabana vuelve " +
-        "balcón por balcón, parque por parque.",
+      titulo: "Bogotá · Huerta de San Luis",
+      texto: "Con vecinos y en nuestros barrios. Compartimos, comemos, sembramos y la pasamos muy bien!",
     },
     {
       k: "Cuándo",
@@ -81,35 +82,21 @@ export const evento = {
       k: "Con quién",
       titulo: "¡Tus Comunidades!",
       texto:
-        "Bancos de semillas, organizaciones de barrio y cualquiera que quiera " +
-        "sembrar. Una vez siembras, ya eres parte :)",
+        "Vecinos, bancos de semillas, parches de barrio y cualquiera que quiera sembrar en sus casas.\n" +
+        "Siembras una semilla, siembras esperanza 😄",
     },
   ],
 };
 
 // ── ¿Y AHORA QUÉ? (los 3 pasos) ──────────────────────────────────────────
-// La respuesta rápida a "¿qué hago con esto?", antes del detalle botánico.
+// La respuesta rápida a "¿qué hago con esto?". Va DESPUÉS de las fichas: el
+// paso 2 remite a "las instrucciones de arriba".
 export const queHago = {
   titulo: "¿Y ahora qué hago?",
   pasos: [
-    {
-      titulo: "Ábrelo",
-      texto:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " +
-        "eiusmod tempor incididunt ut labore.",
-    },
-    {
-      titulo: "Siémbralas",
-      texto:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
-        "nisi ut aliquip ex ea commodo.",
-    },
-    {
-      titulo: "Comparte",
-      texto:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse " +
-        "cillum dolore eu fugiat nulla pariatur.",
-    },
+    { titulo: "Abre tu paquete", texto: "Cuida que no salgan volando." },
+    { titulo: "Siembra las semillas", texto: "Con las instrucciones de arriba." },
+    { titulo: "O compartelas!", texto: "Regalale una o más a alguien que ames." },
   ],
 };
 
@@ -129,10 +116,11 @@ export const queHago = {
 // Al vivir aquí, otra ciudad puede traducir/adaptar toda la copia sin tocar
 // el marcado.
 export const semillasSeccion = {
-  titulo: "Lo que llevas contigo",
+  titulo: "Estas son las semillas",
   intro:
-    "Una mezcla especial, curada por bancos de semillas de la sabana. " +
-    "Cada una cuenta una historia. Y estas son las que podrías tener en tus manos:",
+    "Tienes contigo una mezcla especial de cinco semillas, seleccionadas por bancos de semillas, " +
+    "custodios y custodias de nuestra sabana de Bogotá.\n" +
+    "Cada una de ellas cuenta una historia de la ciudad en la que vives.",
   etiquetas: {
     fotoSemilla: "la semilla",
     fotoGerminado: "al germinar",
@@ -148,8 +136,9 @@ export const semillasSeccion = {
 export const puenteCustodios = {
   // El texto usa [[palabra]] para marcar los resaltados de marcador.
   texto:
-    "Estas semillas tienen un [[origen]] y una [[historia]], conoce a quienes las custodian",
-  cta: "Conocer a los custodios →",
+    "[[Cada semilla tiene un origen y una historia.\n" +
+    "Conoce a quienes las custodian]]",
+  cta: "Conoce a sus custodios →",
   url: "/custodios.html",
   foto: { src: null, alt: "Retrato del custodio de semillas" },
 };
@@ -267,23 +256,28 @@ export const semillas = [
 // ⚠️ Manifiesto en LOREM IPSUM — placeholder a la espera del copy final.
 export const filosofia = {
   cita: "¿Por que lo hacemos?",
-  // El manifiesto en tres tiempos — las tres piedras de la tulpa alrededor
-  // del fuego: pasado, presente y futuro. Los textos siguen en lorem.
+  // Los tres beats alrededor del fuego: recordar, cuidar, compartir.
   beats: [
     {
       titulo: "Recordar",
-      texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      texto:
+        "Mucho antes de ser ciudad, esta tierra tuvo una historia (contada, muchas veces a través " +
+        "de sus plantas) que hoy podemos recordar.",
     },
     {
-      titulo: "Recuperar",
-      texto: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+      titulo: "Cuidar",
+      texto:
+        "Cuidar de una semilla, luego planta, después fruto, nos acerca un poquito más a aquella " +
+        "naturaleza de la que hacemos parte.",
     },
     {
-      titulo: "Encarnar",
-      texto: "Ut labore et dolore magna aliqua, ut enim ad minim veniam.",
+      titulo: "Compartir",
+      texto:
+        "La humanidad es una sola. Estamos junt@s en esto.\n" +
+        "Si quieres cambiar el mundo, empieza conociendo a tus vecinos.",
     },
   ],
-  ctaCompleto: "Leer el manifiesto completo",
+  ctaCompleto: "Lee nuestro manifiesto",
   manifiestoTitulo: "Lorem ipsum dolor",
   completo: [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod " +

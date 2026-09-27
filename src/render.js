@@ -17,9 +17,15 @@ const esc = (s) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+// Texto de contenido: escapa y respeta los saltos de línea (una línea nueva
+// en content.js es un <br> en la página). Para párrafos, notas, pasos.
+const texto = (s) => esc(s).replace(/\n/g, "<br />");
+
 // Convierte [[palabra]] en <mark>palabra</mark> (resaltado de marcador),
-// escapando todo lo demás. Se usa en títulos/textos del contenido.
-const marcar = (s) => esc(s).replace(/\[\[(.+?)\]\]/g, "<mark>$1</mark>");
+// escapando todo lo demás; el resaltado puede abarcar varias líneas. Se usa
+// en títulos/textos del contenido.
+const marcar = (s) =>
+  esc(s).replace(/\[\[([\s\S]+?)\]\]/g, "<mark>$1</mark>").replace(/\n/g, "<br />");
 
 export function renderNav(sitio) {
   const enlaces = sitio.nav
@@ -62,7 +68,7 @@ export function renderHero(hero) {
                 .join("")}</p>`
             : ""
         }
-        <p class="hero__parrafo">${esc(hero.parrafo)}</p>
+        <p class="hero__parrafo">${texto(hero.parrafo)}</p>
         <div class="hero__ctas">
           <a class="btn btn--acento" href="${esc(hero.ctaPrincipal.ancla)}">
             ${esc(hero.ctaPrincipal.texto)}
@@ -85,7 +91,7 @@ export function renderEvento(evento) {
       <div class="nota nota--${i + 1}" data-entra>
         <p class="nota__k">${esc(t.k)}</p>
         <h3 class="nota__titulo">${esc(t.titulo)}</h3>
-        <p class="nota__texto">${esc(t.texto)}</p>
+        <p class="nota__texto">${texto(t.texto)}</p>
       </div>`
     )
     .join("");
@@ -94,7 +100,7 @@ export function renderEvento(evento) {
       <div class="blob blob--a" aria-hidden="true"></div>
       ${evento.eyebrow ? `<p class="eyebrow">${esc(evento.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(evento.titulo)}</h2>
-      <p class="seccion__intro">${esc(evento.intro)}</p>
+      <p class="seccion__intro">${texto(evento.intro)}</p>
       <div class="notas">${notas}</div>
     </section>`;
 }
@@ -107,7 +113,7 @@ export function renderQueHago(queHago) {
       (p, i) => `
       <div class="paso paso--${i + 1}" data-entra>
         <h3 class="paso__titulo">${esc(p.titulo)}</h3>
-        <p class="paso__texto">${esc(p.texto)}</p>
+        <p class="paso__texto">${texto(p.texto)}</p>
       </div>`
     )
     .join("");
@@ -198,7 +204,7 @@ export function renderSemillas(semillas, seccion, puente) {
       <div class="blob blob--b" aria-hidden="true"></div>
       ${seccion.eyebrow ? `<p class="eyebrow">${esc(seccion.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
-      <p class="seccion__intro">${esc(seccion.intro)}</p>
+      <p class="seccion__intro">${texto(seccion.intro)}</p>
       <div class="fichas">${fichas}</div>
       ${puente ? renderPuenteCustodios(puente) : ""}
     </section>`;
@@ -218,17 +224,18 @@ function renderPuenteCustodios(p) {
     </a>`;
 }
 
-// El manifiesto en tono "fogata": anochece, se enciende una brasa y los tres
-// beats son las tres piedras de la tulpa alrededor del fuego. En la pared,
-// las sombras de las plantas tiemblan con la luz. tejido-vivo.js enciende la
-// brasa al llegar y hace subir las chispas.
+// El manifiesto en tono "fogata": anochece, se enciende una brasa bajo la
+// pregunta y en la pared las sombras de las plantas tiemblan con la luz.
+// Los tres beats van en una franja horizontal, bajos y sin adornos (las
+// notas y los pasos ya son tarjetas; aquí no se repite la figura).
+// tejido-vivo.js enciende la brasa al llegar y hace subir las chispas.
 export function renderFilosofia(f) {
-  const piedras = f.beats
+  const beats = f.beats
     .map(
-      (b, i) => `
-      <div class="piedra piedra--${i + 1}" data-entra>
-        <b class="piedra__verbo">${esc(b.titulo)}</b>
-        <span class="piedra__texto">${esc(b.texto)}</span>
+      (b) => `
+      <div class="beat" data-entra>
+        <b class="beat__titulo">${esc(b.titulo)}</b>
+        <span class="beat__texto">${texto(b.texto)}</span>
       </div>`
     )
     .join("");
@@ -246,7 +253,7 @@ export function renderFilosofia(f) {
           <span class="fogata__chispas" aria-hidden="true"></span>
           <blockquote class="filosofia__cita">${esc(f.cita)}</blockquote>
         </div>
-        <div class="tulpa">${piedras}</div>
+        <div class="filosofia__beats">${beats}</div>
         <button class="btn btn--acento" data-modal="manifiesto-completo">
           ${esc(f.ctaCompleto)}
         </button>
@@ -297,12 +304,12 @@ export function renderColectivoSumate(c, r) {
         <div class="vuelta__voz">
           ${c.eyebrow ? `<p class="eyebrow">${esc(c.eyebrow)}</p>` : ""}
           <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
-          <p class="verbena__texto">${esc(c.texto)}</p>
+          <p class="verbena__texto">${texto(c.texto)}</p>
           <p class="vuelta__teaser">${esc(c.teaser)}</p>
         </div>
         <div class="vuelta__registro cinta" data-entra>
           <h3 class="vuelta__sub">${esc(r.titulo)}</h3>
-          <p class="vuelta__intro">${esc(r.intro)}</p>
+          <p class="vuelta__intro">${texto(r.intro)}</p>
           <form class="registro__form" novalidate>
             <!-- honeypot: invisible para humanos; si un bot lo llena, se descarta -->
             <div class="registro__trampa" aria-hidden="true">
@@ -368,7 +375,7 @@ export function renderCierre(c) {
   return `
     <footer class="cierre">
       <h2 class="cierre__titulo">${esc(c.titulo)}</h2>
-      <p class="cierre__texto">${esc(c.texto)}</p>
+      <p class="cierre__texto">${texto(c.texto)}</p>
       <div class="cierre__redes">${redes}</div>
     </footer>`;
 }
@@ -420,7 +427,7 @@ export function renderQueEsCustodiar(q) {
       (n, i) => `
       <div class="nota nota--${i + 1}">
         <b class="nota__titulo">${esc(n.titulo)}</b>
-        <span class="nota__texto">${esc(n.texto)}</span>
+        <span class="nota__texto">${texto(n.texto)}</span>
       </div>`
     )
     .join("");
@@ -494,7 +501,7 @@ export function renderCierreVerbena(c) {
       <div class="verbena__blob2" aria-hidden="true"></div>
       <div class="verbena__contenido">
         <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
-        <p class="verbena__texto">${esc(c.texto)}</p>
+        <p class="verbena__texto">${texto(c.texto)}</p>
         <div class="verbena__ctas">
           <a class="btn verbena__btn-principal" href="${esc(c.ctaPrincipal.url)}">${esc(c.ctaPrincipal.texto)}</a>
           <a class="btn verbena__btn-borde" href="${esc(c.ctaSecundario.url)}">${esc(c.ctaSecundario.texto)}</a>

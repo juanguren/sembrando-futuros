@@ -1306,7 +1306,7 @@ main.custodios .seccion { position: relative; }
 /* ═══════════════════════════════════════════════════════════════════════
    PARTITURA · tonos de la landing
    Cada sección bajo el hero tiene un tono, de 1 (calma) a 5 (verbena):
-     cartelera 2 · brote 3 · mesa 3 · fogata 4 · ronda 2 · vuelta 4
+     cartelera 2 · mesa 3 · brote 3 · fogata 4 · ronda 2 · vuelta 4
    Los hilos que las tejen: las cuatro formas del confeti, el papel girado
    (±0.8–1.8°, nunca en fotos ni fichas), los blobs A→B→C y el marcador.
    Todo con tokens: funciona en los dos temas. Lo que se mueve al
@@ -1530,33 +1530,32 @@ main { overflow-x: clip; }
   100% { translate: var(--deriva, 0px) calc(-1 * var(--alto, 140px)); opacity: 0; scale: 0.35; }
 }
 
-/* La tulpa: las tres piedras alrededor del fuego (recordar / recuperar /
-   encarnar). Piedras, no tarjetas: esquinas desiguales. */
-.tulpa {
-  display: grid;
-  gap: 1.1rem;
-  max-width: 52rem;
+/* Los beats del manifiesto: una sola columna bajo el fuego, como versos de
+   una misma historia. Sin cajas (las notas y los pasos ya son tarjetas):
+   el verbo colgado a la izquierda, el texto a la derecha, líneas finas
+   entre uno y otro. En móvil, verbo arriba y texto debajo. */
+.filosofia__beats {
+  max-width: 40rem;
   margin: 0 auto 2.4rem;
   text-align: left;
+  border-top: 1px solid color-mix(in srgb, var(--explota-fg) 18%, transparent);
 }
-.piedra {
-  padding: 1.5rem 1.6rem 1.35rem;
-  border-radius: 1.6rem 2.6rem 1.4rem 2.9rem / 2.3rem 1.5rem 2.7rem 1.7rem;
-  background: color-mix(in srgb, var(--explota-fg) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--explota-fg) 16%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--explota-fg) 10%, transparent);
+.beat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+  padding: 1.35rem 0.2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--explota-fg) 18%, transparent);
 }
-.piedra--2 { border-radius: 2.8rem 1.5rem 2.4rem 1.6rem / 1.6rem 2.6rem 1.5rem 2.5rem; }
-.piedra--3 { border-radius: 1.5rem 2.4rem 2.9rem 1.6rem / 2.6rem 1.7rem 1.5rem 2.4rem; }
-.piedra__verbo {
+.beat__titulo {
   display: block;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
+  line-height: 1.2;
   color: var(--explota-eyebrow, var(--arcilla));
-  margin-bottom: 0.3rem;
 }
-.piedra__texto { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.85; font-size: 0.94rem; }
+.beat__texto { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.88; font-size: 1rem; line-height: 1.6; }
 
 /* ── 6 · La ronda (aliados): sellos estampados a mano ──────────────────── */
 .sellos {
@@ -1647,11 +1646,8 @@ main { overflow-x: clip; }
 .vuelta__confeti .confeti:nth-child(7) { left: 30%; top: 92%; width: 11px; height: 11px; --rot: 6deg;   --dx: 5px;  --dy: -12px; --dr: 8deg;  --dur: 7.9s; --delay: -6.3s; }
 .vuelta__confeti .confeti:nth-child(8) { left: 74%; top: 4%;  width: 15px; height: 15px; --rot: -16deg; --dx: -4px; --dy: -20px; --dr: 18deg; --dur: 8.6s; --delay: -2.9s; }
 
-@media (min-width: 46rem) {
-  .tulpa { grid-template-columns: repeat(3, 1fr); align-items: start; gap: 1.4rem; }
-  .piedra--1 { transform: rotate(-2deg); }
-  .piedra--2 { transform: rotate(0.6deg); margin-top: 2.6rem; } /* la cuna bajo el fuego */
-  .piedra--3 { transform: rotate(2deg); }
+@media (min-width: 40rem) {
+  .beat { grid-template-columns: 9rem 1fr; gap: 1.6rem; align-items: start; padding: 1.6rem 0.4rem; }
 }
 @media (min-width: 52rem) {
   .vuelta__grid { grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 3rem; }
@@ -1683,5 +1679,5 @@ main { overflow-x: clip; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .paso, .sello, .vuelta__registro, .piedra { transform: none !important; }
+  .paso, .sello, .vuelta__registro { transform: none !important; }
 }
