@@ -96,7 +96,7 @@ export const queHago = {
   pasos: [
     { titulo: "Abre tu paquete", texto: "Cuida que no salgan volando." },
     { titulo: "Siembra las semillas", texto: "Con las instrucciones de arriba." },
-    { titulo: "O compartelas!", texto: "Regalale una o más a alguien que ames." },
+    { titulo: "¡Compartelas!", texto: "Regalale una o más a alguien que ames." },
   ],
 };
 
@@ -262,7 +262,7 @@ export const filosofia = {
       titulo: "Recordar",
       texto:
         "Mucho antes de ser ciudad, esta tierra tuvo una historia (contada, muchas veces a través " +
-        "de sus plantas) que hoy podemos recordar.",
+        "de sus semillas) que hoy podemos recordar.",
     },
     {
       titulo: "Cuidar",

@@ -11,6 +11,8 @@ export function initInteracciones() {
   const lightboxImg = lightbox?.querySelector(".lightbox__img");
 
   // Menú móvil: refleja abierto/cerrado en el botón (aria) y permite cerrarlo.
+  // Tocar fuera del panel lo cierra el velo (.nav__velo), un <label> del mismo
+  // checkbox: dispara el mismo "change", así que aquí no hace falta nada más.
   const navToggle = document.getElementById("nav-toggle");
   const navBurger = document.querySelector(".nav__burger");
   const reflejarMenu = () => {
