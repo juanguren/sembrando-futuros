@@ -42,7 +42,7 @@ export const hero = {
   hashtags: ["#SembrandoFuturos", "#SembramosFuturos"],
   parrafo:
     "Si estás leyendo esto, tienes en tus manos un paquetico que contiene varias semillas, nativas de la sabana de Bogotá. " +
-    "Plantas muy antiguas y que este suelo reconoce. Sembrarlas es devolverle algo a la tierra que te sostiene 🌄",
+    "Plantas muy antiguas y que este suelo reconoce 🌄",
   ctaPrincipal: { texto: "Festival", ancla: "#evento" },
   ctaSecundario: { texto: "Conoce las semillas", ancla: "#semillas" },
   // Espacio reservado a la derecha del hero para una foto o gif del paquete
