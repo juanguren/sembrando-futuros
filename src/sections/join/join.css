@@ -60,7 +60,9 @@
 /* La verbena en su versión de cierre: el formulario es un recorte de papel
    pegado con cinta y vuelven unas piezas del confeti del hero. */
 .seccion.verbena { max-width: none; }
-.seccion.verbena::before { display: none; } /* la greca no va sobre el naranja */
+/* La greca no va sobre el naranja. El prefijo :root[data-tema] le da el peso de
+   la regla que la dibuja (themes.css); sin él, perdía y la greca se veía igual. */
+:root[data-tema] .seccion.verbena::before { display: none; }
 .vuelta .verbena__contenido { max-width: calc(var(--ancho) - 2 * var(--lado)); }
 .vuelta__grid { display: grid; gap: 2.4rem; }
 .vuelta .verbena__titulo { margin-bottom: 1rem; }
