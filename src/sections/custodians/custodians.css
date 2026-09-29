@@ -103,7 +103,7 @@ main.custodios .seccion { position: relative; }
   box-shadow: 0 12px 26px var(--sombra);
 }
 .polaroid__btn { padding: 0; border: none; background: none; cursor: pointer; display: block; }
-.polaroid__btn img, .polaroid__ph { display: block; object-fit: cover; }
+.polaroid__btn img { display: block; object-fit: cover; }
 .polaroid__ph {
   background: var(--crema-honda);
   border: 1px dashed var(--linea);

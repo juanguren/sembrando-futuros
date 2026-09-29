@@ -1,31 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   TOKENS · paleta, tipografía, ritmo y formas
-   Los valores base de :root. Cada tema (themes.css) los redefine.
+   TOKENS · ritmo, formas y valores por defecto
+   Los colores y las tipografías los define cada tema (themes.css): el HTML
+   siempre trae data-tema, así que no hace falta una paleta base.
    ═══════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Paleta — tierra de la sabana de Bogotá, no terracota genérica. */
-  --crema:        #FBF4EC;  /* fondo, nunca blanco puro */
-  --crema-honda:  #F3E9DC;  /* secciones alternas */
-  --tinta:        #26301F;  /* verde-tierra muy oscuro, el texto */
-  --tinta-suave:  #5A5345;  /* texto secundario */
-  --arcilla:      #9C6B43;  /* siena, detalles cálidos */
-  --sabana:       #6E7A57;  /* verde salvia apagado (frailejón) */
-  --acento:       #FF5C2B;  /* naranja Halloween — SOLO para CTA */
-  --acento-honda: #E8481B;  /* hover del CTA */
-  --fuego:        var(--acento); /* la brasa de la fogata; cada tema puede cambiarla */
-  --linea:        rgba(38, 48, 31, 0.14); /* bordes translúcidos */
-
-  /* Colores de "chrome" — tokenizados para que cada tema pueda redefinirlos.
-     Antes estaban hardcodeados en las reglas; ahora viven aquí. */
-  --nav-fondo:       rgba(251, 244, 236, 0.78); /* barra fija translúcida */
-  --sombra:          rgba(38, 48, 31, 0.22);    /* sombra de modales */
-  --backdrop:        rgba(38, 48, 31, 0.45);    /* fondo de modal de guía */
-  --backdrop-fuerte: rgba(38, 48, 31, 0.82);    /* fondo del lightbox */
-
-  /* Tipografía */
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans:  "DM Sans", system-ui, sans-serif;
+  /* La brasa de la fogata: por defecto, el acento del tema; un tema puede cambiarla. */
+  --fuego: var(--acento);
 
   /* Ritmo */
   --interlinea: 1.75;

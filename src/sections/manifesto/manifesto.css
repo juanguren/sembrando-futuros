@@ -7,20 +7,12 @@
 .filosofia__cita {
   font-size: clamp(1.8rem, 5.5vw, 3rem);
   font-style: italic;
-  font-weight: 500;
   max-width: 22ch;
   margin: 0 auto 2.5rem;
   text-wrap: balance;
 }
-.filosofia__cuerpo {
-  max-width: 52ch;
-  margin: 0 auto;
-  text-align: left;
-}
-.filosofia__cuerpo p { margin: 0 0 1.25rem; color: var(--tinta-suave); }
-
-/* El CTA del manifiesto sobre la explosión: usa el color-pop del tema, para
-   que no se confunda con el fondo (p. ej. bermellón sobre bermellón en Riso). */
+/* El botón del manifiesto usa el color-pop del tema (--explota-eyebrow), para
+   no perderse sobre el fondo de la fogata. */
 .filosofia .btn--acento {
   background: var(--explota-eyebrow, var(--acento));
   color: #17140e;

@@ -1,26 +1,18 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   DIRECCIONES "CON ALMA"  ·  exploración de dirección visual
+   TEMAS · Solarpunk (jardin-llamas) y Animista-futurista (fogata)
    ───────────────────────────────────────────────────────────────────────
-   Dos direcciones alternables: jardin-llamas (solarpunk) y fogata (animista-
-   futurista). Las otras dos que se exploraron —greca (ancestral-moderno) y
-   riso (maximalismo punk)— se retiraron para concentrar el diseño.
-   Cada una redefine tokens (color + tipografía) y activa cuatro capas de
-   vida compartidas: grano, greca muisca, motivo botánico y la sección que
-   explota (ver "Andamiaje compartido"). El selector flotante que alterna
-   data-tema vive en src/tools/theme-explorer.js, aislado y fácil de quitar.
+   Cada tema define sus colores y tipografías y tiñe cuatro capas de vida
+   compartidas: grano de impresión, la greca muisca como divisor, un motivo
+   botánico en el margen y la fogata del manifiesto. El HTML trae
+   data-tema="jardin-llamas" por defecto; el selector flotante que lo
+   alterna vive en src/tools/theme-explorer.js, aislado y fácil de quitar.
 
-   Para publicar una dirección elegida: copiar sus tokens a :root, dejar el
-   andamiaje compartido sin el prefijo [data-tema] (o mantenerlo), y borrar
-   los otros bloques + el selector. :root sigue teniendo la v1 herbario como
-   base de la que todo hereda.
+   Para publicar un solo tema: dejar su bloque, borrar el otro y el selector.
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Andamiaje compartido de las direcciones "con alma" ────────────────────
-   Cada tema redefine tokens (color, tipografía) y, además, cuatro capas de
-   vida que se colorean por tema: grano de impresión, greca muisca como
-   divisor con sentido, un motivo botánico dibujado en el margen, y la
-   sección del manifiesto "que explota" en color. Todo puro CSS/SVG, liviano
-   y reversible. El motivo/greca usan máscara SVG + background-color para
+/* ── Andamiaje compartido de los temas ─────────────────────────────────────
+   Las capas de vida, con valores neutros que cada tema tiñe. Todo puro
+   CSS/SVG, liviano y reversible. El motivo/greca usan máscara SVG + background-color para
    poder teñirse con la variable del tema. */
 :root[data-tema] {
   --greca-h: 12px;

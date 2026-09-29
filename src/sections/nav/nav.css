@@ -25,19 +25,6 @@
   letter-spacing: -0.01em;
 }
 
-.nav__links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav__links a {
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color var(--transicion);
-}
-.nav__links a:hover { color: var(--acento); }
-
 /* Menú móvil — solo CSS (checkbox hack). Se abre y se cierra con la
    hamburguesa, y también tocando fuera del panel (ver .nav__velo). */
 .nav__toggle { display: none; }
@@ -84,6 +71,8 @@
 }
 
 .nav__links {
+  list-style: none;
+  margin: 0;
   position: fixed;
   /* Posicionado con unidades de viewport, NO con inset/%: la .nav tiene
      backdrop-filter, lo que la convierte en el bloque contenedor de sus
@@ -113,7 +102,14 @@
   display: flex;
 }
 /* Cada enlace es un bloque de ~46px de alto: blanco de toque cómodo. */
-.nav__links a { display: block; padding: 0.4rem 0; font-size: 1.2rem; }
+.nav__links a {
+  display: block;
+  padding: 0.4rem 0;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: color var(--transicion);
+}
+.nav__links a:hover { color: var(--acento); }
 
 .nav__toggle:checked ~ .nav__links {
   transform: translateX(0);

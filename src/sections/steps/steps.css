@@ -2,41 +2,28 @@
    PASOS · "¿Y ahora qué hago?" — tono brote
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Los 3 pasos (¿y ahora qué?) ───────────────────────────────────────── */
-.pasos { display: grid; grid-template-columns: 1fr; gap: 1.1rem; counter-reset: paso; }
+/* ── Los tres pasos crecen de izquierda a derecha ──────────────────────── */
+.pasos { display: grid; grid-template-columns: 1fr; gap: 1.1rem; }
 .paso {
   border: 1px solid var(--linea);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 1.5rem;
   background: var(--crema-honda);
-  counter-increment: paso;
-}
-.paso::before {
-  content: counter(paso);
-  font-family: var(--serif); font-weight: 600; font-size: 1.05rem;
-  color: var(--crema); background: var(--acento);
-  width: 2rem; height: 2rem; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 0.9rem;
-}
-.paso__titulo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 0.4rem; }
-.paso__texto { margin: 0; color: var(--tinta-suave); font-size: 0.98rem; line-height: 1.6; }
-
-/* ── 3 · Brote (los tres pasos): crecen de izquierda a derecha ─────────── */
-.paso {
-  border-radius: 4px;
   box-shadow: 0 8px 22px var(--sombra);
 }
-/* El número deja de ser un círculo: semilla → brote → hoja */
+/* El numeral es una forma del confeti, no un número: semilla → brote → hoja */
 .paso::before {
   content: "";
+  display: block;
   width: var(--paso-forma, 2rem);
   height: var(--paso-forma, 2rem);
-  border-radius: 0;
+  margin-bottom: 0.9rem;
   background: var(--acento);
   -webkit-mask: var(--forma) no-repeat center / contain;
           mask: var(--forma) no-repeat center / contain;
 }
+.paso__titulo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 0.4rem; }
+.paso__texto { margin: 0; color: var(--tinta-suave); font-size: 0.98rem; line-height: 1.6; }
 .paso--1 { --forma: var(--forma-semilla); transform: rotate(-1deg); }
 .paso--2 { --forma: var(--forma-brote); --paso-forma: 2.4rem; transform: rotate(0.9deg); }
 .paso--3 {

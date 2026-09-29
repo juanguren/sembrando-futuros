@@ -3,7 +3,10 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── Hero ──────────────────────────────────────────────────────────────── */
+/* position: relative ancla el confeti. SIN overflow:clip — el marco de la
+   media desborda a propósito hacia la derecha en escritorio. */
 .hero {
+  position: relative;
   max-width: var(--ancho);
   margin: 0 auto;
   padding: clamp(7rem, 18vw, 11rem) clamp(1.25rem, 5vw, 3rem) var(--aire);
@@ -75,10 +78,6 @@
   letter-spacing: 0.01em;
   color: var(--arcilla);
 }
-
-/* position: relative para anclar el confeti. SIN overflow:clip — el marco de
-   la media desborda a propósito hacia la derecha en escritorio. */
-.hero { position: relative; }
 
 /* El texto y la media van por encima del confeti de fondo */
 .hero__texto, .hero__media { position: relative; z-index: 2; }
