@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   LENGUAJE SUELTO — recortes con cinta, marcador, blobs y notas sueltas.
+   Nace en /custodios (arco altar → verbena) y ya lo usan varias secciones
+   de las dos páginas. Todo con tokens: funciona en los dos temas. Cero
+   assets: solo CSS.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Resaltado de marcador (a mano, ligeramente irregular) */
+mark,
+.hero__rota-cap {
+  background: linear-gradient(
+    100deg,
+    transparent 2%,
+    color-mix(in srgb, var(--sabana) 45%, transparent) 8%,
+    color-mix(in srgb, var(--sabana) 42%, transparent) 92%,
+    transparent 98%
+  );
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Cinta adhesiva sobre un recorte */
+.cinta { position: relative; }
+.cinta::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: color-mix(in srgb, var(--arcilla) 45%, transparent);
+  border-radius: 2px;
+}
+
+/* Blobs orgánicos que sangran por los bordes — progresión A → B → C:
+   lima viva → oro → dúo lima+calabaza (sube la temperatura hacia la verbena) */
+.blob { position: absolute; z-index: -1; pointer-events: none; }
+.blob--a {
+  width: 46vw; max-width: 430px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--lima, var(--sabana)) 42%, transparent);
+  border-radius: 58% 42% 63% 37% / 45% 55% 45% 55%;
+}
+.blob--b {
+  width: 44vw; max-width: 410px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--arcilla) 50%, transparent);
+  border-radius: 39% 61% 45% 55% / 60% 38% 62% 40%;
+}
+.blob--c1 {
+  width: 42vw; max-width: 400px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--lima, var(--sabana)) 38%, transparent);
+  border-radius: 58% 42% 63% 37% / 45% 55% 45% 55%;
+}
+.blob--c2 {
+  width: 30vw; max-width: 280px; aspect-ratio: 1;
+  background: color-mix(in srgb, var(--acento) 30%, transparent);
+  border-radius: 39% 61% 45% 55% / 60% 38% 62% 40%;
+}
+
+/* Notas sueltas, pegadas y giradas: la cartelera del festival y "¿Qué es
+   custodiar?" en /custodios */
+.notas { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+.nota {
+  background: var(--crema);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  box-shadow: 0 8px 22px var(--sombra);
+}
+.nota__titulo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+}
+.nota__texto { color: var(--tinta-suave); font-size: 0.94rem; }
+.nota--1 { transform: rotate(-1.4deg); }
+.nota--2 { transform: rotate(1.8deg); }
+.nota--3 { transform: rotate(-0.8deg); }
+
+@media (min-width: 46rem) {
+  .notas { grid-template-columns: 1.1fr 0.9fr 1fr; align-items: start; }
+  .nota--2 { transform: rotate(1.8deg) translateY(14px); }
+  .nota--3 { transform: rotate(-0.8deg) translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nota { transform: none !important; }
+}

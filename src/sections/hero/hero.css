@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO · la primera pantalla
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: clamp(7rem, 18vw, 11rem) clamp(1.25rem, 5vw, 3rem) var(--aire);
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+.hero__titulo {
+  font-size: clamp(2.8rem, 9vw, 5.2rem);
+  margin: 0 0 1.5rem;
+  max-width: 14ch;
+}
+/* Palabra rotativa del título. UNA sola cápsula: se desvanece, cambia de
+   texto mientras es invisible y vuelve a entrar — nunca coexisten dos
+   palabras (un crossfade de dos textos distintos se lee como duplicado).
+   El contenedor interpola su ANCHO para que "en tus manos" no dé brincos. */
+.hero__rota {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+  white-space: nowrap;
+  transition: width 0.62s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero__rota-cap {
+  display: inline-block;
+  /* relleno y radio: los pone el marcador (styles/loose-language.css) */
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+.hero__parrafo {
+  max-width: 46ch;
+  font-size: 1.15rem;
+  color: var(--tinta-suave);
+  margin: 0 0 2.25rem;
+}
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+/* Columna de media (foto o gif del paquete con el QR) */
+.hero__media-marco {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--crema-honda);
+  border: 1px solid var(--linea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero__media-marco img { width: 100%; height: 100%; object-fit: cover; }
+.hero__media--ph .hero__media-marco { border-style: dashed; }
+.hero__media-ph {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--arcilla);
+  opacity: 0.7;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+/* ── Hashtags del hero ─────────────────────────────────────────────────── */
+.hero__hashtags { margin: -0.4rem 0 1.6rem; }
+.hero__hashtags span {
+  display: block;
+  font-family: var(--sans);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--arcilla);
+}
+
+/* position: relative para anclar el confeti. SIN overflow:clip — el marco de
+   la media desborda a propósito hacia la derecha en escritorio. */
+.hero { position: relative; }
+
+/* El texto y la media van por encima del confeti de fondo */
+.hero__texto, .hero__media { position: relative; z-index: 2; }
+
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  /* El marco de la media se ensancha hacia el margen libre de la derecha
+     (el hero está centrado en 64rem; sobra espacio a los lados en pantallas
+     anchas). La columna de texto NO se toca: el grid sigue 1fr 1fr y solo
+     este elemento desborda su celda hacia la derecha.
+     · 50vw − 32rem = margen libre a la derecha del contenedor de 64rem.
+     · min(…, 14rem) = tope del ensanche. */
+  .hero__media {
+    width: calc(100% + min(50vw - 32rem, 14rem));
+    align-self: stretch; /* iguala la altura al bloque de texto */
+  }
+  /* En escritorio dejamos de forzar el cuadrado: el marco toma la altura del
+     texto (título → botones) para no sobrepasarlo por arriba ni por abajo. */
+  .hero__media-marco {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}

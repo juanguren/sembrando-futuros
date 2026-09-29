@@ -1,0 +1,28 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   LIGHTBOX · visor de fotos ampliadas
+   ═══════════════════════════════════════════════════════════════════════ */
+.lightbox {
+  border: none;
+  padding: 0;
+  background: none;
+  max-width: 92vw;
+  max-height: 92vh;
+}
+.lightbox::backdrop { background: var(--backdrop-fuerte); }
+.lightbox__img {
+  display: block;
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: var(--radio);
+}
+.lightbox__cerrar {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--crema);
+  cursor: pointer;
+}

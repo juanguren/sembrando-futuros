@@ -1,15 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────
-//  TEJIDO VIVO · ajustes
+//  FOGATA · ajustes
 //
-//  Lo afinable del revelado al hacer scroll y de la fogata (brasa y chispas).
-//  Sin lógica; objetos congelados. La lógica está en tejido-vivo.js.
+//  Lo afinable de la brasa y las chispas. Sin lógica; objetos congelados.
+//  La lógica está en bonfire.js.
 // ─────────────────────────────────────────────────────────────────────────
 
-// Revelado de los bloques [data-entra] cuando el navegador NO soporta
-// animaciones ligadas al scroll (si las soporta, lo hace el CSS solo).
-export const REVELADO = Object.freeze({
-  umbral: 0.18,                // fracción visible del bloque para darlo por entrado
-});
 
 // La brasa se enciende cuando esta fracción del hogar está en pantalla.
 export const FOGATA = Object.freeze({
@@ -29,15 +24,12 @@ export const CHISPAS = Object.freeze({
 });
 
 export const SELECTORES = Object.freeze({
-  revelables: "[data-entra]",
   fogata: ".fogata",
   hogar: ".fogata__hogar",     // el bloque del fuego: lo que se observa para encender
   chispas: ".fogata__chispas",
 });
 
 export const CLASES = Object.freeze({
-  reveladoPorJs: "js-entra",   // en <html>: el CSS deja los bloques ocultos hasta que JS los marca
-  visible: "is-visible",
   encendida: "is-encendida",
   chispa: "chispa",
 });

@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   DIRECCIONES "CON ALMA"  ·  exploración de dirección visual
+   ───────────────────────────────────────────────────────────────────────
+   Dos direcciones alternables: jardin-llamas (solarpunk) y fogata (animista-
+   futurista). Las otras dos que se exploraron —greca (ancestral-moderno) y
+   riso (maximalismo punk)— se retiraron para concentrar el diseño.
+   Cada una redefine tokens (color + tipografía) y activa cuatro capas de
+   vida compartidas: grano, greca muisca, motivo botánico y la sección que
+   explota (ver "Andamiaje compartido"). El selector flotante que alterna
+   data-tema vive en src/tools/theme-explorer.js, aislado y fácil de quitar.
+
+   Para publicar una dirección elegida: copiar sus tokens a :root, dejar el
+   andamiaje compartido sin el prefijo [data-tema] (o mantenerlo), y borrar
+   los otros bloques + el selector. :root sigue teniendo la v1 herbario como
+   base de la que todo hereda.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Andamiaje compartido de las direcciones "con alma" ────────────────────
+   Cada tema redefine tokens (color, tipografía) y, además, cuatro capas de
+   vida que se colorean por tema: grano de impresión, greca muisca como
+   divisor con sentido, un motivo botánico dibujado en el margen, y la
+   sección del manifiesto "que explota" en color. Todo puro CSS/SVG, liviano
+   y reversible. El motivo/greca usan máscara SVG + background-color para
+   poder teñirse con la variable del tema. */
+:root[data-tema] {
+  --greca-h: 12px;
+  --grano: 0;
+  --glow: transparent;
+  --greca: transparent;
+  --motivo: transparent;
+  --greca-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='48'%20height='22'%20viewBox='0%200%2048%2022'%3E%3Cpath%20d='M0%2017H10V7H24V17H34V3H48'%20fill='none'%20stroke='%23fff'%20stroke-width='2.6'/%3E%3C/svg%3E");
+  --sprig: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='150'%20viewBox='0%200%20120%20150'%3E%3Cpath%20d='M60%20148%20C58%20104%2060%2072%2064%2022'%20fill='none'%20stroke='%23fff'%20stroke-width='3'/%3E%3Cpath%20d='M62%2096%20C40%2092%2030%2076%2030%2060%20C46%2062%2060%2074%2062%2096Z'%20fill='%23fff'/%3E%3Cpath%20d='M62%2070%20C84%2066%2094%2050%2094%2034%20C78%2036%2064%2048%2062%2070Z'%20fill='%23fff'/%3E%3Cpath%20d='M63%20122%20C45%20120%2036%20106%2036%2092%20C50%2094%2062%20104%2063%20122Z'%20fill='%23fff'/%3E%3C/svg%3E");
+}
+/* Luz que emerge del fondo (glow por tema) */
+:root[data-tema] body {
+  background:
+    radial-gradient(130% 72% at 50% -12%, var(--glow), transparent 60%),
+    var(--crema);
+}
+/* Grano de impresión — intensidad por tema, detrás del contenido */
+:root[data-tema] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grano);
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Motivo botánico dibujado, tenue, en el margen inferior-izquierdo */
+:root[data-tema] body::after {
+  content: "";
+  position: fixed;
+  left: -6px;
+  bottom: -8px;
+  z-index: -1;
+  pointer-events: none;
+  width: 120px;
+  height: 150px;
+  background-color: var(--motivo);
+  -webkit-mask: var(--sprig) no-repeat left bottom / contain;
+  mask: var(--sprig) no-repeat left bottom / contain;
+}
+/* Greca muisca como divisor con sentido, antes de cada sección */
+:root[data-tema] .seccion::before {
+  content: "";
+  display: block;
+  height: var(--greca-h);
+  max-width: var(--ancho);
+  margin: 0 auto clamp(1.8rem, 5vw, 2.8rem);
+  background-color: var(--greca);
+  -webkit-mask: var(--greca-mask) repeat-x left center / auto 100%;
+  mask: var(--greca-mask) repeat-x left center / auto 100%;
+}
+/* El manifiesto es ahora la FOGATA: anochece con un degradado y se enciende
+   una brasa. Sus reglas viven con su sección: sections/manifesto/manifesto.css. */
+
+/* ── Dirección 1 · "Jardín en llamas" ──────────────────────────────────────
+   Solarpunk vida: verde hondo protagonista, lima fosforescente, calabaza. */
+:root[data-tema="jardin-llamas"] {
+  --crema:        #F6F4EC;
+  --crema-honda:  #ECE9DB;
+  --tinta:        #243B22;
+  --tinta-suave:  #55614F;
+  --arcilla:      #5F7A2A;
+  --sabana:       #4F7A24;
+  --acento:       #F26A2E;
+  --acento-honda: #D9541C;
+  --linea:        rgba(36, 59, 34, 0.16);
+  --lima:         #93C13D;
+
+  --nav-fondo:    rgba(246, 244, 236, 0.82);
+  --sombra:       rgba(36, 59, 34, 0.18);
+  --backdrop:     rgba(36, 59, 34, 0.5);
+  --backdrop-fuerte: rgba(20, 33, 19, 0.85);
+
+  --serif: "Space Grotesk", system-ui, sans-serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
+
+  --grano: 0.42;
+  --glow:  rgba(147, 193, 61, 0.20);
+  --greca: rgba(95, 122, 42, 0.55);
+  --motivo: rgba(79, 122, 36, 0.14);
+  --explota-bg: #243B22;
+  --explota-fg: #F6F4EC;
+  --explota-eyebrow: #93C13D;
+}
+:root[data-tema="jardin-llamas"] .btn--acento { box-shadow: 0 0 26px rgba(242, 106, 46, 0.30); }
+:root[data-tema="jardin-llamas"] .ficha:hover,
+:root[data-tema="jardin-llamas"] .foto__btn:hover,
+:root[data-tema="jardin-llamas"] .ficha__cta:hover { border-color: var(--lima); }
+:root[data-tema="jardin-llamas"] .guia__lista--pasos li::before { color: var(--lima); }
+:root[data-tema="jardin-llamas"] .seccion__titulo,
+:root[data-tema="jardin-llamas"] .hero__titulo { font-weight: 500; letter-spacing: -0.02em; }
+
+/* ── Dirección 2 · "Fogata" ─────────────────────────────────────────────────
+   Animista luz: fondo noche, dorado de vela, la semilla como punto de luz.
+   La más dramática y ceremonial. */
+:root[data-tema="fogata"] {
+  --crema:        #16130E;
+  --crema-honda:  #1F1A12;
+  --tinta:        #F2E8D5;
+  --tinta-suave:  #C7BBA2;
+  --arcilla:      #E9B04A;
+  /* musgo aclarado para legibilidad de texto sobre fondo oscuro */
+  --sabana:       #9AAD79;
+  --acento:       #FF6B2C;
+  --acento-honda: #E85618;
+  --linea:        rgba(242, 232, 213, 0.16);
+
+  --nav-fondo:    rgba(22, 19, 14, 0.72);
+  --sombra:       rgba(0, 0, 0, 0.55);
+  --backdrop:     rgba(8, 6, 4, 0.6);
+  --backdrop-fuerte: rgba(8, 6, 4, 0.9);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
+
+  --grano: 0.30;
+  --glow:  rgba(233, 176, 74, 0.16);
+  --greca: rgba(233, 176, 74, 0.55);
+  --motivo: rgba(233, 176, 74, 0.12);
+  --explota-fg: #F2E8D5;
+  --explota-eyebrow: #E9B04A;
+  /* La fogata al revés: la página ya es noche, así que el fuego ALUMBRA la
+     sección (madera encendida) en vez de oscurecerla. */
+  --explota-bg: #36220F;
+  --fuego: #FFB347;
+  --pared-sombra: rgba(0, 0, 0, 0.42);
+  /* La verbena usa la naranja de día: la de noche (#FF6B2C, el acento de los
+     botones) deslumbra sobre el fondo oscuro. */
+  --verbena-fondo: #F26A2E;
+}
+:root[data-tema="fogata"] .btn--acento { box-shadow: 0 0 28px rgba(255, 107, 44, 0.35); }

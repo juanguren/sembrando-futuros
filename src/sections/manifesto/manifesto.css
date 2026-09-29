@@ -1,0 +1,214 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   MANIFIESTO · "¿Por qué lo hacemos?" — tono fogata
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Filosofía ─────────────────────────────────────────────────────────── */
+.filosofia { text-align: center; }
+.filosofia__cita {
+  font-size: clamp(1.8rem, 5.5vw, 3rem);
+  font-style: italic;
+  font-weight: 500;
+  max-width: 22ch;
+  margin: 0 auto 2.5rem;
+  text-wrap: balance;
+}
+.filosofia__cuerpo {
+  max-width: 52ch;
+  margin: 0 auto;
+  text-align: left;
+}
+.filosofia__cuerpo p { margin: 0 0 1.25rem; color: var(--tinta-suave); }
+
+/* El CTA del manifiesto sobre la explosión: usa el color-pop del tema, para
+   que no se confunda con el fondo (p. ej. bermellón sobre bermellón en Riso). */
+.filosofia .btn--acento {
+  background: var(--explota-eyebrow, var(--acento));
+  color: #17140e;
+  box-shadow: none;
+}
+.filosofia .btn--acento:hover { background: var(--explota-eyebrow, var(--acento)); filter: brightness(1.06); }
+
+/* Texto largo dentro del modal (manifiesto completo) */
+.modal__caja--texto .manifiesto-largo p { margin: 0 0 1rem; color: var(--tinta-suave); }
+.modal__caja--texto .manifiesto-largo p:first-child { color: var(--tinta); }
+
+/* ── 5 · Fogata (manifiesto): anochece y se enciende una brasa ─────────── */
+/* A sangre completa de verdad (sin el truco del box-shadow), para que el
+   atardecer y el amanecer sean degradados: se entra y se sale del fuego
+   poco a poco, al ritmo del scroll. El contenido conserva el ancho y la
+   alineación de las demás secciones vía .fogata__contenido. */
+:root[data-tema] .fogata {
+  --atardecer: clamp(7rem, 16vw, 11rem);   /* alto del degradado de entrada */
+  --amanecer:  clamp(5rem, 12vw, 8rem);    /* … y del de salida, hacia la ronda */
+  position: relative;
+  max-width: none;
+  padding-inline: 0;
+  overflow: clip;
+  color: var(--explota-fg);
+  background:
+    linear-gradient(to bottom, var(--crema) 0, transparent var(--atardecer)),
+    linear-gradient(to top, var(--crema-honda) 0, transparent var(--amanecer)),
+    var(--explota-bg);
+}
+:root[data-tema] .fogata::before {
+  width: calc(min(100%, var(--ancho)) - 2 * var(--lado));
+}
+:root[data-tema] .fogata .eyebrow { color: var(--explota-eyebrow, var(--arcilla)); }
+:root[data-tema] .fogata .filosofia__cita {
+  color: var(--explota-fg);
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.35);
+}
+.fogata__contenido {
+  position: relative;
+  z-index: 2;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding-inline: var(--lado);
+}
+
+/* La pared: sombras de las plantas nativas, temblando con la luz del fuego */
+.fogata__pared { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sombra {
+  position: absolute;
+  background-color: var(--pared-sombra, rgba(0, 0, 0, 0.3));
+  -webkit-mask: var(--forma) no-repeat center / contain;
+          mask: var(--forma) no-repeat center / contain;
+  opacity: var(--sombra-op, 0.85);
+}
+.sombra--1 {
+  --forma: var(--sprig);
+  left: -4%; bottom: 3%;
+  width: min(46vw, 22rem); height: min(56vw, 27rem);
+  transform: scaleX(-1) rotate(5deg);
+}
+.sombra--2 {
+  --forma: var(--forma-hoja);
+  right: -5%; top: 9%;
+  width: min(42vw, 20rem); height: min(42vw, 20rem);
+  transform: rotate(-28deg);
+}
+.sombra--3 {
+  --forma: var(--forma-brote);
+  right: 10%; bottom: -4%;
+  width: min(34vw, 15rem); height: min(40vw, 18rem);
+  transform: rotate(8deg);
+}
+
+/* El hogar: la pregunta es el fuego; detrás, la brasa; encima, las chispas */
+.fogata__hogar {
+  position: relative;
+  padding: clamp(2.5rem, 8vw, 5rem) 0 clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+}
+.fogata__hogar .filosofia__cita { position: relative; z-index: 2; margin-bottom: 0; }
+.fogata__brasa {
+  position: absolute;
+  left: 50%; top: 58%;
+  z-index: 0;
+  width: min(88vw, 36rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+.fogata__luz {
+  display: block;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 55%,
+    color-mix(in srgb, var(--fuego) 62%, transparent) 0%,
+    color-mix(in srgb, var(--fuego) 26%, transparent) 26%,
+    color-mix(in srgb, var(--fuego) 8%, transparent) 46%,
+    transparent 66%);
+}
+.fogata__chispas {
+  position: absolute;
+  left: 50%; top: 62%;
+  z-index: 1;
+  width: 0; height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease 0.4s;
+}
+.fogata.is-encendida .fogata__chispas { opacity: 1; }
+.chispa {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--fuego) 70%, #fff);
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--fuego) 70%, transparent);
+  opacity: 0;
+}
+
+/* Encendido: chispa → brasa. Ligado al scroll si se puede; si no, al llegar
+   (bonfire.js marca .is-encendida) con una transición larga. Y una vez
+   encendida, la brasa respira. */
+@media (prefers-reduced-motion: no-preference) {
+  .fogata__brasa {
+    opacity: 0;
+    scale: 0.3;
+    transition: opacity 1.8s ease-out, scale 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .fogata.is-encendida .fogata__brasa { opacity: 1; scale: 1; }
+  @supports (animation-timeline: view()) {
+    .fogata__brasa {
+      transition: none;
+      animation: brasa-enciende linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 95%;
+    }
+  }
+  .fogata__luz { animation: brasa-respira 6.5s ease-in-out infinite alternate; }
+  .sombra { animation: vela var(--vela-dur, 4.6s) ease-in-out var(--vela-delay, 0s) infinite alternate; }
+  .sombra--2 { --vela-dur: 3.7s; --vela-delay: -1.3s; }
+  .sombra--3 { --vela-dur: 5.4s; --vela-delay: -2.2s; }
+  .chispa { animation: chispa-sube var(--dur, 5s) linear var(--delay, 0s) infinite; }
+}
+@keyframes brasa-enciende {
+  from { opacity: 0; scale: 0.3; }
+  to   { opacity: 1; scale: 1; }
+}
+@keyframes brasa-respira {
+  from { opacity: 0.78; scale: 0.96; }
+  to   { opacity: 1; scale: 1.05; }
+}
+@keyframes vela {
+  from { opacity: var(--sombra-op, 0.85); }
+  to   { opacity: calc(var(--sombra-op, 0.85) * 0.5); }
+}
+@keyframes chispa-sube {
+  0%   { translate: 0 0; opacity: 0; scale: 1; }
+  10%  { opacity: 0.95; }
+  70%  { opacity: 0.6; }
+  100% { translate: var(--deriva, 0px) calc(-1 * var(--alto, 140px)); opacity: 0; scale: 0.35; }
+}
+
+/* Los beats del manifiesto: una sola columna bajo el fuego, como versos de
+   una misma historia. Sin cajas (las notas y los pasos ya son tarjetas):
+   el verbo colgado a la izquierda, el texto a la derecha, líneas finas
+   entre uno y otro. En móvil, verbo arriba y texto debajo. */
+.filosofia__beats {
+  max-width: 40rem;
+  margin: 0 auto 2.4rem;
+  text-align: left;
+  border-top: 1px solid color-mix(in srgb, var(--explota-fg) 18%, transparent);
+}
+.beat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+  padding: 1.35rem 0.2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--explota-fg) 18%, transparent);
+}
+.beat__titulo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--explota-eyebrow, var(--arcilla));
+}
+.beat__texto { color: var(--explota-fg, var(--tinta-suave)); opacity: 0.88; font-size: 1rem; line-height: 1.6; }
+
+@media (min-width: 40rem) {
+  .beat { grid-template-columns: 9rem 1fr; gap: 1.6rem; align-items: start; padding: 1.6rem 0.4rem; }
+}

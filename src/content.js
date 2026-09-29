@@ -3,7 +3,7 @@
 //
 //  Todo lo que dice la página vive aquí, separado del marcado y los estilos.
 //  Para cambiar un texto, una semilla, un aliado o un link, edita ESTE archivo.
-//  No necesitas tocar render.js ni style.css.
+//  No necesitas tocar sections/ ni styles/.
 //
 //  Cuando migres a Astro, este objeto se convierte casi 1:1 en una
 //  "content collection": cada arreglo (semillas, aliados...) pasa a ser una
@@ -16,7 +16,7 @@ export const sitio = {
   descripcion:
     "Festival colombiano de esperanza, educación y diversión alrededor de las semillas nativas de " +
     "nuestros territorios y nuestras comunidades. ¡Únete a sembrar!",
-  // Enlaces de la navegación (texto + ancla). Editar aquí, no en render.js.
+  // Enlaces de la navegación (texto + ancla). Editar aquí, no en sections/nav/.
   // Van con "/" al inicio para que funcionen también desde /custodios.html.
   nav: [
     { texto: "Inicio", ancla: "/#inicio" },
@@ -296,7 +296,7 @@ export const filosofia = {
 // Enmarca que esto es más grande que una web: la puerta a una movida
 // colectiva, con el teaser del mapa (v2).
 export const colectivo = {
-  // [[palabra]] marca el resaltado de marcador (ver marcar() en render.js).
+  // [[palabra]] marca el resaltado de marcador (ver marcar() en shared/html.js).
   titulo: "Somos parte de [[algo más grande]]",
   texto:
     "Es un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá " +

@@ -4,24 +4,25 @@
 //  Custodios y custodias de semillas: formato featuring con arco emocional
 //  altar (testimonio en silencio) → verbena (fiesta al cierre). La verbena es
 //  la misma banda final de la página principal: colectividad + súmate.
-//  Contenido en content.js (custodiosPagina), marcado en render.js,
-//  estética en style.css. Igual que index: nada de texto aquí.
+//  Contenido en content.js (custodiosPagina); marcado y estilo de cada
+//  sección en sections/. Igual que la principal: aquí no hay texto.
 // ─────────────────────────────────────────────────────────────────────────
-import "./style.css";
-import { sitio, custodiosPagina as pagina, colectivo, registro } from "./content.js";
+
+import "../styles/global.css";
+import { sitio, custodiosPagina as pagina, colectivo, registro } from "../content.js";
+import { renderNav } from "../sections/nav/nav.js";
 import {
-  renderNav,
   renderCustodioFeaturing,
   renderQueEsCustodiar,
   renderMesaFotos,
   renderBancosSemillas,
   renderProximosCustodios,
-  renderColectivoSumate,
-  renderLightbox,
-} from "./render.js";
-import { initInteracciones } from "./interacciones.js";
-import { initTemaExplorador } from "./tema-explorador.js";
-import { initRegistro } from "./registro.js";
+} from "../sections/custodians/custodians.js";
+import { renderColectivoSumate } from "../sections/join/join.js";
+import { initRegistro } from "../sections/join/signup.js";
+import { renderLightbox } from "../shared/lightbox.js";
+import { initInteracciones } from "../shared/interactions.js";
+import { initTemaExplorador } from "../tools/theme-explorer.js";
 
 document.title = pagina.tituloPagina;
 const metaDesc = document.querySelector('meta[name="description"]');

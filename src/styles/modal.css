@@ -1,0 +1,44 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   MODALES · <dialog> de la guía de cada semilla y del manifiesto
+   ═══════════════════════════════════════════════════════════════════════ */
+.modal {
+  border: none;
+  padding: 0;
+  border-radius: 8px;
+  background: var(--crema);
+  color: var(--tinta);
+  max-width: 32rem;
+  width: calc(100% - 2.5rem);
+  box-shadow: 0 24px 60px var(--sombra);
+}
+.modal::backdrop { background: var(--backdrop); }
+.modal__caja { padding: 2rem clamp(1.5rem, 5vw, 2.5rem) 2.25rem; position: relative; }
+.modal__cerrar {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--tinta-suave);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+.modal__cerrar:hover { color: var(--acento); }
+.modal__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--arcilla);
+  margin: 0 0 0.5rem;
+}
+.modal__titulo { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin: 0; }
+.modal__cientifico {
+  font-family: var(--serif);
+  color: var(--sabana);
+  font-size: 1.1rem;
+  margin: 0.1rem 0 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--linea);
+}

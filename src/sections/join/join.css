@@ -1,0 +1,162 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   ÚNETE · colectividad + formulario — tono vuelta a la verbena
+   La banda final de las dos páginas.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── La verbena: fondo en fiesta, blobs y título girado ──────────────────── */
+.verbena {
+  position: relative;
+  overflow: clip; /* clip, no hidden: hidden crearía un scroll container y
+                     rompería el revelado ligado al scroll de sus hijos */
+  /* Fondo con token propio: se puede suavizar sin tocar el acento de los botones */
+  background: var(--verbena-fondo, var(--acento));
+  color: var(--tinta);
+  padding: clamp(3.5rem, 9vw, 6rem) clamp(1.25rem, 5vw, 3rem);
+}
+.verbena__blob1 {
+  position: absolute; top: -18%; right: -8%;
+  width: 44vw; max-width: 420px; aspect-ratio: 1;
+  background: var(--arcilla);
+  border-radius: 58% 42% 63% 37% / 45% 55% 45% 55%;
+  opacity: 0.85;
+}
+.verbena__blob2 {
+  position: absolute; bottom: -22%; left: -6%;
+  width: 36vw; max-width: 340px; aspect-ratio: 1;
+  background: var(--tinta);
+  border-radius: 39% 61% 45% 55% / 60% 38% 62% 40%;
+  opacity: 0.5;
+}
+.verbena__contenido { position: relative; z-index: 2; max-width: var(--ancho); margin: 0 auto; }
+.verbena__titulo {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.2rem;
+  max-width: 14ch;
+  transform: rotate(-1.6deg);
+}
+.verbena__titulo mark {
+  background: linear-gradient(
+    100deg,
+    transparent 2%,
+    color-mix(in srgb, var(--arcilla) 85%, transparent) 8%,
+    color-mix(in srgb, var(--arcilla) 80%, transparent) 92%,
+    transparent 98%
+  );
+}
+.verbena__texto {
+  max-width: 40ch;
+  margin: 0 0 2rem;
+  color: color-mix(in srgb, var(--tinta) 88%, transparent);
+  font-size: 1.08rem;
+}
+.verbena .btn { font-family: var(--serif); font-weight: 700; padding: 0.85rem 1.6rem; }
+
+/* ── 7 · Vuelta a la verbena (colectividad + súmate) ───────────────────── */
+/* La verbena en su versión de cierre: el formulario es un recorte de papel
+   pegado con cinta y vuelven unas piezas del confeti del hero. */
+.seccion.verbena { max-width: none; }
+.seccion.verbena::before { display: none; } /* la greca no va sobre el naranja */
+.vuelta .verbena__contenido { max-width: calc(var(--ancho) - 2 * var(--lado)); }
+.vuelta__grid { display: grid; gap: 2.4rem; }
+.vuelta .verbena__titulo { margin-bottom: 1rem; }
+.vuelta__teaser {
+  display: inline-block;
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: var(--tinta);
+  border: 1px solid color-mix(in srgb, var(--tinta) 45%, transparent);
+  border-radius: 100px;
+  padding: 0.55rem 1.1rem;
+}
+.vuelta__registro {
+  position: relative;
+  background: var(--crema);
+  color: var(--tinta);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 1.8rem 1.6rem 1.5rem;
+  box-shadow: 0 18px 40px var(--sombra);
+  transform: rotate(-1.1deg);
+}
+.vuelta__sub {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+}
+.vuelta__intro { color: var(--tinta-suave); margin: 0 0 1.6rem; font-size: 0.98rem; }
+
+/* Unas piezas del confeti del hero vuelven aquí: el ciclo se cierra */
+.vuelta__confeti { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.vuelta__confeti .confeti { opacity: 0.85; }
+.confeti--tinta { color: var(--tinta); }
+.confeti--crema { color: var(--crema); }
+.vuelta__confeti .confeti:nth-child(1) { left: 5%;  top: 10%; width: 16px; height: 16px; --rot: -22deg; --dx: 6px;  --dy: -20px; --dr: 16deg; --dur: 7.4s; --delay: -2.1s; }
+.vuelta__confeti .confeti:nth-child(2) { left: 14%; top: 78%; width: 12px; height: 12px; --rot: 14deg;  --dx: -5px; --dy: -14px; --dr: 10deg; --dur: 6.1s; --delay: -0.7s; }
+.vuelta__confeti .confeti:nth-child(3) { left: 46%; top: 6%;  width: 14px; height: 14px; --rot: 30deg;  --dx: 7px;  --dy: -22px; --dr: 20deg; --dur: 8.2s; --delay: -4.4s; }
+.vuelta__confeti .confeti:nth-child(4) { left: 60%; top: 88%; width: 18px; height: 18px; --rot: -8deg;  --dx: -7px; --dy: -16px; --dr: 12deg; --dur: 5.6s; --delay: -3.2s; }
+.vuelta__confeti .confeti:nth-child(5) { left: 88%; top: 14%; width: 13px; height: 13px; --rot: 18deg;  --dx: 4px;  --dy: -24px; --dr: 22deg; --dur: 9.1s; --delay: -5.5s; }
+.vuelta__confeti .confeti:nth-child(6) { left: 93%; top: 62%; width: 17px; height: 17px; --rot: -30deg; --dx: -6px; --dy: -18px; --dr: 14deg; --dur: 6.8s; --delay: -1.6s; }
+.vuelta__confeti .confeti:nth-child(7) { left: 30%; top: 92%; width: 11px; height: 11px; --rot: 6deg;   --dx: 5px;  --dy: -12px; --dr: 8deg;  --dur: 7.9s; --delay: -6.3s; }
+.vuelta__confeti .confeti:nth-child(8) { left: 74%; top: 4%;  width: 15px; height: 15px; --rot: -16deg; --dx: -4px; --dy: -20px; --dr: 18deg; --dur: 8.6s; --delay: -2.9s; }
+
+/* ── Súmate / registro (formulario) ────────────────────────────────────── */
+.registro__form { max-width: 38rem; }
+/* Honeypot: fuera de pantalla, invisible para humanos */
+.registro__trampa {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.registro__campos { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+.campo { display: flex; flex-direction: column; gap: 0.35rem; }
+.campo__label {
+  font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--arcilla);
+}
+.campo__input {
+  font-family: var(--sans); font-size: 1rem; color: var(--tinta);
+  background: var(--crema);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 0.7rem 0.85rem;
+  transition: border-color var(--transicion);
+}
+.campo__input:hover { border-color: var(--sabana); }
+.campo__input:focus-visible { border-color: var(--acento); }
+
+.registro__consent {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  font-size: 0.92rem; color: var(--tinta-suave); line-height: 1.5;
+  margin-bottom: 1.3rem; cursor: pointer;
+}
+.registro__consent input { margin-top: 0.25rem; flex: 0 0 auto; accent-color: var(--acento); }
+.registro__consent a { color: var(--arcilla); }
+
+.registro__estado {
+  min-height: 1.4em; margin: 1rem 0 0; font-size: 0.95rem; color: var(--tinta-suave);
+}
+.registro__estado.is-ok { color: var(--sabana); }
+.registro__estado.is-error { color: var(--acento); }
+
+@media (min-width: 40rem) {
+  /* nombre + correo lado a lado; barrio ocupa toda la fila */
+  .registro__campos { grid-template-columns: 1fr 1fr; }
+  .registro__campos .campo:nth-child(3) { grid-column: 1 / -1; }
+}
+
+@media (min-width: 52rem) {
+  .vuelta__grid { grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verbena__titulo, .vuelta__registro { transform: none !important; }
+}

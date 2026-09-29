@@ -1,0 +1,11 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   FESTIVAL · "¿Qué es Sembrando Futuros?" — tono cartelera de barrio
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── 2 · Cartelera de barrio (evento): notas pegadas al tablón ─────────── */
+.cartelera { position: relative; }
+.cartelera .blob--a { top: 6%; left: -14%; opacity: 0.55; }
+.nota__k {
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--arcilla); margin: 0 0 0.5rem;
+}

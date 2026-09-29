@@ -5,12 +5,12 @@ El objetivo: recoger nombre + correo de los vecinos para enviarles después el
 **mensaje de resultados del evento** (y avisar cuando esté el mapa v2).
 
 ## Estado actual del código
-- El formulario **ya está construido y estilizado** (funciona en los 4 temas).
+- El formulario **ya está construido y estilizado** (funciona en los dos temas).
 - Vive en:
   - Contenido/config → `src/content.js` (export `registro`)
-  - Marcado → `src/render.js` (`renderRegistro`)
-  - Envío (fetch + estados + honeypot) → `src/main.js`
-  - Estilos → `src/style.css` (`.registro__*`, `.campo__*`)
+  - Marcado → `src/sections/join/join.js` (`renderColectivoSumate`)
+  - Envío (fetch + estados + honeypot) → `src/sections/join/signup.js`
+  - Estilos → `src/sections/join/join.css` (`.registro__*`, `.campo__*`)
 - Corre en **modo demo**: mientras `registro.endpoint` esté vacío, no envía nada,
   solo muestra el estado de éxito. Al pegar el endpoint, empieza a guardar de verdad.
 

@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   TOKENS · paleta, tipografía, ritmo y formas
+   Los valores base de :root. Cada tema (themes.css) los redefine.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta — tierra de la sabana de Bogotá, no terracota genérica. */
+  --crema:        #FBF4EC;  /* fondo, nunca blanco puro */
+  --crema-honda:  #F3E9DC;  /* secciones alternas */
+  --tinta:        #26301F;  /* verde-tierra muy oscuro, el texto */
+  --tinta-suave:  #5A5345;  /* texto secundario */
+  --arcilla:      #9C6B43;  /* siena, detalles cálidos */
+  --sabana:       #6E7A57;  /* verde salvia apagado (frailejón) */
+  --acento:       #FF5C2B;  /* naranja Halloween — SOLO para CTA */
+  --acento-honda: #E8481B;  /* hover del CTA */
+  --fuego:        var(--acento); /* la brasa de la fogata; cada tema puede cambiarla */
+  --linea:        rgba(38, 48, 31, 0.14); /* bordes translúcidos */
+
+  /* Colores de "chrome" — tokenizados para que cada tema pueda redefinirlos.
+     Antes estaban hardcodeados en las reglas; ahora viven aquí. */
+  --nav-fondo:       rgba(251, 244, 236, 0.78); /* barra fija translúcida */
+  --sombra:          rgba(38, 48, 31, 0.22);    /* sombra de modales */
+  --backdrop:        rgba(38, 48, 31, 0.45);    /* fondo de modal de guía */
+  --backdrop-fuerte: rgba(38, 48, 31, 0.82);    /* fondo del lightbox */
+
+  /* Tipografía */
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans:  "DM Sans", system-ui, sans-serif;
+
+  /* Ritmo */
+  --interlinea: 1.75;
+  --radio: 4px;
+  --transicion: 0.2s ease;
+  --ancho: 64rem;
+  --aire: clamp(3.5rem, 9vw, 7rem); /* espacio vertical entre secciones */
+  --lado: clamp(1.25rem, 5vw, 3rem); /* aire lateral de cada sección */
+}
+
+/* Las cuatro formas, como tokens: las comparten el confeti, los numerales de
+   los pasos y las sombras de la fogata. */
+:root {
+  --forma-semilla: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='12'%20rx='5.5'%20ry='9.5'%20fill='%23fff'/%3E%3C/svg%3E");
+  --forma-hoja: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2021C7%2017%206%2012%208%207c5%201%208%205%207%2011-1%202-2%203-3%203Z'%20fill='%23fff'/%3E%3C/svg%3E");
+  --forma-punto: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3C/svg%3E");
+  --forma-brote: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%2022V9M12%209C12%205%209%203%205%203c0%204%203%207%207%206ZM12%2011c0-4%203-6%207-6%200%204-3%207-7%206Z'%20fill='none'%20stroke='%23fff'%20stroke-width='1.8'/%3E%3C/svg%3E");
+}

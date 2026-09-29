@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   PASOS · "¿Y ahora qué hago?" — tono brote
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Los 3 pasos (¿y ahora qué?) ───────────────────────────────────────── */
+.pasos { display: grid; grid-template-columns: 1fr; gap: 1.1rem; counter-reset: paso; }
+.paso {
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: var(--crema-honda);
+  counter-increment: paso;
+}
+.paso::before {
+  content: counter(paso);
+  font-family: var(--serif); font-weight: 600; font-size: 1.05rem;
+  color: var(--crema); background: var(--acento);
+  width: 2rem; height: 2rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.paso__titulo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin: 0 0 0.4rem; }
+.paso__texto { margin: 0; color: var(--tinta-suave); font-size: 0.98rem; line-height: 1.6; }
+
+/* ── 3 · Brote (los tres pasos): crecen de izquierda a derecha ─────────── */
+.paso {
+  border-radius: 4px;
+  box-shadow: 0 8px 22px var(--sombra);
+}
+/* El número deja de ser un círculo: semilla → brote → hoja */
+.paso::before {
+  content: "";
+  width: var(--paso-forma, 2rem);
+  height: var(--paso-forma, 2rem);
+  border-radius: 0;
+  background: var(--acento);
+  -webkit-mask: var(--forma) no-repeat center / contain;
+          mask: var(--forma) no-repeat center / contain;
+}
+.paso--1 { --forma: var(--forma-semilla); transform: rotate(-1deg); }
+.paso--2 { --forma: var(--forma-brote); --paso-forma: 2.4rem; transform: rotate(0.9deg); }
+.paso--3 {
+  --forma: var(--forma-hoja); --paso-forma: 2.8rem;
+  transform: rotate(-0.6deg) scale(1.03);
+  background: color-mix(in srgb, var(--lima, var(--sabana)) 16%, var(--crema-honda));
+  border-color: color-mix(in srgb, var(--lima, var(--sabana)) 55%, var(--linea));
+}
+.paso--3 .paso__titulo { font-size: 1.5rem; }
+
+@media (min-width: 40rem) {
+  .pasos { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paso { transform: none !important; }
+}

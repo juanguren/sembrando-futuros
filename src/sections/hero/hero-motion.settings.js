@@ -10,7 +10,7 @@
 //                  margen, y qué tipos de hueco existen y cómo se comportan.
 //   · TOLERANCIAS  geometría fina del algoritmo. Rara vez hay que tocarla.
 //
-//  Cambiar un número aquí no requiere entender el algoritmo de hero-vivo.js.
+//  Cambiar un número aquí no requiere entender el algoritmo de hero-motion.js.
 //  Los objetos van congelados: son datos, no estado.
 // ─────────────────────────────────────────────────────────────────────────
 
@@ -49,7 +49,7 @@ export const VUELO = Object.freeze({
 export const PALABRA = Object.freeze({
   intervalo: 3400,             // ms entre una palabra y la siguiente
   fundido: 380,                // ms que la palabra está invisible al cambiar;
-                               // igual a la transición de .hero__rota-cap en style.css
+                               // igual a la transición de .hero__rota-cap en hero.css
   recorrido: "0.22em",         // cuánto sube al salir y desde dónde entra la siguiente
 });
 

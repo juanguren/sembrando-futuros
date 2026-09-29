@@ -4,10 +4,10 @@
 //  Alterna el atributo data-tema en <html> para comparar en vivo los dos
 //  temas (solarpunk y animista-futurista) contra el contenido real.
 //  NO es parte final del sitio: es un aislado deliberado. Para quitarlo,
-//  borra este archivo y sus imports en main.js / custodios.js (y, si quieres,
-//  los bloques :root[data-tema=...] de style.css).
+//  borra este archivo y sus imports en pages/home.js y pages/custodians.js (y,
+//  si quieres, los bloques :root[data-tema=...] de styles/themes.css).
 //
-//  Inyecta su propio CSS para no ensuciar style.css.
+//  Inyecta su propio CSS para no ensuciar los estilos del sitio.
 // ═════════════════════════════════════════════════════════════════════════
 
 export function initTemaExplorador() {

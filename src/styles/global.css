@@ -1,0 +1,24 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   SEMBRANDO FUTUROS · estilos globales
+   Mobile-first. Quien llega lo hace por QR, desde el celular, en la calle.
+   Los breakpoints amplían, no reorganizan.
+   
+   Aquí solo lo que comparten las dos páginas, en orden de cascada. El
+   estilo de cada sección vive junto a su marcado, en src/sections/<sección>/,
+   y lo importa el JS de esa sección.
+   
+   PARTITURA · cada sección bajo el hero tiene un tono, de 1 (calma) a 5
+   (verbena): cartelera 2 · herbario 3 · brote 3 · fogata 4 · ronda 2 ·
+   vuelta 4. Los hilos que las tejen: las cuatro formas del confeti, el papel
+   girado (±0.8–1.8°, nunca en fotos ni fichas), los blobs A→B→C y el
+   marcador. Todo con tokens: funciona en los dos temas.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./themes.css";
+@import "./loose-language.css";
+@import "./modal.css";
+@import "./lightbox.css";
+@import "./confetti.css";
+@import "./reveal.css";

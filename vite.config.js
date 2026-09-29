@@ -7,7 +7,8 @@ export default defineConfig({
   // Si publicas en GitHub Pages bajo un subpath (usuario.github.io/repo),
   // cambia esto a "/repo/". Para dominio propio o Netlify/Vercel, déjalo en "/".
   base: "/",
-  // Multipágina: cada página nueva es un .html en la raíz que se registra aquí.
+  // Multipágina: cada página nueva es un .html en la raíz (con su entrada JS en
+  // src/pages/) que se registra aquí.
   build: {
     rollupOptions: {
       input: {

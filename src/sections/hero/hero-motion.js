@@ -19,16 +19,16 @@
 //   6 · Entrada pública       initHeroVivo()
 //
 //  Todo lo afinable (cantidades, tiempos, márgenes) vive en
-//  hero-vivo.ajustes.js. Aquí solo hay lógica.
+//  hero-motion.settings.js. Aquí solo hay lógica.
 // ─────────────────────────────────────────────────────────────────────────
 import {
   BRISA, VUELO, PALABRA, ESPERA_TRAS_RESIZE, FORMAS, TONOS,
   CLASES, SELECTORES, TEXTOS, TIPOS_DE_HUECO, GEOMETRIA,
-} from "./hero-vivo.ajustes.js";
-import { crearAzar, alAzarEntre, alAzarDe } from "./azar.js";
+} from "./hero-motion.settings.js";
+import { crearAzar, alAzarEntre, alAzarDe } from "../../shared/random.js";
 
 // ═══ 1 · Geometría ════════════════════════════════════════════════════════
-// (El azar con semilla vive en azar.js: lo comparte con la fogata.)
+// (El azar con semilla vive en shared/random.js: lo comparte con la fogata.)
 
 const seSolapan = (a, b) => a.x1 < b.x2 && a.x2 > b.x1 && a.y1 < b.y2 && a.y2 > b.y1;
 const distancia = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);

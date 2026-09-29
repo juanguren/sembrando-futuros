@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   BASE · lo que comparte todo el sitio
+   Reset, tipografía compartida, botones, el andamio de las secciones y
+   accesibilidad.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: var(--interlinea);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+::selection { background: var(--acento); color: var(--crema); }
+
+/* ── Tipos compartidos ─────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--arcilla);
+  margin: 0 0 1rem;
+}
+
+.seccion__titulo,
+.hero__titulo,
+.filosofia__cita {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* ── Botones ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.98rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio);
+  border: 1px solid transparent;
+  transition: background var(--transicion), color var(--transicion),
+    border-color var(--transicion), transform var(--transicion);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn--acento {
+  background: var(--acento);
+  color: var(--crema);
+  font-weight: 400;
+}
+.btn--acento:hover { background: var(--acento-honda); }
+
+.btn--fantasma {
+  border-color: var(--linea);
+  color: var(--tinta);
+}
+.btn--fantasma:hover { border-color: var(--tinta); }
+
+/* ── Secciones ─────────────────────────────────────────────────────────── */
+.seccion {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: var(--aire) var(--lado);
+}
+/* Fondo a sangre completa SIN sacar el contenido del flujo centrado: la
+   sección conserva el mismo ancho y centrado que las normales (por eso todo
+   alinea entre secciones), y el color se extiende a los lados con box-shadow
+   recortado en vertical. Reemplaza el viejo truco `> *` que peleaba con los
+   márgenes de los títulos. */
+.seccion--alt {
+  background: var(--crema-honda);
+  box-shadow: 0 0 0 100vmax var(--crema-honda);
+  clip-path: inset(0 -100vmax);
+}
+
+.seccion__titulo { font-size: clamp(2rem, 6vw, 3.2rem); margin: 0 0 1rem; }
+.seccion__intro {
+  max-width: 48ch;
+  color: var(--tinta-suave);
+  margin: 0 0 3rem;
+}
+
+/* ── Accesibilidad ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Los blobs sangran por los costados; que no abran scroll horizontal.
+   (clip, no hidden: hidden crearía un scroll container y rompería el
+   revelado ligado al scroll.) */
+main { overflow-x: clip; }
