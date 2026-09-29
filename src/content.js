@@ -12,7 +12,7 @@
 
 export const sitio = {
   nombre: "sembrando futuros",
-  tituloPagina: "sembrando-futuros - cultivando esperanza y diversión por el mañana",
+  tituloPagina: "sembrando-futuros - cultivando esperanza y diversión",
   descripcion:
     "Festival colombiano de esperanza, educación y diversión alrededor de las semillas nativas de " +
     "nuestros territorios y nuestras comunidades. ¡Únete a sembrar!",
@@ -370,7 +370,9 @@ export const cierre = {
 // PÁGINA /custodios — Custodios y custodias de semillas
 //
 // Formato featuring, arco emocional ALTAR (silencio, testimonio) → VERBENA
-// (fiesta) al cierre. ⚠️ Copy en LOREM IPSUM a la espera del texto final.
+// (fiesta) al cierre. El cierre es la banda de la página principal
+// (`colectivo` + `registro`): se escribe una vez y sale en ambas páginas.
+// ⚠️ Copy en LOREM IPSUM a la espera del texto final.
 // En los textos, [[palabra]] marca resaltado de marcador.
 //
 // ⚠️ Antes de publicar EN VIVO: reenviar el resultado final al custodio y
@@ -426,12 +428,4 @@ export const custodiosPagina = {
   // 5 · Slots para más custodios (2–3 máx). Cuando llegue el siguiente,
   // este arreglo se convierte en featurings completos.
   proximos: ["Custodio/a 2 · próximamente", "Custodio/a 3 · próximamente"],
-
-  // 6 · Cierre en VERBENA — el círculo se cierra: quien siembra, custodia.
-  cierre: {
-    titulo: "Al sembrar, tú también [[custodias]]",
-    texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
-    ctaPrincipal: { texto: "Cómo sembrarlas", url: "/#semillas" },
-    ctaSecundario: { texto: "Súmate", url: "/#sumate" },
-  },
 };

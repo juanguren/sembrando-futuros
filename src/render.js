@@ -494,20 +494,3 @@ export function renderProximosCustodios(proximos) {
       <div class="proximos">${slots}</div>
     </section>`;
 }
-
-// 6 · Cierre en VERBENA: al sembrar, tú también custodias.
-export function renderCierreVerbena(c) {
-  return `
-    <footer class="verbena">
-      <div class="verbena__blob1" aria-hidden="true"></div>
-      <div class="verbena__blob2" aria-hidden="true"></div>
-      <div class="verbena__contenido">
-        <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
-        <p class="verbena__texto">${texto(c.texto)}</p>
-        <div class="verbena__ctas">
-          <a class="btn verbena__btn-principal" href="${esc(c.ctaPrincipal.url)}">${esc(c.ctaPrincipal.texto)}</a>
-          <a class="btn verbena__btn-borde" href="${esc(c.ctaSecundario.url)}">${esc(c.ctaSecundario.texto)}</a>
-        </div>
-      </div>
-    </footer>`;
-}
