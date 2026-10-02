@@ -51,6 +51,7 @@ a { color: inherit; }
 .btn {
   display: inline-block;
   text-decoration: none;
+  cursor: pointer;
   font-size: 0.98rem;
   padding: 0.7rem 1.4rem;
   border-radius: var(--radio);

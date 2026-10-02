@@ -327,9 +327,19 @@ export const registro = {
     "Acepto que me escriban para contarme sobre Sembrando Futuros.",
   avisoPrivacidad: { texto: "Cómo cuidamos tus datos", url: "#" },
   boton: "Quiero enterarme",
-  enviando: "Enviando…",
+  // Lo que dice el botón mientras se envía y cuando el registro quedó.
+  botonEnviando: "Sembrando…",
+  botonListo: "¡Sembrado!",
   exito: "¡Gracias! Te deseamos una buena cosecha 🌱🌄",
   error: "Uy, algo falló. Inténtalo de nuevo en un momento.",
+  // Avisos cuando falta un dato o está mal escrito. Reemplazan los del
+  // navegador, que salen en el idioma del teléfono (a veces en inglés).
+  avisos: {
+    nombre: "Cuéntanos tu nombre.",
+    email: "Escribe tu correo.",
+    emailInvalido: "Revisa tu correo: parece incompleto.",
+    consentimiento: "Marca la casilla para que podamos escribirte.",
+  },
   endpoint: "https://assets.mailerlite.com/jsonp/2677708/forms/200174368554223157/subscribe",
 };
 

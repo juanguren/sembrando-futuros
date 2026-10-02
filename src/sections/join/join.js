@@ -70,7 +70,9 @@ export function renderColectivoSumate(c, r) {
               <input type="checkbox" name="consentimiento" required />
               <span>${esc(r.consentimiento)}${aviso}</span>
             </label>
-            <button class="btn btn--acento" type="submit">${esc(r.boton)}</button>
+            <button class="btn btn--acento registro__boton" type="submit">
+              <span class="registro__boton-texto">${esc(r.boton)}</span>
+            </button>
             <p class="registro__estado" role="status" aria-live="polite"></p>
           </form>
         </div>

@@ -149,6 +149,69 @@
 .registro__estado.is-ok { color: var(--sabana); }
 .registro__estado.is-error { color: var(--acento); }
 
+/* El botón cuenta lo que pasa: mientras se envía, una semilla late
+   ("Sembrando…"); cuando el registro queda, la semilla brota, el botón se
+   pone verde y saltan hojas y semillas; si falla, el botón niega con la
+   cabeza. Los textos están en content.js y los tiempos en signup.settings.js. */
+.registro__boton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.registro__boton::before {
+  content: "";
+  width: 0;
+  height: 1.15em;
+  margin-right: 0;
+  background: currentColor;
+  -webkit-mask: var(--forma-semilla) center / contain no-repeat;
+          mask: var(--forma-semilla) center / contain no-repeat;
+  transition: width 0.25s ease, margin 0.25s ease;
+}
+.registro__boton[data-estado="enviando"],
+.registro__boton[data-estado="listo"] { cursor: default; }
+.registro__boton[data-estado="enviando"]::before,
+.registro__boton[data-estado="listo"]::before { width: 1.15em; margin-right: 0.5em; }
+.registro__boton[data-estado="enviando"]::before { animation: semilla-late 0.9s ease-in-out infinite; }
+.registro__boton[data-estado="listo"],
+.registro__boton[data-estado="listo"]:hover { background: var(--sabana); }
+.registro__boton[data-estado="listo"]::before {
+  -webkit-mask-image: var(--forma-brote);
+          mask-image: var(--forma-brote);
+  animation: brote-crece 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.registro__boton[data-estado="error"] { animation: boton-niega 0.42s ease; }
+
+.registro__brote {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  pointer-events: none;
+  background: var(--color);
+  -webkit-mask: var(--forma) center / contain no-repeat;
+          mask: var(--forma) center / contain no-repeat;
+  animation: brote-salta 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes semilla-late {
+  0%, 100% { transform: scale(0.8) rotate(-14deg); }
+  50%      { transform: scale(1.12) rotate(14deg); }
+}
+@keyframes brote-crece { from { transform: translateY(35%) scale(0); } }
+@keyframes boton-niega {
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+@keyframes brote-salta {
+  from { transform: translate(0, 0) scale(0.4); opacity: 1; }
+  70%  { opacity: 1; }
+  to   { transform: translate(var(--x), var(--y)) scale(1) rotate(160deg); opacity: 0; }
+}
+
 @media (min-width: 40rem) {
   /* nombre + correo lado a lado; barrio ocupa toda la fila */
   .registro__campos { grid-template-columns: 1fr 1fr; }
@@ -161,4 +224,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .verbena__titulo, .vuelta__registro { transform: none !important; }
+  .registro__boton, .registro__boton::before { animation: none !important; }
 }
