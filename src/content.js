@@ -309,15 +309,10 @@ export const colectivo = {
 // ── SÚMATE / REGISTRO ────────────────────────────────────────────────────
 // Captura nombre + correo para avisar los resultados del evento (y el mapa v2).
 //
-// CÓMO CONECTARLO (sin backend): pega en `endpoint` la URL de un receptor
-// simple que te entregue un CSV — Formspree, Web3Forms o un Google Form.
-//   · Web3Forms: endpoint "https://api.web3forms.com/submit" + tu accessKey.
-//   · Formspree: endpoint "https://formspree.io/f/xxxxxxx" (accessKey vacío).
-// Mientras `endpoint` esté vacío, el form corre en MODO DEMO (no envía nada,
-// solo muestra el estado de éxito) para poder probar el diseño.
-//
-// TODO(migración): cuando crezca, migrar a MailerLite (formulario embebido:
-// captura + envío + bajas + consentimiento en una sola plataforma).
+// Los registros llegan a MailerLite. `endpoint` es la dirección del formulario
+// embebido de MailerLite (el "action" de su código HTML): es pública, no es una
+// llave. Si se deja vacío, el form corre en MODO DEMO (no envía nada, solo
+// muestra el estado de éxito). Guía completa: docs/registro-mailerlite.md
 export const registro = {
   titulo: "Súmate y entérate cómo germinó",
   intro:
@@ -333,10 +328,9 @@ export const registro = {
   avisoPrivacidad: { texto: "Cómo cuidamos tus datos", url: "#" },
   boton: "Quiero enterarme",
   enviando: "Enviando…",
-  exito: "¡Listo! Te escribiremos pronto. 🌱",
+  exito: "¡Gracias! Te deseamos una buena cosecha 🌱🌄",
   error: "Uy, algo falló. Inténtalo de nuevo en un momento.",
-  endpoint: "", // ← pega aquí el endpoint del receptor (ver nota de arriba)
-  accessKey: "", // ← solo Web3Forms
+  endpoint: "https://assets.mailerlite.com/jsonp/2677708/forms/200174368554223157/subscribe",
 };
 
 export const aliadosSeccion = {
