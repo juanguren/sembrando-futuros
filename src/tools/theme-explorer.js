@@ -1,29 +1,61 @@
 // ═════════════════════════════════════════════════════════════════════════
-//  SELECTOR DE TEMAS · herramienta de exploración (TEMPORAL)
+//  SELECTOR DE TEMAS · herramienta de exploración (OCULTA)
 //
 //  Alterna el atributo data-tema en <html> para comparar en vivo los dos
-//  temas (solarpunk y animista-futurista) contra el contenido real.
+//  temas (animista-futurista y solarpunk) contra el contenido real.
+//
+//  Los visitantes no lo ven: siempre tienen el tema por defecto. Aparece solo
+//  en el dispositivo de quien abra el sitio con ?temas en la dirección (por
+//  ejemplo, …/?temas) y se apaga con ?temas=no.
+//
 //  NO es parte final del sitio: es un aislado deliberado. Para quitarlo,
-//  borra este archivo y sus imports en pages/home.js y pages/custodians.js (y,
-//  si quieres, los bloques :root[data-tema=...] de styles/themes.css).
+//  borra este archivo y sus imports en src/pages/ (y, si quieres, los bloques
+//  :root[data-tema=...] de styles/themes.css).
 //
 //  Inyecta su propio CSS para no ensuciar los estilos del sitio.
 // ═════════════════════════════════════════════════════════════════════════
 
+// Solo se guarda lo que alguien elige. (La clave anterior, sf-tema-explorador,
+// guardaba el tema por defecto en cada visita y dejaba a todos fijados en él.)
+const CLAVE_TEMA = "sf-tema-elegido";
+const CLAVE_VISIBLE = "sf-temas-visible";
+const PARAMETRO = "temas";
+const APAGADO = ["no", "0", "off"];
+
+// Lee ?temas: "encender", "apagar" o null si no viene. Lo recuerda en este
+// dispositivo y lo quita de la dirección, para no compartirlo sin querer al
+// copiar el enlace.
+function leerInterruptor() {
+  const url = new URL(location.href);
+  if (!url.searchParams.has(PARAMETRO)) return null;
+  const orden = APAGADO.includes(url.searchParams.get(PARAMETRO)) ? "apagar" : "encender";
+  try {
+    if (orden === "encender") localStorage.setItem(CLAVE_VISIBLE, "1");
+    else [CLAVE_VISIBLE, CLAVE_TEMA].forEach((clave) => localStorage.removeItem(clave));
+  } catch {}
+  url.searchParams.delete(PARAMETRO);
+  history.replaceState(history.state, "", url);
+  return orden;
+}
+
+function encendidoAntes() {
+  try { return localStorage.getItem(CLAVE_VISIBLE) === "1"; } catch { return false; }
+}
+
 export function initTemaExplorador() {
+  const orden = leerInterruptor();
+  if (orden === "apagar" || (orden !== "encender" && !encendidoAntes())) return;
+
   const TEMAS = [
     { id: "fogata", nombre: "Animista-futurista" },
     { id: "jardin-llamas", nombre: "Solarpunk" },
   ];
   const DEFECTO = "fogata"; // coincide con data-tema en los .html
-  // Solo se guarda lo que alguien elige. (La clave anterior, sf-tema-explorador,
-  // guardaba el tema por defecto en cada visita y dejaba a todos fijados en él.)
-  const CLAVE = "sf-tema-elegido";
 
   const aplicar = (id, { guardar = false } = {}) => {
     if (id) document.documentElement.setAttribute("data-tema", id);
     else document.documentElement.removeAttribute("data-tema");
-    if (guardar) try { localStorage.setItem(CLAVE, id); } catch {}
+    if (guardar) try { localStorage.setItem(CLAVE_TEMA, id); } catch {}
     panel.querySelectorAll("button[data-tema-id]").forEach((b) => {
       b.setAttribute("aria-pressed", String(b.dataset.temaId === id));
     });
@@ -82,6 +114,6 @@ export function initTemaExplorador() {
   });
 
   let inicial = "";
-  try { inicial = localStorage.getItem(CLAVE) || ""; } catch {}
+  try { inicial = localStorage.getItem(CLAVE_TEMA) || ""; } catch {}
   aplicar(TEMAS.some((t) => t.id === inicial) ? inicial : DEFECTO);
 }

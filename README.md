@@ -15,7 +15,7 @@ sembrando-futuros/
 │  │   nav · hero · festival · seeds · steps · manifesto · allies · join · custodians
 │  ├─ shared/       lo que usan varias secciones: html, azar, modales, revelado, lightbox
 │  ├─ styles/       estilos globales: tokens, base, temas y piezas comunes
-│  └─ tools/        herramientas temporales (el selector de temas)
+│  └─ tools/        herramientas temporales (el selector de temas, oculto: aparece con ?temas)
 └─ public/
    ├─ favicon.svg
    └─ semillas/     fotos de las semillas
