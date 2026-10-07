@@ -4,7 +4,7 @@
    Cada tema define sus colores y tipografías y tiñe cuatro capas de vida
    compartidas: grano de impresión, la greca muisca como divisor, un motivo
    botánico en el margen y la fogata del manifiesto. El HTML trae
-   data-tema="jardin-llamas" por defecto; el selector flotante que lo
+   data-tema="fogata" (animista-futurista) por defecto; el selector flotante que lo
    alterna vive en src/tools/theme-explorer.js, aislado y fácil de quitar.
 
    Para publicar un solo tema: dejar su bloque, borrar el otro y el selector.

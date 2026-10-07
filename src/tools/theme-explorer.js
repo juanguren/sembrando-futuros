@@ -12,16 +12,18 @@
 
 export function initTemaExplorador() {
   const TEMAS = [
-    { id: "jardin-llamas", nombre: "Solarpunk" },
     { id: "fogata", nombre: "Animista-futurista" },
+    { id: "jardin-llamas", nombre: "Solarpunk" },
   ];
-  const DEFECTO = "jardin-llamas"; // coincide con data-tema en los .html
-  const CLAVE = "sf-tema-explorador";
+  const DEFECTO = "fogata"; // coincide con data-tema en los .html
+  // Solo se guarda lo que alguien elige. (La clave anterior, sf-tema-explorador,
+  // guardaba el tema por defecto en cada visita y dejaba a todos fijados en él.)
+  const CLAVE = "sf-tema-elegido";
 
-  const aplicar = (id) => {
+  const aplicar = (id, { guardar = false } = {}) => {
     if (id) document.documentElement.setAttribute("data-tema", id);
     else document.documentElement.removeAttribute("data-tema");
-    try { localStorage.setItem(CLAVE, id); } catch {}
+    if (guardar) try { localStorage.setItem(CLAVE, id); } catch {}
     panel.querySelectorAll("button[data-tema-id]").forEach((b) => {
       b.setAttribute("aria-pressed", String(b.dataset.temaId === id));
     });
@@ -76,7 +78,7 @@ export function initTemaExplorador() {
 
   panel.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-tema-id]");
-    if (btn) aplicar(btn.dataset.temaId);
+    if (btn) aplicar(btn.dataset.temaId, { guardar: true });
   });
 
   let inicial = "";
