@@ -48,6 +48,18 @@
     transparent 98%
   );
 }
+/* El complemento del título: grande, pero sin mayúsculas y un punto más
+   liviano, para que se lea como su continuación. Girado igual que él. */
+.verbena__complemento {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 20ch;
+  margin: 0 0 2rem;
+  transform: rotate(-1.6deg);
+}
 .verbena__texto {
   max-width: 40ch;
   margin: 0 0 2rem;
@@ -93,6 +105,8 @@
   margin: 0 0 0.7rem;
 }
 .vuelta__intro { color: var(--tinta-suave); margin: 0 0 1.6rem; font-size: 0.98rem; }
+/* Sin párrafo de entrada, el formulario arranca justo bajo el título. */
+.vuelta__sub + .registro__form { margin-top: 1.2rem; }
 
 /* Unas piezas del confeti del hero vuelven aquí: el ciclo se cierra */
 .vuelta__confeti { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
@@ -223,6 +237,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .verbena__titulo, .vuelta__registro { transform: none !important; }
+  .verbena__titulo, .verbena__complemento, .vuelta__registro { transform: none !important; }
   .registro__boton, .registro__boton::before { animation: none !important; }
 }

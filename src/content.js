@@ -294,30 +294,26 @@ export const filosofia = {
 
 // ── COLECTIVIDAD ─────────────────────────────────────────────────────────
 // Enmarca que esto es más grande que una web: la puerta a una movida
-// colectiva, con el teaser del mapa (v2).
+// colectiva. Opcional: `teaser: "…"`, una nota en píldora bajo el título.
 export const colectivo = {
   // [[palabra]] marca el resaltado de marcador (ver marcar() en shared/html.js).
   titulo: "Somos parte de [[algo más grande]]",
-  texto:
-    "Es un evento de educación, juego y acción colectiva alrededor de las semillas nativas de la Sabana de Bogotá " +
-    "sembrando el mismo futuro, cada quien en su barrio. Cuando siembras, te sumas.",
-  teaser:
-    "Pronto: un mapa para marcar dónde sembraste y ver la sabana volver por todo Bogotá.",
+  // Complemento del título, en letra grande justo debajo. Si se quiere un
+  // párrafo además, agregar `texto: "…"` (va entre el complemento y el teaser).
+  complemento: "... Y tenemos muchas historias para cosechar.",
 };
 
 // ── ALIADOS ─────────────────────────────────────────────────────────────
 // ── SÚMATE / REGISTRO ────────────────────────────────────────────────────
-// Captura nombre + correo para avisar los resultados del evento (y el mapa v2).
+// Captura nombre + correo para contar los resultados del evento y las próximas historias.
 //
 // Los registros llegan a MailerLite. `endpoint` es la dirección del formulario
 // embebido de MailerLite (el "action" de su código HTML): es pública, no es una
 // llave. Si se deja vacío, el form corre en MODO DEMO (no envía nada, solo
 // muestra el estado de éxito). Guía completa: docs/registro-mailerlite.md
 export const registro = {
-  titulo: "Súmate y entérate cómo germinó",
-  intro:
-    "Déjanos tu nombre y correo: te contamos los resultados de la siembra y " +
-    "te avisamos cuando esté el mapa. Sin spam, y te puedes salir cuando quieras.",
+  titulo: "Súmate y recibe nuestras próximas historias",
+  // Párrafo opcional entre el título y el formulario: `intro: "…"`.
   campos: {
     nombre: "Tu nombre",
     email: "Tu correo",
@@ -344,7 +340,6 @@ export const registro = {
 };
 
 export const aliadosSeccion = {
-  eyebrow: "no lo hacemos solos",
   titulo: "Quienes siembran con nosotros",
   // El sello vacío al final de la ronda: un lugar abierto para quien se sume.
   invitacion: { texto: "¿Y tú?", url: "#sumate" },

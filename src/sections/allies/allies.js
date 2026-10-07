@@ -21,7 +21,7 @@ export function renderAliados(aliados, seccion) {
     : "";
   return `
     <section class="seccion seccion--alt ronda" id="aliados">
-      <p class="eyebrow">${esc(seccion.eyebrow)}</p>
+      ${seccion.eyebrow ? `<p class="eyebrow">${esc(seccion.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(seccion.titulo)}</h2>
       <div class="sellos">${sellos}${invitacion}</div>
     </section>`;

@@ -35,13 +35,16 @@ export function renderColectivoSumate(c, r) {
       <div class="verbena__contenido vuelta__grid">
         <div class="vuelta__voz">
           ${c.eyebrow ? `<p class="eyebrow">${esc(c.eyebrow)}</p>` : ""}
-          <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
-          <p class="verbena__texto">${texto(c.texto)}</p>
-          <p class="vuelta__teaser">${esc(c.teaser)}</p>
+          <hgroup>
+            <h2 class="verbena__titulo">${marcar(c.titulo)}</h2>
+            ${c.complemento ? `<p class="verbena__complemento">${texto(c.complemento)}</p>` : ""}
+          </hgroup>
+          ${c.texto ? `<p class="verbena__texto">${texto(c.texto)}</p>` : ""}
+          ${c.teaser ? `<p class="vuelta__teaser">${esc(c.teaser)}</p>` : ""}
         </div>
         <div class="vuelta__registro cinta" data-entra>
           <h3 class="vuelta__sub">${esc(r.titulo)}</h3>
-          <p class="vuelta__intro">${texto(r.intro)}</p>
+          ${r.intro ? `<p class="vuelta__intro">${texto(r.intro)}</p>` : ""}
           <form class="registro__form" novalidate>
             <!-- honeypot: invisible para humanos; si un bot lo llena, se descarta -->
             <div class="registro__trampa" aria-hidden="true">
