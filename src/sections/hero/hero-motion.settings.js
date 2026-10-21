@@ -19,13 +19,14 @@
 // "Brisa": pocas piezas, muy repartidas, con acento en los huecos junto al
 // texto — sobre todo el costado de los hashtags, que es puro espacio negativo.
 export const BRISA = Object.freeze({
-  cantidad: 19,
+  cantidad: 25,
   tamanoMin: 10,               // px
   tamanoMax: 20,
   semilla: 7,                  // del generador aleatorio: cambiarla cambia toda la composición
   // Cuánto cupo recibe cada tipo de hueco (los tipos, en TIPOS_DE_HUECO)
   sesgoPorTipo: Object.freeze({
-    derecha: 1.8, entre: 1.2, margenSuperior: 1, margenInferior: 1, sobre: 0.5,
+    derecha: 1.8, izquierda: 1.8, entre: 1.2, margenSuperior: 1, margenInferior: 1, sobre: 0.5,
+    arribaDelPaquete: 1.4, abajoDelPaquete: 1.4,
   }),
   // Los textos marcados `destacado` en TEXTOS (los hashtags) reciben más:
   prioridadDestacados: 4,      // multiplica el cupo de sus huecos laterales
@@ -82,7 +83,8 @@ export const SELECTORES = Object.freeze({
 //   margen       → px de respeto alrededor de cada línea
 //   medir        → "lineas" (renglón a renglón, ceñido a los glifos)
 //                  o "caja" (el rectángulo del elemento; para botones)
-//   pesoDerecha  → peso del hueco a su derecha (si falta, el del tipo "derecha")
+//   pesoDerecha  → peso de sus huecos laterales, a la derecha y (con el texto
+//                  centrado) a la izquierda; si falta, el del tipo de hueco
 //   destacado    → sus huecos laterales reciben la prioridad de BRISA
 export const TEXTOS = Object.freeze([
   Object.freeze({ selector: ".hero__titulo",   margen: 12, medir: "lineas", pesoDerecha: 3 }),
@@ -100,10 +102,15 @@ export const TEXTOS = Object.freeze([
 //   capa          → z-index; solo "sobre" va por delante del paquete
 export const TIPOS_DE_HUECO = Object.freeze({
   derecha:        Object.freeze({ peso: 2, esquivaTexto: true,  separacion: 0.5 }),
+  izquierda:      Object.freeze({ peso: 2, esquivaTexto: true,  separacion: 0.5 }),
   entre:          Object.freeze({ peso: 2, esquivaTexto: true,  separacion: 0.5 }),
   margenSuperior: Object.freeze({ peso: 3, esquivaTexto: true,  separacion: 0.5,  vuela: true }),
   margenInferior: Object.freeze({ peso: 1, esquivaTexto: true,  separacion: 0.5,  vuela: true }),
   sobre:          Object.freeze({ peso: 2, esquivaTexto: false, separacion: 0.75, vuela: true, capa: 3 }),
+  // adicionales → piezas extra, además de su cupo (solo en escritorio, con el
+  //                paquete al lado del texto)
+  arribaDelPaquete: Object.freeze({ peso: 2, esquivaTexto: true, separacion: 0.6, vuela: true, adicionales: 2 }),
+  abajoDelPaquete:  Object.freeze({ peso: 2, esquivaTexto: true, separacion: 0.6, vuela: true, adicionales: 3 }),
 });
 
 // ═══ TOLERANCIAS ══════════════════════════════════════════════════════════

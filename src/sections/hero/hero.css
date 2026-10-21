@@ -3,22 +3,26 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── Hero ──────────────────────────────────────────────────────────────── */
-/* position: relative ancla el confeti. SIN overflow:clip — el marco de la
-   media desborda a propósito hacia la derecha en escritorio. */
+/* position: relative ancla el confeti.
+   Celular: la imagen va arriba del título y el texto va centrado.
+   Escritorio: imagen a la izquierda (más pequeña) y texto a la derecha. */
 .hero {
   position: relative;
   max-width: var(--ancho);
   margin: 0 auto;
   padding: clamp(7rem, 18vw, 11rem) clamp(1.25rem, 5vw, 3rem) var(--aire);
   display: grid;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
 }
 .hero__titulo {
-  font-size: clamp(2.8rem, 9vw, 5.2rem);
-  margin: 0 0 1.5rem;
+  font-size: clamp(2.15rem, 8.5vw, 2.8rem);
+  margin: 0 auto 1.5rem;
   max-width: 14ch;
 }
+/* En animista-futurista el título va en la cursiva de Fraunces: más ritual. */
+:root[data-tema="fogata"] .hero__titulo { font-style: italic; }
+.hero__texto { text-align: center; }
 /* Palabra rotativa del título. UNA sola cápsula: se desvanece, cambia de
    texto mientras es invisible y vuelve a entrar — nunca coexisten dos
    palabras (un crossfade de dos textos distintos se lee como duplicado).
@@ -40,11 +44,12 @@
   max-width: 46ch;
   font-size: 1.15rem;
   color: var(--tinta-suave);
-  margin: 0 0 2.25rem;
+  margin: 0 auto 2.25rem;
 }
-.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
 
-/* Columna de media (foto o gif del paquete con el QR) */
+/* Media (foto o gif del paquete con el QR): primero, centrada y contenida */
+.hero__media { order: -1; width: min(72%, 18rem); justify-self: center; }
 .hero__media-marco {
   aspect-ratio: 1 / 1;
   border-radius: var(--radio);
@@ -83,27 +88,25 @@
 .hero__texto, .hero__media { position: relative; z-index: 2; }
 
 @media (min-width: 48rem) {
+  /* Más ancho para el texto, para que el título corra a la derecha y baje de
+     altura; la imagen se queda en una columna más angosta. El hero llena la
+     primera pantalla y todo crece un punto para ocuparla. */
   .hero {
-    grid-template-columns: 1fr 1fr;
-    gap: 3.5rem;
+    max-width: 82rem;
+    min-height: 100svh;
+    grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr);
+    gap: 4.5rem;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
   }
+  .hero__media { width: 100%; max-width: 31rem; justify-self: start; }
+  .hero__texto { text-align: left; }
+  .hero__titulo { max-width: 22ch; font-size: clamp(3rem, 4.8vw, 4.3rem); margin-left: 0; }
+  .hero__hashtags span { font-size: 1.3rem; }
+  .hero__parrafo { font-size: 1.3rem; max-width: 42ch; margin-left: 0; }
+  .hero__ctas { justify-content: flex-start; gap: 1rem; }
+  .hero__ctas .btn { font-size: 1.08rem; padding: 0.85rem 1.7rem; }
 }
 
-@media (min-width: 64rem) {
-  /* El marco de la media se ensancha hacia el margen libre de la derecha
-     (el hero está centrado en 64rem; sobra espacio a los lados en pantallas
-     anchas). La columna de texto NO se toca: el grid sigue 1fr 1fr y solo
-     este elemento desborda su celda hacia la derecha.
-     · 50vw − 32rem = margen libre a la derecha del contenedor de 64rem.
-     · min(…, 14rem) = tope del ensanche. */
-  .hero__media {
-    width: calc(100% + min(50vw - 32rem, 14rem));
-    align-self: stretch; /* iguala la altura al bloque de texto */
-  }
-  /* En escritorio dejamos de forzar el cuadrado: el marco toma la altura del
-     texto (título → botones) para no sobrepasarlo por arriba ni por abajo. */
-  .hero__media-marco {
-    aspect-ratio: auto;
-    height: 100%;
-  }
-}
+/* Borde rasgado al pie (styles/loose-language.css): del color de la sección de abajo. */
+.hero { --rasgado-color: var(--crema-honda); }

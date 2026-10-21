@@ -23,7 +23,7 @@ function renderHeroMedia(media) {
 
 export function renderHero(hero) {
   return `
-    <header class="hero" id="inicio">
+    <header class="hero rasgado" id="inicio">
       <div class="hero__texto">
         ${hero.eyebrow ? `<p class="eyebrow">${esc(hero.eyebrow)}</p>` : ""}
         <h1 class="hero__titulo">${esc(hero.tituloAntes)} <span class="hero__rota" data-rota><span class="hero__rota-cap">${esc(hero.tituloRota[0])}</span></span> ${esc(hero.tituloDespues)}</h1>

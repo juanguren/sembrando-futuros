@@ -91,3 +91,23 @@ mark,
 @media (prefers-reduced-motion: reduce) {
   .nota { transform: none !important; }
 }
+
+/* Borde rasgado: el papel de la sección de abajo se rompe hacia arriba, sobre
+   el pie de la sección que lleva la clase .rasgado. Una tira a lo ancho de la
+   pantalla, del color de la sección de abajo (--rasgado-color; por defecto el
+   fondo de la página), recortada con la silueta --rasgado (tokens.css). */
+.rasgado { position: relative; }
+.rasgado::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 100vw;
+  height: clamp(26px, 3.4vw, 44px);
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  background: var(--rasgado-color, var(--crema));
+  -webkit-mask: var(--rasgado) repeat-x left bottom / 1200px 100%;
+          mask: var(--rasgado) repeat-x left bottom / 1200px 100%;
+}

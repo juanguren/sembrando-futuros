@@ -19,7 +19,7 @@ export function renderEvento(evento) {
     )
     .join("");
   return `
-    <section class="seccion seccion--alt cartelera" id="evento">
+    <section class="seccion seccion--alt cartelera rasgado" id="evento">
       <div class="blob blob--a" aria-hidden="true"></div>
       ${evento.eyebrow ? `<p class="eyebrow">${esc(evento.eyebrow)}</p>` : ""}
       <h2 class="seccion__titulo">${esc(evento.titulo)}</h2>

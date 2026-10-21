@@ -104,6 +104,13 @@ const crearHueco = (tipo, rect, extra = {}) => ({ tipo, ...TIPOS_DE_HUECO[tipo],
 const hayTextoALaDerecha = (linea, lineas) =>
   lineas.some((otra) => otra !== linea && otra.x1 > linea.x2 && otra.y2 > linea.y1 && otra.y1 < linea.y2);
 
+const hayTextoALaIzquierda = (linea, lineas) =>
+  lineas.some((otra) => otra !== linea && otra.x2 < linea.x1 && otra.y2 > linea.y1 && otra.y1 < linea.y2);
+
+// El cuadro del paquete a la izquierda de la línea (escritorio): ahí no hay hueco.
+const mediaALaIzquierda = (linea, media) =>
+  media && media.x2 <= linea.x1 && media.y2 > linea.y1 && media.y1 < linea.y2;
+
 const invadenBanda = (lineas, y1, y2, holgura) =>
   lineas.some((linea) => linea.y1 < y2 - holgura && linea.y2 > y1 + holgura);
 
@@ -121,6 +128,17 @@ function detectarHuecos({ ancho, alto, lineas, media }) {
     huecos.push(crearHueco("derecha",
       { x1: linea.x2 + respiro, y1: linea.y1, x2: ancho - borde, y2: linea.y2 },
       { peso: linea.pesoDerecha ?? TIPOS_DE_HUECO.derecha.peso, destacado: linea.destacado }));
+  }
+
+  // 1b · A la izquierda de cada línea, cuando el texto va centrado (celular):
+  //      el espejo del costado derecho, para que no quede un lado vacío.
+  for (const linea of lineas) {
+    const libre = linea.x1 - respiro - borde;
+    if (libre < huecoMinimo || linea.y2 - linea.y1 < alturaMinimaLinea) continue;
+    if (hayTextoALaIzquierda(linea, lineas) || mediaALaIzquierda(linea, media)) continue;
+    huecos.push(crearHueco("izquierda",
+      { x1: borde, y1: linea.y1, x2: linea.x1 - respiro, y2: linea.y2 },
+      { peso: linea.pesoDerecha ?? TIPOS_DE_HUECO.izquierda.peso, destacado: linea.destacado }));
   }
 
   // 2 · Bandas libres entre bloques consecutivos
@@ -146,6 +164,22 @@ function detectarHuecos({ ancho, alto, lineas, media }) {
   // 4 · Sobre el paquete: unas piezas van POR DELANTE de la foto (profundidad)
   if (media) huecos.push(crearHueco("sobre", media));
 
+  // 5 · Arriba y abajo del paquete, en su columna (en escritorio, la izquierda):
+  //     así esa esquina no queda vacía ni las piezas se amontonan en un rincón.
+  if (media) {
+    const columna = { x1: borde, x2: Math.min(ancho - borde, media.x2 + respiro) };
+    // Solo cuando el paquete va al lado del texto (escritorio) estos huecos
+    // reciben sus piezas adicionales (`adicionales` en TIPOS_DE_HUECO).
+    const alLado = lineas.length > 0 && lineas.every((linea) => linea.x1 >= media.x2);
+    const ajuste = alLado ? {} : { adicionales: 0 };
+    if (media.y1 - borde >= huecoMinimo) {
+      huecos.push(crearHueco("arribaDelPaquete", { ...columna, y1: borde, y2: media.y1 - respiro }, ajuste));
+    }
+    if (alto - borde - media.y2 >= huecoMinimo) {
+      huecos.push(crearHueco("abajoDelPaquete", { ...columna, y1: media.y2 + respiro, y2: alto - borde }, ajuste));
+    }
+  }
+
   return huecos;
 }
 
@@ -162,7 +196,8 @@ function repartirCupos(huecos, brisa) {
 
   return huecos.map((hueco, i) => {
     const proporcional = Math.round(brisa.cantidad * pesos[i] / pesoTotal);
-    const cupo = hueco.destacado ? Math.max(proporcional, brisa.minimoJuntoADestacados) : proporcional;
+    const base = hueco.destacado ? Math.max(proporcional, brisa.minimoJuntoADestacados) : proporcional;
+    const cupo = base + (hueco.adicionales ?? 0);
     return { hueco, cupo };
   });
 }
