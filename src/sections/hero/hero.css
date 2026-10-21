@@ -20,8 +20,14 @@
   margin: 0 auto 1.5rem;
   max-width: 14ch;
 }
-/* En animista-futurista el título va en la cursiva de Fraunces: más ritual. */
-:root[data-tema="fogata"] .hero__titulo { font-style: italic; }
+/* El título va en la cursiva de Fraunces en los dos temas: más ritual.
+   Solarpunk titula con Space Grotesk, que no tiene cursiva (el navegador la
+   inclinaría a la fuerza), así que en su inicio toma Fraunces, ya cargada. */
+:root[data-tema] .hero__titulo { font-style: italic; }
+:root[data-tema="jardin-llamas"] .hero__titulo {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: -0.01em;
+}
 .hero__texto { text-align: center; }
 /* Palabra rotativa del título. UNA sola cápsula: se desvanece, cambia de
    texto mientras es invisible y vuelve a entrar — nunca coexisten dos
